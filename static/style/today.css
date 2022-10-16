@@ -1,0 +1,17 @@
+.topnav {
+    background-color: #D1E7EA;
+    height: 45px;
+}
+.topnav-left {
+    /* align on the left */
+    float: left;
+    padding-left: 20px;
+    /* in the middle */
+    line-height: 45px;
+}
+.topnav-right {
+    /* align on the right */
+    float: right;
+    padding-right: 20px;
+    line-height: 45px;
+}
