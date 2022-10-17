@@ -2,16 +2,34 @@
     background-color: #D1E7EA;
     height: 45px;
 }
+.topnav div {
+    display: inline-block;
+}
 .topnav-left {
     /* align on the left */
     float: left;
-    padding-left: 20px;
+    padding-left: 30px;
     /* in the middle */
     line-height: 45px;
+    display: inline-block;
 }
 .topnav-right {
     /* align on the right */
     float: right;
-    padding-right: 20px;
+    padding-right: 30px;
     line-height: 45px;
+    display: inline-block;
+}
+.topnav-left>.icon {
+    vertical-align: middle;
+    margin-left: 7px;
+}
+.topnav-left>div>input {
+    height: 25px;
+}
+.topnav-right .icon {
+    vertical-align: middle;
+}
+.topnav-right>svg,div {
+    margin-right: 5px;
 }
