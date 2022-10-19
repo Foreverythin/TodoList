@@ -37,6 +37,7 @@
     /* margin-top: 7.5px; */
     position: relative;
     top: 7.5px;
+    -webkit-transition:  all .4s;
 }
 .topnav button:hover {
     /* background-color: #B3D4E0; */
