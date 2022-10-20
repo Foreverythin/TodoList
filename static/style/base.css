@@ -101,6 +101,10 @@
     flex-direction: column;
     padding-left: 55px;
 }
+#sidebar-top {
+    position: relative;
+    right: 12px;
+}
 .sidebar-top-item {
     margin-top: 10px;
 }
