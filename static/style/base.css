@@ -3,6 +3,7 @@
 .topnav {
     background-color: #D1E7EA;
     height: 45px;
+    overflow: hidden;
 }
 .topnav div {
     display: inline-block;
@@ -95,7 +96,12 @@
     /* go to left */
     position: fixed;
     left: 0px;
+    z-index: 1;
 }
+
+
+
+
 #mainContent {
     /* width: 100%; */
     margin-left: 250px;
