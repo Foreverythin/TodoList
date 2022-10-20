@@ -1,3 +1,5 @@
+/* the top navigator */
+/* ---------------------------------------------------------------- */
 .topnav {
     background-color: #D1E7EA;
     height: 45px;
@@ -59,7 +61,7 @@
 }
 #saying {
     width: 200px; 
-    line-height: 25px;  
+    line-height: 30px;  
     color: rgb(110, 131, 150); 
     background-color: rgba(255, 255, 255, 0.5); 
     vertical-align: middle; 
@@ -72,4 +74,33 @@
 #numOfCompleted-icon {
     position: relative;
     top: 7.5px;
+}
+/* ---------------------------------------------------------------- */
+
+/* the side bar */
+/* ---------------------------------------------------------------- */
+.below {
+    display: flex;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    flex-direction: row;
+}
+#sidebar {
+    width: 250px;
+    height: calc(100vh - 45px);
+    background-color: #f7f7f7;
+    transition: all 0.5s;
+    padding-top: 40px;
+    /* go to left */
+    position: fixed;
+    left: 0px;
+}
+#mainContent {
+    /* width: 100%; */
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    height: calc(100vh - 45px);
+    background-color: rgba(255, 166, 0, 0.42);
+    transition: all 0.5s;
 }
