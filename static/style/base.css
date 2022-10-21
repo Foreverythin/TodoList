@@ -101,69 +101,34 @@
     flex-direction: column;
     padding-left: 55px;
 }
-#sidebar-top {
+.table {
     position: relative;
-    right: 12px;
+    right: 20px;
 }
-.sidebar-top-item {
-    margin-top: 10px;
-    display: flex;
-}
-.sidebar-top-item-text {
-    height: 30px;
-    display: inline-block;
+#sidebar-top-table tr td{
+    border: 0px;
     font-size: 18px;
-    margin-left: 10px;
-    line-height: 30px;
+    vertical-align: middle;
 }
-#line {
-    width: 90%;
-    height: 1.2px;
-    background-color: rgb(190, 190, 190);
-    margin-top: 13px;
-    position: relative;
-    right: 15px;
+#sidebar-top-table tr td:first-child {
+    width: 30px;
 }
 #sidebar-text {
     font-size: 16px;
     color: rgb(120, 118, 118);
-    margin-top: 20px;
     margin-bottom: 8px;
     position: relative;
     right: 13px;
 }
-#sidebar-bottom {
-    position: relative;
-    right: 15px;
-}
-.sidebar-bottom-item {
-    height: 18px;
-    margin-top: 15px;
-    display: flex;
-    vertical-align: middle;
-}
-.circle {
-    display: inline-block;
-}
-.sidebar-bottom-item-text {
-    height: 15px;
-    font-size: 15px;
-    display: inline-block;
-    margin-left: 10px;
-    /* position: relative;
-    bottom: 1px; */
-    /* line-height: 15px; */
-}
 #sidebar-bottom-table {
     margin-top: 10px;
     position: relative;
-    right: 20px;
 }
 #sidebar-bottom-table tr {
     height: 35px;
 }
 #sidebar-bottom-table tr th {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 400;
     /* margin-right: 10px; */
 }
