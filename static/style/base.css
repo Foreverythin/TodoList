@@ -99,18 +99,21 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    padding-left: 55px;
+    /* padding-left: 55px; */
 }
-.table {
+/* .table {
+    width: 150px;
+} */
+#sidebar-top-table {
     position: relative;
-    right: 20px;
+    left: 40px;
 }
 #sidebar-top-table tr td{
     border: 0px;
     font-size: 18px;
     vertical-align: middle;
 }
-#sidebar-top-table tr td:first-child {
+#sidebar-top-table tr td:first-child{
     width: 30px;
 }
 #sidebar-text {
@@ -118,11 +121,17 @@
     color: rgb(120, 118, 118);
     margin-bottom: 8px;
     position: relative;
-    right: 13px;
+    left: 52.4px;
+    display: flex;
+}
+#line {
+    width: 100%;
+    height: 1px;
+    background-color: #e6e4e4;
+    margin-bottom: 10px;
 }
 #sidebar-bottom-table {
     margin-top: 10px;
-    position: relative;
 }
 #sidebar-bottom-table tr {
     height: 35px;
@@ -130,6 +139,7 @@
 #sidebar-bottom-table tr th {
     font-size: 16px;
     font-weight: 400;
+    border: none;
     /* margin-right: 10px; */
 }
 .table-hover > tbody > tr:hover > td,
@@ -137,6 +147,22 @@
     background-color: #EDEDED;
     cursor: pointer;
     transition: all 0.5s;
+}
+#sidebar-bottom-table tr th button{
+    width: 20px; 
+    height: 20px;
+    border: none;
+    background-color: #EDEDED;
+    padding: 0;
+    visibility: hidden;
+}
+#sidebar-bottom-table tr:hover th button{
+    visibility: visible;
+    transition:  all .5s;
+}
+#sidebar-button-table tr th button:hover {
+    background-color: red;
+    transition:  all .5s;
 }
 
 
