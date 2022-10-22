@@ -1,3 +1,4 @@
+from email.policy import default
 from exts import db
 
 class User(db.Model):
@@ -17,8 +18,8 @@ class Task(db.Model):
     task_name = db.Column(db.String(50), nullable=False)
     task_description = db.Column(db.String(100), nullable=False)
     task_status = db.Column(db.Boolean, nullable=False)
-    task_date = db.Column(db.Date, nullable=False)
-    task_time = db.Column(db.Time, nullable=False)
+    task_date = db.Column(db.Date)
+    task_time = db.Column(db.Time)
     user_id = db.Column(db.Integer, db.ForeignKey('user.uid'))
     class_id = db.Column(db.Integer, db.ForeignKey('class.cid'))
 
