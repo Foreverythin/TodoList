@@ -1,10 +1,8 @@
 from flask import Flask
 from flask_migrate import Migrate
 import config
-from models import User
-from models import Class
-from models import Task
-from exts import db
+from models import User, Class, Task
+from exts import db, mail
 
 from blueprints import all_bp, completed_bp, schedule_bp, statistics_bp, today_bp, user_bp
 
@@ -17,6 +15,7 @@ app.register_blueprint(statistics_bp)
 app.register_blueprint(today_bp)
 app.register_blueprint(user_bp)
 db.init_app(app)
+mail.init_app(app)
 
 migrate = Migrate(app, db)
 

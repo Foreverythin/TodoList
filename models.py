@@ -2,20 +2,20 @@ from exts import db
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    usermail = db.Column(db.String(50), nullable=False)
-    username = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(100), nullable=False)
+    usermail = db.Column(db.String(50), nullable=False, unique=True)
+    username = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(150), nullable=False)
 
 class Class(db.Model):
     cid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    cname = db.Column(db.String(100), nullable=False)
-    color = db.Column(db.String(100), nullable=False)
+    cname = db.Column(db.String(50), nullable=False, unique=True)
+    color = db.Column(db.String(50), nullable=False, unique=True)
 
 class Task(db.Model):
     __tablename__ = 'task'
     tid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    task_name = db.Column(db.String(100), nullable=False)
-    task_description = db.Column(db.String(1000), nullable=False)
+    task_name = db.Column(db.String(50), nullable=False)
+    task_description = db.Column(db.String(100), nullable=False)
     task_status = db.Column(db.Boolean, nullable=False)
     task_date = db.Column(db.Date, nullable=False)
     task_time = db.Column(db.Time, nullable=False)
