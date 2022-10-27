@@ -25,7 +25,7 @@ def newTask():
             if (form.task_time.data != None):
                 task_time = form.task_time.data
             else:
-                task_time = datetime.time(18, 0, 0)
+                task_time = datetime.time(20, 0, 0)
         else:
             task_time = None
         user_id = uid

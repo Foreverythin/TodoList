@@ -1,4 +1,3 @@
-from email.policy import default
 from exts import db
 
 class User(db.Model):
@@ -21,5 +20,5 @@ class Task(db.Model):
     task_date = db.Column(db.Date)
     task_time = db.Column(db.Time)
     user_id = db.Column(db.Integer, db.ForeignKey('user.uid'))
-    class_id = db.Column(db.Integer, db.ForeignKey('class.cid'))
-
+    class_id = db.Column(db.Integer, db.ForeignKey('class.cid'), nullable=False)
+    _task = db.relationship('User', backref=db.backref('task', lazy=True))

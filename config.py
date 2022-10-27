@@ -1,11 +1,14 @@
-# database config
-HOSTNAME = '127.0.0.1'
-PORT     = '3306'
-DATABASE = 'TodoList'
-USERNAME = 'root'
-PASSWORD = 'lpy..2002'
-DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format(USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE)
-SQLALCHEMY_DATABASE_URI = DB_URI
+# mysql config
+# HOSTNAME = '127.0.0.1'
+# PORT     = '3306'
+# DATABASE = 'TodoList'
+# USERNAME = 'root'
+# PASSWORD = 'lpy..2002'
+# DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format(USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE)
+# SQLALCHEMY_DATABASE_URI = DB_URI
+
+# sqlite config
+SQLALCHEMY_DATABASE_URI = 'sqlite:///./database/TodoList.sqlite3'
 
 # Prohibit data modification tracking
 SQLALCHEMY_TRACK_MODIFICATIONS = True
