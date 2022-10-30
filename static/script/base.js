@@ -32,14 +32,40 @@ $(document).ready(function() {
                 $("#mainContent").css('width', '100%');
                 $('#sidebar').css('position', 'absolute');
                 $("#sidebar").css('left', '0px');
-                $("#sidebar").css('box-shadow', '4px 5px 5px #888888');
+                $("#sidebar").css('box-shadow', '0px 20px 40px 0px rgba(0,0,0,0.4)');
             }
+        }
+    });
+
+    $("#day-night").on("click", function() {
+        var root = $(':root');
+        var nav_color = root.css('--color-primary');
+        if (nav_color === '#D1E7EA') {
+            root.css('--color-primary', '#000000');
+            root.css('--color-nav-sayings-font', '#000000');
+            root.css('--color-secondary', '#839AA8');
+            root.css('--color-sidebar-line', '#FFF9D7');
+        } else {
+            root.css('--color-primary', '#D1E7EA');
+            root.css('--color-nav-sayings-font', 'rgb(110, 131, 150)');
+            root.css('--color-secondary', '#F7F7F7');
+            root.css('--color-sidebar-line', '#E6E4E4');
         }
     });
 
     // make it suitable for small devices
     $(window).resize(function(){
         adaptive();
+    });
+
+    // make the sidebar item clicked to be highlighted
+    $(".table-hover>tbody>tr").on("click", function() {
+        // var trs = $(this).parent().find("tr");
+        var trs = $(".table-hover>tbody>tr");
+        if (trs.hasClass("on")) {
+            trs.removeClass("on");
+        }
+        $(this).addClass("on");
     });
 
 });
