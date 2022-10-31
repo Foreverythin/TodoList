@@ -61,14 +61,33 @@ $(document).ready(function() {
     });
 
     // make the sidebar item clicked to be highlighted
-    $(".table-hover>tbody>tr").on("click", function() {
-        // var trs = $(this).parent().find("tr");
-        var trs = $(".table-hover>tbody>tr");
-        if (trs.hasClass("on")) {
-            trs.removeClass("on");
-        }
-        $(this).addClass("on");
-    });
+    // $(".table-hover>tbody>tr").on("click", function() {
+    //     // var trs = $(this).parent().find("tr");
+    //     var trs = $(".table-hover>tbody>tr");
+    //     if (trs.hasClass("on")) {
+    //         trs.removeClass("on");
+    //     }
+    //     $(this).addClass("on");
+    //     var pageID = console.log($(this).attr("id"));
+    //     // // go to the page
+    //     // $.get('/' + pageID, function(data) {
+    //     //     // $("#mainContent").html(data);
+    //     // });
+    //     // window.location.href = '/' + pageID + '/';
+    //     // ajax to get the page
+    //     // $.ajax({
+    //     //     url: '/' + pageID,
+    //     //     type: 'GET',
+    //     //     success: function(data) {
+    //     //         // $("#mainContent").html(dat);
+    //     //     }
+    //     // });
+    //
+    // });
+    var pageName = window.location.pathname.split('/')[1];
+    console.log(pageName);
+    $("#" + pageName).addClass("on");
+
 
     // go to today page when clicking the home button
     $("#home").on("click", function() {

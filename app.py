@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect
 from flask_migrate import Migrate
 import config
 from models import User, Class, Task
@@ -18,6 +18,10 @@ db.init_app(app)
 mail.init_app(app)
 
 migrate = Migrate(app, db)
+
+@app.route('/')
+def index():
+    return redirect('/today')
 
 
 if __name__ == '__main__':

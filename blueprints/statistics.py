@@ -1,7 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 bp = Blueprint('statistics', __name__, url_prefix='/statistics')
 
 @bp.route('/')
 def index():
-    return 'statistics'
+    return render_template('statistics.html')

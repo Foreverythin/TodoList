@@ -1,4 +1,4 @@
-from flask import Blueprint, session, request
+from flask import Blueprint, session, request, render_template
 from blueprints import user
 from forms import NewTaskForm
 import datetime
@@ -7,9 +7,9 @@ from exts import db
 
 bp = Blueprint('all', __name__, url_prefix='/all')
 
-@bp.route('/')
+@bp.route('/', methods=['GET', 'POST'])
 def index():
-    return 'all'
+    return render_template('all.html')
 
 @bp.route('/newTask', methods=['POST'])
 def newTask():
