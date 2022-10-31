@@ -4,7 +4,7 @@ import config
 from models import User, Class, Task
 from exts import db, mail
 
-from blueprints import all_bp, completed_bp, schedule_bp, statistics_bp, today_bp, user_bp
+from blueprints import all_bp, completed_bp, schedule_bp, statistics_bp, today_bp, user_bp, module_bp
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -14,6 +14,7 @@ app.register_blueprint(schedule_bp)
 app.register_blueprint(statistics_bp)
 app.register_blueprint(today_bp)
 app.register_blueprint(user_bp)
+app.register_blueprint(module_bp)
 db.init_app(app)
 mail.init_app(app)
 
