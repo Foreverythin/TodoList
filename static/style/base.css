@@ -32,7 +32,7 @@
     padding-left: 30px;
     /* in the middle */
     line-height: 45px;
-    display: inline-block;
+    /*display: inline-block;*/
 }
 .topnav-right {
     /* align on the right */
@@ -80,11 +80,11 @@
 }
 #saying {
     width: 200px; 
-    line-height: 30px;  
+    line-height: 30px;
     /* color: rgb(110, 131, 150);  */
     color: var(--color-nav-sayings-font);
     background-color: rgba(255, 255, 255, 0.5); 
-    vertical-align: middle; 
+    /*vertical-align: middle; */
     border-radius: 10px; 
     text-align: center;
     transition: all 0.4s;

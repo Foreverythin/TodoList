@@ -85,8 +85,12 @@ $(document).ready(function() {
     //
     // });
     var pageName = window.location.pathname.split('/')[1];
-    console.log(pageName);
-    $("#" + pageName).addClass("on");
+    if (pageName === 'module') {
+        className = window.location.pathname.split('/')[2];
+        $("#" + className).addClass("on");
+    } else {
+        $("#" + pageName).addClass("on");
+    }
 
 
     // go to today page when clicking the home button
@@ -94,6 +98,17 @@ $(document).ready(function() {
         $("#sidebar-top-table>tbody>tr:first-child").click();
     });
 
+    // go to the page when clicking the sidebar module item
+    $("#sidebar-bottom-table").each(function() {
+        var trs = $(this).find("tr");
+        trs.each(function() {
+            $(this).on("click", function() {
+                var className = $(this).attr("id");
+                window.location.href = '/module/' + className;
+                $(this).addClass("on");
+            });
+        });
+    });
 });
 
 function adaptive() {
