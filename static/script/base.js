@@ -44,12 +44,14 @@ $(document).ready(function() {
             root.css('--color-primary', '#000000');
             root.css('--color-nav-sayings-font', '#000000');
             root.css('--color-secondary', '#839AA8');
-            root.css('--color-sidebar-line', '#FFF9D7');
+            root.css('--color-sidebar-line', '');
+            // root.css('--color-sidebar-clicked', '#99C4C8');
         } else {
             root.css('--color-primary', '#D1E7EA');
             root.css('--color-nav-sayings-font', 'rgb(110, 131, 150)');
             root.css('--color-secondary', '#F7F7F7');
             root.css('--color-sidebar-line', '#E6E4E4');
+            // root.css('--color-sidebar-clicked', '#EDEDED');
         }
     });
 
@@ -66,6 +68,11 @@ $(document).ready(function() {
             trs.removeClass("on");
         }
         $(this).addClass("on");
+    });
+
+    // go to today page when clicking the home button
+    $("#home").on("click", function() {
+        $("#sidebar-top-table>tbody>tr:first-child").click();
     });
 
 });

@@ -9,18 +9,20 @@
     <link rel="stylesheet" href="../static/bootstrap/bootstrap@3.4.1.min.css">
     <link rel="stylesheet" href="../static/style/base.css">
     <script src="../static/script/base.js"></script>
+    <script src="../static/jquery/twitter-bootstrap@3.3.7.min.js"></script>
+    <link href="../static/bootstrap/bootstrap@5.1.3.min.css" rel="stylesheet" integrity="sha384-rTTiRUKnSWaDu2FjhzWFl8/JuUZMlplyWE/djenb2LoKqkgLGfEGfSrL7XDLoB1M" crossorigin="anonymous">
 </head>
 <body>
     <!-- the top navigator -->
     <div class="topnav">
         <div class="topnav-left">
             <button><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M907.3 227.2H118.1c-11.4 0-20.7-9.3-20.7-20.7s9.3-20.7 20.7-20.7h789.3c11.4 0 20.7 9.3 20.7 20.7s-9.4 20.7-20.8 20.7zM907.3 533.9H118.1c-11.4 0-20.7-9.3-20.7-20.7s9.3-20.7 20.7-20.7h789.3c11.4 0 20.7 9.3 20.7 20.7s-9.4 20.7-20.8 20.7zM907.3 840.6H118.1c-11.4 0-20.7-9.3-20.7-20.7s9.3-20.7 20.7-20.7h789.3c11.4 0 20.7 9.3 20.7 20.7s-9.4 20.7-20.8 20.7z" fill="#395B64" /></svg></button>
-            <button><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M511.803392 48.39424L21.641216 538.556416h154.353664V981.03296h292.347904V664.979456h86.919168v316.055552h292.347904V538.556416h154.355712L511.803392 48.39424z m296.30464 450.658304v442.476544h-213.34016V625.475584h-165.924864v316.055552H215.498752V499.052544h-98.48832l394.79296-394.79296 394.790912 394.79296h-98.486272z" fill="#395B64"/></svg></button>
+            <button id="home"><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M511.803392 48.39424L21.641216 538.556416h154.353664V981.03296h292.347904V664.979456h86.919168v316.055552h292.347904V538.556416h154.355712L511.803392 48.39424z m296.30464 450.658304v442.476544h-213.34016V625.475584h-165.924864v316.055552H215.498752V499.052544h-98.48832l394.79296-394.79296 394.790912 394.79296h-98.486272z" fill="#395B64"/></svg></button>
             <img class="icon" src="../static/icon/run.gif" alt="run.gif" style="height: 25px; width: 25px; border-radius: 12px; opacity: 0.5; margin-left: 5px;">
             <div id="saying">今日事，今日毕。</div>
         </div>
         <div class="topnav-right">
-            <button><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M533.333333 490.666667V128h-42.666666v362.666667H128v42.666666h362.666667v362.666667h42.666666V533.333333h362.666667v-42.666666z" fill="#395B64" /></svg></button>
+            <button data-toggle="modal" data-target="#newTaskModel"><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M533.333333 490.666667V128h-42.666666v362.666667H128v42.666666h362.666667v362.666667h42.666666V533.333333h362.666667v-42.666666z" fill="#395B64" /></svg></button>
             <div>
                 <svg id="numOfCompleted-icon" class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M520.533333 597.333333l128-128 29.866667 29.866667-153.6 153.6-110.933333-110.933333 29.866666-29.866667 76.8 85.333333zM640 256v42.666667h-213.333333V234.666667c0-8.533333 0-12.8 4.266666-21.333334H298.666667v640h469.333333V213.333333h-132.266667c4.266667 8.533333 4.266667 12.8 4.266667 21.333334V256z m-42.666667 0v-21.333333c0-34.133333-29.866667-64-64-64S469.333333 200.533333 469.333333 234.666667V256h128z m-149.333333-85.333333c21.333333-25.6 51.2-42.666667 85.333333-42.666667s64 17.066667 85.333334 42.666667H810.666667v725.333333H256V170.666667h192z" fill="#395B64" /></svg>
                 <div id="numOfCompleted">5/10</div>
@@ -28,15 +30,15 @@
             <button id="day-night">
                 <svg t="1666178958917" class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2705" width="200" height="200"><path d="M564.693333 930.133333A426.666667 426.666667 0 0 1 288.853333 178.56a419.2 419.2 0 0 1 152.533334-82.986667 42.666667 42.666667 0 0 1 45.44 14.08A42.666667 42.666667 0 0 1 490.666667 156.8a381.013333 381.013333 0 0 0 3.413333 377.6 384 384 0 0 0 347.306667 192 42.666667 42.666667 0 0 1 39.893333 24.746667 42.666667 42.666667 0 0 1-6.613333 46.933333 424.96 424.96 0 0 1-309.973334 132.053333z m-110.933333-794.026666a379.52 379.52 0 0 0-137.386667 75.093333A384 384 0 1 0 842.88 768a426.666667 426.666667 0 0 1-385.493333-213.333333 423.68 423.68 0 0 1-3.626667-418.56z" p-id="2706" fill="#395B64"></path></svg>
             </button>
-            <button><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M808 712l-48-108.8V448c0-102.4-65.6-195.2-160-232-3.2-44.8-41.6-80-88-80s-83.2 35.2-88 80c-96 36.8-160 129.6-160 232v155.2l-48 108.8c-6.4 14.4-4.8 30.4 3.2 43.2 8 12.8 22.4 20.8 38.4 20.8h508.8c16 0 30.4-8 38.4-20.8s9.6-30.4 3.2-43.2z m-547.2 16l51.2-115.2V448c0-88 59.2-166.4 144-192l19.2-6.4-3.2-20.8V224c0-22.4 17.6-40 40-40s40 17.6 40 40v6.4l-3.2 20.8 19.2 6.4c84.8 25.6 144 104 144 192v164.8l51.2 115.2H260.8zM512 880c44.8 0 80-35.2 80-80H432c0 44.8 35.2 80 80 80z" fill="#395B64" /></svg></button>
-            <button><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M510.6 67.9c-244.2 0-442.2 198-442.2 442.2 0 103.9 35.9 199.5 95.9 275 51.5 64.7 120.7 114.6 200.2 142.5 45.7 16 94.8 24.7 146 24.7s100.3-8.7 146-24.7C737 899.4 806.8 848.7 858.4 783c59.1-75.2 94.3-170 94.3-273 0-244.1-197.9-442.1-442.1-442.1z m309.1 691.9l-161-62.8s-31.5-12.2-43.8-24.3c-7.9-7.7-7.3-26-0.3-49.3 7-23.3 91.7-118.1 91.7-204.1 0-132.9-87.4-240.7-195.2-240.7-107.7 0.1-195.1 107.8-195.1 240.8 0 82.4 75.5 180.7 84.8 198.6 9.3 17.9 7.1 45.1-0.3 53.3-11.1 12.4-51.4 24.8-51.4 24.8l-146.4 65.2c-55.9-68.5-89.5-155.9-89.5-251.2 0-219.4 177.9-397.3 397.3-397.3s397.3 177.9 397.3 397.3c0.1 94.6-33 181.4-88.1 249.7z" fill="#395B64" /></svg></button>
+            <!-- <button><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M808 712l-48-108.8V448c0-102.4-65.6-195.2-160-232-3.2-44.8-41.6-80-88-80s-83.2 35.2-88 80c-96 36.8-160 129.6-160 232v155.2l-48 108.8c-6.4 14.4-4.8 30.4 3.2 43.2 8 12.8 22.4 20.8 38.4 20.8h508.8c16 0 30.4-8 38.4-20.8s9.6-30.4 3.2-43.2z m-547.2 16l51.2-115.2V448c0-88 59.2-166.4 144-192l19.2-6.4-3.2-20.8V224c0-22.4 17.6-40 40-40s40 17.6 40 40v6.4l-3.2 20.8 19.2 6.4c84.8 25.6 144 104 144 192v164.8l51.2 115.2H260.8zM512 880c44.8 0 80-35.2 80-80H432c0 44.8 35.2 80 80 80z" fill="#395B64" /></svg></button> -->
+            <button data-toggle="modal" data-target="#logout"><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M510.6 67.9c-244.2 0-442.2 198-442.2 442.2 0 103.9 35.9 199.5 95.9 275 51.5 64.7 120.7 114.6 200.2 142.5 45.7 16 94.8 24.7 146 24.7s100.3-8.7 146-24.7C737 899.4 806.8 848.7 858.4 783c59.1-75.2 94.3-170 94.3-273 0-244.1-197.9-442.1-442.1-442.1z m309.1 691.9l-161-62.8s-31.5-12.2-43.8-24.3c-7.9-7.7-7.3-26-0.3-49.3 7-23.3 91.7-118.1 91.7-204.1 0-132.9-87.4-240.7-195.2-240.7-107.7 0.1-195.1 107.8-195.1 240.8 0 82.4 75.5 180.7 84.8 198.6 9.3 17.9 7.1 45.1-0.3 53.3-11.1 12.4-51.4 24.8-51.4 24.8l-146.4 65.2c-55.9-68.5-89.5-155.9-89.5-251.2 0-219.4 177.9-397.3 397.3-397.3s397.3 177.9 397.3 397.3c0.1 94.6-33 181.4-88.1 249.7z" fill="#395B64" /></svg></button>
         </div>
     </div>
     <div class="below container-fluid">
         <!-- the side bar -->
         <div id="sidebar">
             <table id="sidebar-top-table" class="table table-hover" style="width: 210px;">
-                <tr>
+                <tr class="on">
                     <td>                    <svg class="icon sidebar-top-item-icon" width="30px" height="30px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><path d="M478.634667 811.349333a304.490667 304.490667 0 0 0 64.021333 0.277334v124.330666h-64v-124.608z m267.776-110.229333l87.594666 87.637333-45.226666 45.248-87.658667-87.594666c16.64-13.44 31.829333-28.629333 45.290667-45.290667z m-469.994667-1.493333c13.333333 16.746667 28.416 32 44.970667 45.568L232.533333 834.005333l-45.248-45.226666 89.130667-89.130667zM512 261.034667c138.602667 0 250.986667 112.384 250.986667 250.986666 0 138.602667-112.384 250.986667-250.986667 250.986667-138.602667 0-250.986667-112.384-250.986667-250.986667 0-138.602667 112.384-250.986667 250.986667-250.986666z m0 64a186.986667 186.986667 0 1 0 0 373.973333 186.986667 186.986667 0 0 0 0-373.973333z m423.957333 153.642666v64h-124.330666a304.725333 304.725333 0 0 0-0.277334-64h124.608z m-723.306666 0a304.490667 304.490667 0 0 0-0.277334 64H85.333333v-64h127.317334zM232.533333 187.264l90.346667 90.304c-16.64 13.44-31.829333 28.629333-45.290667 45.290667L187.306667 232.533333l45.226666-45.248z m556.224 0l45.248 45.226667-88.810666 88.874666a302.997333 302.997333 0 0 0-45.546667-44.970666l89.109333-89.130667zM542.656 85.333333v127.04a304.725333 304.725333 0 0 0-64 0.277334V85.333333h64z" /></svg></td>
                     <td>Day Todo</td>
                 </tr>
@@ -94,6 +96,49 @@
         </div>
         <!-- the main content -->
         <div id="mainContent">{% block content %}{% endblock %}</div>
+    </div>
+
+    <!-- Model of add a new task -->
+    <div class="modal fade" id="newTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        New Task
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    在这里添加一些文本
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- model of logout -->
+    <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Logout?</h4>
+                </div>
+                <!-- <div class="modal-body">Logout?</div> -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Yes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
     </div>
 </body>
 </html>

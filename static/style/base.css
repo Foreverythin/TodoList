@@ -8,6 +8,7 @@
     --color-nav-sayings-font: rgb(110, 131, 150);
     --color-main-font: rgb(120, 118, 118);
     --color-sidebar-line: #e6e4e4;
+    --color-sidebar-clicked: #EDEDED;
 }
 
 /* ---------------------------------------------------------------- */
@@ -189,11 +190,11 @@
     transition:  all .5s;
 }
 tr.on td {
-    background-color: #EDEDED;
+    background-color: var(--color-sidebar-clicked);
     transition: all 0.5s;
 }
 tr.on th {
-    background-color: #EDEDED;
+    background-color: var(--color-sidebar-clicked);
     transition: all 0.5s;
 }
 
