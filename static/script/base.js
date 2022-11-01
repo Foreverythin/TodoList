@@ -1,6 +1,14 @@
 $(document).ready(function() {
     adaptive();
 
+    // stop Bubble
+    // function stopBubble(e) {
+    //     if (e && e.stopPropagation) {
+    //         e.stopPropagation();
+    //         return;
+    //     }
+    // }
+
     // change the saying every 5 seconds
     $.get('/static/sayings.txt', function(data) {
         sayings = data.split("\n");
@@ -60,30 +68,7 @@ $(document).ready(function() {
         adaptive();
     });
 
-    // make the sidebar item clicked to be highlighted
-    // $(".table-hover>tbody>tr").on("click", function() {
-    //     // var trs = $(this).parent().find("tr");
-    //     var trs = $(".table-hover>tbody>tr");
-    //     if (trs.hasClass("on")) {
-    //         trs.removeClass("on");
-    //     }
-    //     $(this).addClass("on");
-    //     var pageID = console.log($(this).attr("id"));
-    //     // // go to the page
-    //     // $.get('/' + pageID, function(data) {
-    //     //     // $("#mainContent").html(data);
-    //     // });
-    //     // window.location.href = '/' + pageID + '/';
-    //     // ajax to get the page
-    //     // $.ajax({
-    //     //     url: '/' + pageID,
-    //     //     type: 'GET',
-    //     //     success: function(data) {
-    //     //         // $("#mainContent").html(dat);
-    //     //     }
-    //     // });
-    //
-    // });
+    // have some ids correct "on" when the page is updated
     var pageName = window.location.pathname.split('/')[1];
     if (pageName === 'module') {
         className = window.location.pathname.split('/')[2];
@@ -91,7 +76,6 @@ $(document).ready(function() {
     } else {
         $("#" + pageName).addClass("on");
     }
-
 
     // go to today page when clicking the home button
     $("#home").on("click", function() {
@@ -109,6 +93,22 @@ $(document).ready(function() {
             });
         });
     });
+
+    // show the modal when clicking the sidebar class items
+    var little_button_deletes = $('.little-button.delete');
+    var little_button_edits = $('.little-button.edit');
+    for (var i = 0; i < little_button_deletes.length; i++) {
+        little_button_deletes[i].addEventListener('click', function (event) {
+            event.stopPropagation();
+            $('#little-button-delete').modal('show');
+        })
+    }
+    for (var i = 0; i < little_button_edits.length; i++) {
+        little_button_edits[i].addEventListener('click', function (event) {
+            event.stopPropagation();
+            $('#little-button-edit').modal('show');
+        })
+    }
 });
 
 function adaptive() {

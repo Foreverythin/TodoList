@@ -186,8 +186,10 @@
     transition:  all .5s;
 }
 .little-button:hover {
-    background-color: #D1E7EA!important;
+    background-color: #EDEDED!important;
     transition:  all .5s;
+    /*  larger  */
+
 }
 tr.on td {
     background-color: var(--color-sidebar-clicked);
