@@ -1,13 +1,9 @@
 $(document).ready(function() {
     adaptive();
 
-    // stop Bubble
-    // function stopBubble(e) {
-    //     if (e && e.stopPropagation) {
-    //         e.stopPropagation();
-    //         return;
-    //     }
-    // }
+    $("#datepicker").flatpickr({
+        time: (new Date()).getTime()
+    });
 
     // change the saying every 5 seconds
     $.get('/static/sayings.txt', function(data) {
@@ -52,14 +48,16 @@ $(document).ready(function() {
             root.css('--color-primary', '#000000');
             root.css('--color-nav-sayings-font', '#000000');
             root.css('--color-secondary', '#839AA8');
-            root.css('--color-sidebar-line', '');
+            root.css('--color-sidebar-line', '#839AA8');
             // root.css('--color-sidebar-clicked', '#99C4C8');
+            $('#flatpickrDark')[0].setAttribute('href', '../static/style/flatpickr-dark.css');
         } else {
             root.css('--color-primary', '#D1E7EA');
             root.css('--color-nav-sayings-font', 'rgb(110, 131, 150)');
             root.css('--color-secondary', '#F7F7F7');
             root.css('--color-sidebar-line', '#E6E4E4');
             // root.css('--color-sidebar-clicked', '#EDEDED');
+            $('#flatpickrDark')[0].href = '';
         }
     });
 
