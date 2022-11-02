@@ -1,5 +1,30 @@
 $(document).ready(function() {
-    adaptive();
+
+    var dayMode = localStorage.getItem('dayMode');
+
+    // whether the dayMode is null
+    if (dayMode == null) {
+        localStorage.setItem('dayMode', 'light');
+    }
+
+    var root = $(':root');
+    if (dayMode === 'light') {
+        root.css('--color-primary', '#D1E7EA');
+        root.css('--color-nav-sayings-font', 'rgb(110, 131, 150)');
+        root.css('--color-secondary', '#F7F7F7');
+        root.css('--color-sidebar-line', '#E6E4E4');
+        root.css('--color-modal-content', '#ffffff');
+        // root.css('--color-sidebar-clicked', '#EDEDED');
+        $('#flatpickrDark')[0].href = '';
+    } else {
+        root.css('--color-primary', '#000000');
+        root.css('--color-nav-sayings-font', '#000000');
+        root.css('--color-secondary', '#839AA8');
+        root.css('--color-sidebar-line', '#839AA8');
+        root.css('--color-modal-content', '#839AA8');
+        // root.css('--color-sidebar-clicked', '#99C4C8');
+        $('#flatpickrDark')[0].setAttribute('href', '../static/style/flatpickr-dark.css');
+    }
 
     $("#datepicker").flatpickr({
         time: (new Date()).getTime()
@@ -18,7 +43,7 @@ $(document).ready(function() {
     // make the side bar expandable and collapsible
     $(".topnav-left>button:first-child").on("click", function() {
         var sidebarLeft = $("#sidebar").css('left');
-        if (sidebarLeft == '0px') {
+        if (sidebarLeft === '0px') {
             $('#sidebar').css('position', 'fixed');
             $("#sidebar").css('left', '-250px');
             $("#mainContent").css('margin-left', '0px');
@@ -42,7 +67,6 @@ $(document).ready(function() {
     });
 
     $("#day-night").on("click", function() {
-        var root = $(':root');
         var nav_color = root.css('--color-primary');
         if (nav_color === '#D1E7EA') {
             root.css('--color-primary', '#000000');
@@ -52,6 +76,7 @@ $(document).ready(function() {
             root.css('--color-modal-content', '#839AA8');
             // root.css('--color-sidebar-clicked', '#99C4C8');
             $('#flatpickrDark')[0].setAttribute('href', '../static/style/flatpickr-dark.css');
+            localStorage.setItem('dayMode', 'dark');
         } else {
             root.css('--color-primary', '#D1E7EA');
             root.css('--color-nav-sayings-font', 'rgb(110, 131, 150)');
@@ -60,6 +85,7 @@ $(document).ready(function() {
             root.css('--color-modal-content', '#ffffff');
             // root.css('--color-sidebar-clicked', '#EDEDED');
             $('#flatpickrDark')[0].href = '';
+            localStorage.setItem('dayMode', 'light');
         }
     });
 
