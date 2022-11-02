@@ -49,6 +49,7 @@ $(document).ready(function() {
             root.css('--color-nav-sayings-font', '#000000');
             root.css('--color-secondary', '#839AA8');
             root.css('--color-sidebar-line', '#839AA8');
+            root.css('--color-modal-content', '#839AA8');
             // root.css('--color-sidebar-clicked', '#99C4C8');
             $('#flatpickrDark')[0].setAttribute('href', '../static/style/flatpickr-dark.css');
         } else {
@@ -56,6 +57,7 @@ $(document).ready(function() {
             root.css('--color-nav-sayings-font', 'rgb(110, 131, 150)');
             root.css('--color-secondary', '#F7F7F7');
             root.css('--color-sidebar-line', '#E6E4E4');
+            root.css('--color-modal-content', '#ffffff');
             // root.css('--color-sidebar-clicked', '#EDEDED');
             $('#flatpickrDark')[0].href = '';
         }

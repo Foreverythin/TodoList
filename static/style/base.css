@@ -9,6 +9,7 @@
     --color-main-font: rgb(120, 118, 118);
     --color-sidebar-line: #e6e4e4;
     --color-sidebar-clicked: #EDEDED;
+    --color-modal-content: #ffffff;
 }
 
 /* ---------------------------------------------------------------- */
@@ -216,4 +217,18 @@ tr.on th {
     /* overflow-x: hidden; */
 }
 
+/* ---------------------------------------------------------------- */
+
+
+/* the modal content */
+/* ---------------------------------------------------------------- */
+.modal-content {
+    background-color: var(--color-modal-content);
+}
+input {
+    border: 1px solid #c3c3c3;
+    border-radius: 3px;
+    line-height: 25px;
+    padding-left: 5px;
+}
 /* ---------------------------------------------------------------- */
