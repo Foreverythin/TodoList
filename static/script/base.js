@@ -88,8 +88,10 @@ $(document).ready(function() {
         trs.each(function() {
             $(this).on("click", function() {
                 var className = $(this).attr("id");
-                window.location.href = '/module/' + className;
-                $(this).addClass("on");
+                if (className !== undefined) {
+                    window.location.href = "/module/" + className;
+                    $(this).addClass("on");
+                }
             });
         });
     });
