@@ -240,4 +240,7 @@ input {
 .color_dropdown_select__name {
     margin: 0 6px;
 }
+.dropdown-menu>li:hover {
+    cursor: pointer;
+}
 /* ---------------------------------------------------------------- */

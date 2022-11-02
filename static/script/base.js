@@ -137,6 +137,28 @@ $(document).ready(function() {
             $('#little-button-edit').modal('show');
         })
     }
+
+    // color-selector in the modal
+    $(".color-selector>ul>li").on("click", function() {
+        let color = $(this).children("a").children("span")[0].style.backgroundColor;
+        let colorName = $(this).children("a").children("span")[1].innerText;
+        let showButton = $(".selected-color-button>span");
+        let showButtonColor = showButton[0];
+        let showButtonColorName = showButton[1];
+
+        showButtonColor.style.backgroundColor = color;
+        showButtonColorName.innerText = colorName;
+    })
+    $(".color-selector-2>ul>li").on("click", function() {
+        let color = $(this).children("a").children("span")[0].style.backgroundColor;
+        let colorName = $(this).children("a").children("span")[1].innerText;
+        let showButton = $(".selected-color-button-2>span");
+        let showButtonColor = showButton[0];
+        let showButtonColorName = showButton[1];
+
+        showButtonColor.style.backgroundColor = color;
+        showButtonColorName.innerText = colorName;
+    })
 });
 
 function adaptive() {

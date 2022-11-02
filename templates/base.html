@@ -266,7 +266,7 @@
         </table>
     </div>
     <!-- the main content -->
-    <div id="mainContent">{% block content %}{% endblock %}div</div>
+    <div id="mainContent" class="container" style="text-align: center">{% block content %}{% endblock %}div</div>
 </div>
 
 <!-- Model of add a new task -->
@@ -294,11 +294,13 @@
                     <div class="form-group">
                         <label for="date" style="margin-right: 10px">Deadline</label>
                         <input id="datepicker" class="flatpickr selector" data-min-date=today data-enable-time=true
-                               data-time_24hr=true placeholder="Select Date.." style="text-align: center; height: 34px;">
+                               data-time_24hr=true placeholder="Select Date.."
+                               style="text-align: center; height: 34px;">
                         <div style="float: right">
                             <label for="date" style="margin-right: 10px;">Module</label>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" style="width: 137px;">Unclassified</button>
+                                <button type="button" class="btn btn-default" style="width: 137px;">Unclassified
+                                </button>
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
@@ -353,7 +355,8 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h5 class="modal-title" id="myModalLabel">Are you sure to delete the module?</h5>
-                <div class="modal-title" style="text-align: center; margin-top: 15px;"><h4><strong>Web Dev</strong></h4></div>
+                <div class="modal-title" style="text-align: center; margin-top: 15px;"><h4><strong>Web Dev</strong></h4>
+                </div>
             </div>
             <!-- <div class="modal-body">Logout?</div> -->
             <div class="modal-footer">
@@ -381,9 +384,10 @@
                     </div>
                     <div class="form-group">
                         <label for="date" style="margin-right: 10px; margin-top: 15px;">Color</label>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" style="width: 137px;">
-                                <span class="color_dropdown_select__color" style="background-color: rgb(126, 204, 73);"></span>
+                        <div class="btn-group color-selector">
+                            <button type="button" class="btn btn-default selected-color-button" style="width: 137px;">
+                                <span class="color_dropdown_select__color"
+                                      style="background-color: rgb(126, 204, 73);"></span>
                                 <span class="color_dropdown_select__name">Lime Green</span>
                             </button>
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -391,24 +395,139 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu" style="overflow-y: scroll; max-height: 300px;">
-                                <li><a href="#">Today</a></li>
-                                <li><a href="#">Tomorrow</a></li>
-                                <li><a href="#">Next Week</a></li>
-                                <li><a href="#">Next Month</a></li>
-                                <li><a href="#">Next Year</a></li>
-                                <li><a href="#">Unclassified</a></li>
-                                <li><a href="#">Today</a></li>
-                                <li><a href="#">Tomorrow</a></li>
-                                <li><a href="#">Next Week</a></li>
-                                <li><a href="#">Next Month</a></li>
-                                <li><a href="#">Next Year</a></li>
-                                <li><a href="#">Unclassified</a></li>
-                                <li><a href="#">Today</a></li>
-                                <li><a href="#">Tomorrow</a></li>
-                                <li><a href="#">Next Week</a></li>
-                                <li><a href="#">Next Month</a></li>
-                                <li><a href="#">Next Year</a></li>
-                                <li><a href="#">Unclassified</a></li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(184, 37, 111);"></span>
+                                        <span class="color_dropdown_select__name">Berry Red</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(219, 64, 53);"></span>
+                                        <span class="color_dropdown_select__name">Red</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(255, 153,51);"></span>
+                                        <span class="color_dropdown_select__name">Orange</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(255, 208,0);"></span>
+                                        <span class="color_dropdown_select__name">Yellow</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(175, 184,59);"></span>
+                                        <span class="color_dropdown_select__name">Olive Green</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(126, 204,73);"></span>
+                                        <span class="color_dropdown_select__name">Lime Green</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(41, 148,56);"></span>
+                                        <span class="color_dropdown_select__name">Green</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(106, 204,188);"></span>
+                                        <span class="color_dropdown_select__name">Mint Green</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(21, 143,173);"></span>
+                                        <span class="color_dropdown_select__name">Teal</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(20, 170,245);"></span>
+                                        <span class="color_dropdown_select__name">Sky Blue</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(150, 195,235);"></span>
+                                        <span class="color_dropdown_select__name">Light Blue</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(64, 115,255);"></span>
+                                        <span class="color_dropdown_select__name">Blue</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(136, 77,255);"></span>
+                                        <span class="color_dropdown_select__name">Grape</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(175, 56,235);"></span>
+                                        <span class="color_dropdown_select__name">Violet</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(235, 150,235);"></span>
+                                        <span class="color_dropdown_select__name">Lavender</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(224, 81,148);"></span>
+                                        <span class="color_dropdown_select__name">Magenta</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(255, 141,133);"></span>
+                                        <span class="color_dropdown_select__name">Salmon</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(128, 128,128);"></span>
+                                        <span class="color_dropdown_select__name">Charcoal</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(204, 172,147);"></span>
+                                        <span class="color_dropdown_select__name">Berry Red</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -438,9 +557,10 @@
                     </div>
                     <div class="form-group">
                         <label for="date" style="margin-right: 10px; margin-top: 15px;">Color</label>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" style="width: 137px;">
-                                <span class="color_dropdown_select__color" style="background-color: rgb(126, 204, 73);"></span>
+                        <div class="btn-group color-selector-2">
+                            <button type="button" class="btn btn-default selected-color-button-2" style="width: 137px;">
+                                <span class="color_dropdown_select__color"
+                                      style="background-color: rgb(126, 204, 73);"></span>
                                 <span class="color_dropdown_select__name">Lime Green</span>
                             </button>
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -448,24 +568,139 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu" style="overflow-y: scroll; max-height: 300px;">
-                                <li><a href="#">Today</a></li>
-                                <li><a href="#">Tomorrow</a></li>
-                                <li><a href="#">Next Week</a></li>
-                                <li><a href="#">Next Month</a></li>
-                                <li><a href="#">Next Year</a></li>
-                                <li><a href="#">Unclassified</a></li>
-                                <li><a href="#">Today</a></li>
-                                <li><a href="#">Tomorrow</a></li>
-                                <li><a href="#">Next Week</a></li>
-                                <li><a href="#">Next Month</a></li>
-                                <li><a href="#">Next Year</a></li>
-                                <li><a href="#">Unclassified</a></li>
-                                <li><a href="#">Today</a></li>
-                                <li><a href="#">Tomorrow</a></li>
-                                <li><a href="#">Next Week</a></li>
-                                <li><a href="#">Next Month</a></li>
-                                <li><a href="#">Next Year</a></li>
-                                <li><a href="#">Unclassified</a></li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(184, 37, 111);"></span>
+                                        <span class="color_dropdown_select__name">Berry Red</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(219, 64, 53);"></span>
+                                        <span class="color_dropdown_select__name">Red</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(255, 153,51);"></span>
+                                        <span class="color_dropdown_select__name">Orange</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(255, 208,0);"></span>
+                                        <span class="color_dropdown_select__name">Yellow</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(175, 184,59);"></span>
+                                        <span class="color_dropdown_select__name">Olive Green</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(126, 204,73);"></span>
+                                        <span class="color_dropdown_select__name">Lime Green</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(41, 148,56);"></span>
+                                        <span class="color_dropdown_select__name">Green</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(106, 204,188);"></span>
+                                        <span class="color_dropdown_select__name">Mint Green</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(21, 143,173);"></span>
+                                        <span class="color_dropdown_select__name">Teal</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(20, 170,245);"></span>
+                                        <span class="color_dropdown_select__name">Sky Blue</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(150, 195,235);"></span>
+                                        <span class="color_dropdown_select__name">Light Blue</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(64, 115,255);"></span>
+                                        <span class="color_dropdown_select__name">Blue</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(136, 77,255);"></span>
+                                        <span class="color_dropdown_select__name">Grape</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(175, 56,235);"></span>
+                                        <span class="color_dropdown_select__name">Violet</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(235, 150,235);"></span>
+                                        <span class="color_dropdown_select__name">Lavender</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(224, 81,148);"></span>
+                                        <span class="color_dropdown_select__name">Magenta</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(255, 141,133);"></span>
+                                        <span class="color_dropdown_select__name">Salmon</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(128, 128,128);"></span>
+                                        <span class="color_dropdown_select__name">Charcoal</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="color_dropdown_select__color"
+                                              style="background-color: rgb(204, 172,147);"></span>
+                                        <span class="color_dropdown_select__name">Berry Red</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
