@@ -1,61 +1,8 @@
-{#{% extends "base.html" %}#}
-{##}
-{#{% block content %}#}
-{#  <div class="row">#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#    <div class="col-md-1">.col-md-1</div>#}
-{#  </div>#}
-{#  <div class="row">#}
-{#    <div class="col-md-8">.col-md-8</div>#}
-{#    <div class="col-md-4">.col-md-4</div>#}
-{#  </div>#}
-{#  <div class="row">#}
-{#    <div class="col-md-4">.col-md-4</div>#}
-{#    <div class="col-md-4">.col-md-4</div>#}
-{#    <div class="col-md-4">.col-md-4</div>#}
-{#  </div>#}
-{#  <div class="row">#}
-{#    <div class="col-md-6">.col-md-6</div>#}
-{#    <div class="col-md-6">.col-md-6</div>#}
-{#  </div>#}
-{#  <div>Schedule</div>#}
-{#    <div id="calendar" style="height: 800px;"></div>#}
-{#{% endblock %}#}
+<script src="../static/script/schedule.js"></script>
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../static/jquery/jquery-3.6.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-    <title>Document</title>
-</head>
-<body>
-<div id='calendar'></div>
+{% extends "base.html" %}
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
-        });
-        calendar.render();
-    });
-</script>
-</body>
-</html>
+{% block content %}
+    <h1>Calendar</h1>
+    <div id='calendar'></div>
+{% endblock %}

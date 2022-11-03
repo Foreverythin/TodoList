@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/bootstrap/bootstrap@3.4.1.min.css">
     <link rel="stylesheet" href="../static/style/login-signup.css">
+    <script src="../static/jquery/jquery-3.6.1.min.js"></script>
+    <script src="../static/script/signup.js"></script>
     <title>Signup</title>
 </head>
 <body>
 <div id="bigBlock" class="row">
-    <form role="form" action="/user/signup", method="post">
+    <form>
         <div class="form-group">
             <label for="email" style="margin-bottom: 10px;">Email</label>
             <input type="text" class="form-control" id="email" name="usermail" placeholder="Please input your email.">
@@ -18,15 +20,15 @@
         <div class="form-group" style="margin-top: 20px;">
             <label for=""></label>
             <input type="text" class="form-control col-sm-8 col-xs-8" id="email" placeholder="Please input the captcha."
-                   style="width: 200px">
-            <span class="btn btn-primary col-sm-4 col-xs-4" style="margin-left: 16px">Get Captcha</span>
+                   name="captcha" style="width: 200px">
+            <span class="btn btn-primary col-sm-4 col-xs-4" style="margin-left: 16px" id="captcha-btn" onclick="getCaptcha()">Get Captcha</span>
         </div>
         <div class="form-group" style="margin-top: 40px;">
             <label for="password" style="margin-bottom: 10px;">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Please input your password.">
             <input type="password" class="form-control" id="confirm" name="confirm" placeholder="Repeat your password." style="margin-top: 10px">
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%">Submit</button>
+        <button type="button" class="btn btn-primary" style="width: 100%" id="submit" onclick="signup()">Submit</button>
         <a href={{ url_for('user.login') }}>Already have an account? Login.</a>
     </form>
 </div>

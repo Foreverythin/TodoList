@@ -1,15 +1,16 @@
-from crypt import methods
-from email import message
-from flask import Blueprint, render_template, session, url_for
-from flask import request
+import string
+import random
+from datetime import datetime
+
+from flask import Blueprint, render_template, session, url_for, redirect, request, jsonify, flash
 from forms import LoginForm, RegisterForm
-from flask import redirect
-from models import User
+from models import User, Captcha
 from exts import db, mail
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
 
 bp = Blueprint('user', __name__, url_prefix='/user')
+
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -27,12 +28,20 @@ def login():
             else:
                 return 'Email or password is incorrect.'
 
+
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
         return render_template('signup.html')
     else:
         form = RegisterForm(request.form)
+
+        # if not form.validate_usermail(form.usermail):
+        #     return jsonify({'status': '400', 'msg': 'Email already registered!'})
+        # if not form.validate_captcha(form.captcha):
+        #     print(2)
+        #     return jsonify({'status': '400', 'msg': 'Wrong captcha!'})
+
         if form.validate():
             usermail = form.usermail.data
             password = form.password.data
@@ -42,13 +51,35 @@ def signup():
             db.session.add(user)
             db.session.commit()
 
-            return 'success'
+            return jsonify({'status': 200, 'msg': 'Sign up successfully!'})
         else:
-            return redirect(url_for('user.signup'))
+            key = list(form.errors.keys())[0]
+            return jsonify({'status': 400, 'msg': form.errors[key][0]})
 
-@bp.route('/mail')
-def send_mail():
-    message = Message('Hello', recipients=['pangyuli92@gmail.com'], body='Hello, this is a test email.')
+
+
+
+
+@bp.route('/captcha', methods=['POST'])
+def get_captcha():
+    usermail = request.form.get('usermail')
+    usermail_exist = User.query.filter(User.usermail == usermail).first()
+    if usermail_exist:
+        return jsonify({'code': 400, 'msg': 'Email already exists.'})
+
+    letters = string.ascii_letters + string.digits
+    captcha = "".join(random.sample(letters, 4))
+    message = Message('Captcha', recipients=[usermail], body="The captcha is: " + captcha + ", just valid for 5 "
+                                                                                            "minutes.")
+    captcha_model = Captcha.query.filter(Captcha.usermail == usermail).first()
+    if captcha_model:
+        captcha_model.captcha = captcha
+        captcha_model.create_time = datetime.now()
+        db.session.commit()
+    else:
+        captcha_model = Captcha(usermail=usermail, captcha=captcha, create_time=datetime.now())
+        db.session.add(captcha_model)
+        db.session.commit()
     mail.send(message)
 
-    return 'success'
+    return jsonify({'status': 200, 'msg': 'Captcha has been sent to your email address!'})
