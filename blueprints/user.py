@@ -27,10 +27,10 @@ def login():
             else:
                 return 'Email or password is incorrect.'
 
-@bp.route('/register', methods=['GET', 'POST'])
+@bp.route('/signup', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template('register.html')
+        return render_template('signup.html')
     else:
         form = RegisterForm(request.form)
         if form.validate():
@@ -45,7 +45,7 @@ def register():
 
             return 'success'
         else:
-            return redirect(url_for('user.register'))
+            return redirect(url_for('user.signup'))
 
 @bp.route('/mail')
 def send_mail():

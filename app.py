@@ -22,7 +22,7 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def index():
-    return redirect('/today')
+    return redirect('/user/signup')
 
 
 if __name__ == '__main__':
