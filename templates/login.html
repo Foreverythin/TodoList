@@ -10,24 +10,17 @@
 </head>
 <body>
 <div id="bigBlock" class="row">
-    <form role="form">
+    <form role="form" action="/user/login", method="post">
         <div class="form-group">
             <label for="email" style="margin-bottom: 10px;">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="Please input your email.">
+            <input type="text" class="form-control" id="email" name="usermail" placeholder="Please input your email.">
         </div>
-{#        <div class="form-group" style="margin-top: 20px;">#}
-{#            <label for=""></label>#}
-{#            <input type="text" class="form-control col-sm-8 col-xs-8" id="email" placeholder="Please input the captcha."#}
-{#                   style="width: 200px">#}
-{#            <span class="btn btn-primary col-sm-4 col-xs-4" style="margin-left: 16px">Get Captcha</span>#}
-{#        </div>#}
         <div class="form-group" style="margin-top: 0px;">
             <label for="password" style="margin-bottom: 10px;">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Please input your password.">
-{#            <input type="password" class="form-control" id="password-again" placeholder="Repeat your password." style="margin-top: 10px">#}
+            <input type="password" class="form-control" id="password" name="password" placeholder="Please input your password.">
         </div>
-        <button type="submit" class="btn btn-default" style="width: 100%">Submit</button>
-        <a>Does not have an account? Sign up. -></a>
+        <button type="submit" class="btn btn-primary" style="width: 100%">Submit</button>
+        <a href = {{ url_for('user.signup') }}>Does not have an account? Sign up. -></a>
     </form>
 </div>
 

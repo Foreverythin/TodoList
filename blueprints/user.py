@@ -28,18 +28,17 @@ def login():
                 return 'Email or password is incorrect.'
 
 @bp.route('/signup', methods=['GET', 'POST'])
-def register():
+def signup():
     if request.method == 'GET':
         return render_template('signup.html')
     else:
         form = RegisterForm(request.form)
         if form.validate():
             usermail = form.usermail.data
-            username = form.username.data
             password = form.password.data
 
             hash_password = generate_password_hash(password)
-            user = User(usermail=usermail, username=username, password=hash_password)
+            user = User(usermail=usermail, password=hash_password)
             db.session.add(user)
             db.session.commit()
 

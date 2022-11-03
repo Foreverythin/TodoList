@@ -4,7 +4,6 @@ class User(db.Model):
     __tablename__ = 'user'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     usermail = db.Column(db.String(50), nullable=False, unique=True)
-    username = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(150), nullable=False)
 
 class Class(db.Model):
