@@ -26,6 +26,16 @@ function getCaptcha() {
                 success: function(res) {
                     if (res['status'] === 200) {
                         alert(res['msg']);
+                        var count = 60;
+                        var timer = setInterval(function() {
+                            if (count > 0) {
+                                count--;
+                                $('#captcha-btn').text(count + 's');
+                            } else {
+                                clearInterval(timer);
+                                $('#captcha-btn').text('Get Captcha');
+                            }
+                        }, 1000);
                     } else {
                         alert(res['msg']);
                     }
