@@ -9,6 +9,7 @@ from exts import db, mail
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 bp = Blueprint('user', __name__, url_prefix='/user')
 
 
@@ -24,6 +25,7 @@ def login():
             user = User.query.filter(User.usermail == usermail).first()
             if user and check_password_hash(user.password, password):
                 session['uid'] = user.uid
+                print(session['uid'])
                 return redirect(url_for('today.index'))
             else:
                 return 'Email or password is incorrect.'
@@ -83,3 +85,10 @@ def get_captcha():
     mail.send(message)
 
     return jsonify({'status': 200, 'msg': 'Captcha has been sent to your email address!'})
+
+
+@bp.route('/logout', methods=['POST'])
+def logout():
+    if session.get('uid'):
+        session.pop('uid')
+    return jsonify({'status': 200, 'msg': 'Logout successfully!'})

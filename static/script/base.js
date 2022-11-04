@@ -178,3 +178,17 @@ function adaptive() {
         $("#saying").css('display','');
     }
 }
+
+function logout() {
+    $.ajax({
+        url: '/user/logout',
+        type: 'POST',
+        success: function (res) {
+            if (res['status'] === 200) {
+                window.location.href = '/user/login';
+            } else {
+                alert(res['msg']);
+            }
+        }
+    })
+}
