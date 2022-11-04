@@ -18,7 +18,7 @@ app.register_blueprint(module_bp)
 db.init_app(app)
 mail.init_app(app)
 
-migrate = Migrate(app, db, render_as_batch=True, compare_type=True, compare_server_default=True)
+migrate = Migrate(app, db, compare_type=True, compare_server_default=True)
 
 @app.route('/')
 def index():
