@@ -1,5 +1,6 @@
 import re
 from datetime import datetime
+from datetime import timedelta
 
 import wtforms
 from wtforms import validators
@@ -36,7 +37,7 @@ class RegisterForm(wtforms.Form):
         if not re.match(r'^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$', usermail):
             raise validators.ValidationError('Invalid email address')
         captcha_model = Captcha.query.filter_by(usermail=usermail).order_by(Captcha.create_time.desc()).first()
-        if not captcha_model or captcha_model.captcha.lower() != captcha.lower() or captcha_model.create_time + 60 * 5 < datetime.now():
+        if not captcha_model or captcha_model.captcha.lower() != captcha.lower() or captcha_model.create_time + timedelta(minutes=5) < datetime.now():
             raise validators.ValidationError('Invalid captcha')
 
     def validate_usermail(self, field):
