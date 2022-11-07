@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, session, url_for
 from flask_migrate import Migrate
 import config
 from models import User, Class, Task, Captcha
@@ -20,9 +20,13 @@ mail.init_app(app)
 
 migrate = Migrate(app, db, compare_type=True, compare_server_default=True)
 
+
 @app.route('/')
 def index():
-    return redirect('/user/signup')
+    if session.get('uid'):
+        return redirect(url_for('today.index'))
+    else:
+        return redirect('/user/signup')
 
 
 if __name__ == '__main__':
