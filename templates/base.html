@@ -474,13 +474,13 @@
                 <form role="form">
                     <div class="form-group">
                         <label for="module">Module name</label>
-                        <input type="text" class="form-control" placeholder="The module name here.">
+                        <input type="text" class="form-control" id="newModuleName-input" placeholder="The module name here.">
                     </div>
                     <div class="form-group">
                         <label for="date" style="margin-right: 10px; margin-top: 15px;">Color</label>
                         <div class="btn-group color-selector-2">
                             <button type="button" class="btn btn-default selected-color-button-2" style="width: 137px;">
-                                <span class="color_dropdown_select__color"
+                                <span class="color_dropdown_select__color" id="newModuleColor-input"
                                       style="background-color: rgb(126, 204, 73);"></span>
                                 <span class="color_dropdown_select__name">Lime Green</span>
                             </button>
@@ -629,7 +629,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-primary" id="new_module_submit">Submit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var moduleID_need_to_be_changed;
 
     var dayMode = localStorage.getItem('dayMode');
@@ -32,17 +32,17 @@ $(document).ready(function() {
     });
 
     // change the saying every 5 seconds
-    $.get('/static/sayings.txt', function(data) {
+    $.get('/static/sayings.txt', function (data) {
         sayings = data.split("\n");
         // set interval before reload a new saying
         var now = 0; // current reading line
-        setInterval(function() {
-            $("#saying").html(sayings[now++%sayings.length]);
+        setInterval(function () {
+            $("#saying").html(sayings[now++ % sayings.length]);
         }, 5000); // in ms.
     });
 
     // make the side bar expandable and collapsible
-    $(".topnav-left>button:first-child").on("click", function() {
+    $(".topnav-left>button:first-child").on("click", function () {
         var sidebarLeft = $("#sidebar").css('left');
         if (sidebarLeft === '0px') {
             $('#sidebar').css('position', 'fixed');
@@ -67,7 +67,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#day-night").on("click", function() {
+    $("#day-night").on("click", function () {
         var nav_color = root.css('--color-primary');
         if (nav_color === '#D1E7EA') {
             root.css('--color-primary', '#000000');
@@ -91,7 +91,7 @@ $(document).ready(function() {
     });
 
     // make it suitable for small devices
-    $(window).resize(function(){
+    $(window).resize(function () {
         adaptive();
     });
 
@@ -105,15 +105,15 @@ $(document).ready(function() {
     }
 
     // go to today page when clicking the home button
-    $("#home").on("click", function() {
+    $("#home").on("click", function () {
         $("#sidebar-top-table>tbody>tr:first-child").click();
     });
 
     // go to the page when clicking the sidebar module item
-    $("#sidebar-bottom-table").each(function() {
+    $("#sidebar-bottom-table").each(function () {
         var trs = $(this).find("tr");
-        trs.each(function() {
-            $(this).on("click", function() {
+        trs.each(function () {
+            $(this).on("click", function () {
                 var className = $(this).attr("id");
                 if (className !== undefined) {
                     window.location.href = "/module/" + className;
@@ -140,7 +140,7 @@ $(document).ready(function() {
     }
 
     // color-selector in the modal
-    $(".color-selector>ul>li").on("click", function() {
+    $(".color-selector>ul>li").on("click", function () {
         let color = $(this).children("a").children("span")[0].style.backgroundColor;
         let colorName = $(this).children("a").children("span")[1].innerText;
         let showButton = $(".selected-color-button>span");
@@ -150,7 +150,7 @@ $(document).ready(function() {
         showButtonColor.style.backgroundColor = color;
         showButtonColorName.innerText = colorName;
     })
-    $(".color-selector-2>ul>li").on("click", function() {
+    $(".color-selector-2>ul>li").on("click", function () {
         let color = $(this).children("a").children("span")[0].style.backgroundColor;
         let colorName = $(this).children("a").children("span")[1].innerText;
         let showButton = $(".selected-color-button-2>span");
@@ -227,9 +227,38 @@ $(document).ready(function() {
         })
     });
 
+    // add a new module
+    $("#new_module_submit").on("click", function () {
+        var newModuleName = $("#newModuleName-input").val();
+        var newModuleColor = $("#newModuleColor-input").css("background-color");
+        if (newModuleName === "") {
+            alert("Please enter a module name!");
+        } else {
+            $.ajax({
+                url: '/module/add_module',
+                type: 'POST',
+                data: {
+                    'new_module': newModuleName,
+                    'new_color': newModuleColor
+                },
+                success: function (res) {
+                    console.log(res);
+                    // if (res['status'] === 200) {
+                    //     alert(res['msg']);
+                    //     window.location.reload();
+                    // } else {
+                    //     alert(res['msg']);
+                    //     window.location.reload();
+                    // }
+                    alert(res['msg']);
+                    window.location.reload();
+                }
+            });
+        }
+    });
+
     var unclassified_modules = $(".Unclassified");
     for (var i = 0; i < unclassified_modules.length; i++) {
-        console.log(unclassified_modules[i]);
         unclassified_modules[i].children[0].children[0].style.visibility = "hidden";
         unclassified_modules[i].children[3].children[0].style.visibility = "hidden";
     }
@@ -246,10 +275,10 @@ function adaptive() {
             $("#sidebar").css('box-shadow', 'none');
         }
     }
-    if ($(window).width() < 625 ) {
-        $("#saying").css('display','none');
-    }else{
-        $("#saying").css('display','');
+    if ($(window).width() < 625) {
+        $("#saying").css('display', 'none');
+    } else {
+        $("#saying").css('display', '');
     }
 }
 

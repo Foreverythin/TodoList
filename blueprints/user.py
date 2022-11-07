@@ -4,7 +4,7 @@ from datetime import datetime
 
 from flask import Blueprint, render_template, session, url_for, redirect, request, jsonify, flash
 from forms import LoginForm, RegisterForm
-from models import User, Captcha
+from models import User, Captcha, Class
 from exts import db, mail
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -40,12 +40,6 @@ def signup():
     else:
         form = RegisterForm(request.form)
 
-        # if not form.validate_usermail(form.usermail):
-        #     return jsonify({'status': '400', 'msg': 'Email already registered!'})
-        # if not form.validate_captcha(form.captcha):
-        #     print(2)
-        #     return jsonify({'status': '400', 'msg': 'Wrong captcha!'})
-
         if form.validate():
             usermail = form.usermail.data
             password = form.password.data
@@ -54,6 +48,9 @@ def signup():
             user = User(usermail=usermail, password=hash_password)
             db.session.add(user)
             try:
+                db.session.commit()
+                unclassified_module = Class(cname='Unclassified', uid=user.uid, color='rgb(128, 128,128)')
+                db.session.add(unclassified_module)
                 db.session.commit()
                 return jsonify({'status': 200, 'msg': 'Sign up successfully!'})
             except Exception as e:

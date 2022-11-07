@@ -43,3 +43,21 @@ def delete_module():
     except Exception as e:
         db.session.rollback()
         return jsonify({'status': 400, 'msg': e.__str__()})
+
+
+@bp.route('/add_module', methods=['POST'])
+def add_module():
+    new_module = request.form.get('new_module')
+    new_color = request.form.get('new_color')
+    uid = session.get('uid')
+    repeat_module = Class.query.filter_by(cname=new_module, uid=uid).first()
+    if repeat_module:
+        return jsonify({'status': 401, 'msg': 'Repeat module!'})
+    module = Class(cname=new_module, color=new_color, uid=uid)
+    db.session.add(module)
+    try:
+        db.session.commit()
+        return jsonify({'status': 200, 'msg': 'Successfully added!'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 400, 'msg': e.__str__()})
