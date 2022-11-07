@@ -12,17 +12,9 @@ class User(db.Model):
 class Class(db.Model):
     __tablename__ = 'class'
     cid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    cname = db.Column(db.String(50), nullable=False, unique=True)
-    color = db.Column(db.String(50), nullable=False, unique=True)
-
-
-class UserClass(db.Model):
-    __tablename__ = 'user_class'
-    uc_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    uid = db.Column(db.Integer, db.ForeignKey('user.uid'))
-    cid = db.Column(db.Integer, db.ForeignKey('class.cid'))
-    _user = db.relationship('User', backref=db.backref('classes'))
-    _class = db.relationship('Class', backref=db.backref('users'))
+    cname = db.Column(db.String(50), nullable=False)
+    color = db.Column(db.String(50), nullable=False)
+    uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
 
 
 class Task(db.Model):
@@ -34,7 +26,7 @@ class Task(db.Model):
     task_date = db.Column(db.Date)
     task_time = db.Column(db.Time)
     informed = db.Column(db.Boolean, nullable=False)
-    uc_id = db.Column(db.Integer, db.ForeignKey('user_class.uc_id'))
+    cid = db.Column(db.Integer, db.ForeignKey('class.cid'), nullable=False)
 
 
 class Captcha(db.Model):

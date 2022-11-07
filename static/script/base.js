@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var moduleID_need_to_be_changed;
 
     var dayMode = localStorage.getItem('dayMode');
 
@@ -159,6 +160,79 @@ $(document).ready(function() {
         showButtonColor.style.backgroundColor = color;
         showButtonColorName.innerText = colorName;
     })
+
+    $(".little-button.delete").on("click", function () {
+        var moduleID = this.parentNode.parentNode.id;
+        var moduleName = this.parentNode.nextElementSibling.nextElementSibling.innerText;
+        $('#little-button-delete-module').text(moduleName);
+        moduleID_need_to_be_changed = moduleID;
+    })
+    $(".little-button.edit").on("click", function () {
+        var moduleID = this.parentNode.parentNode.id;
+        var moduleName = this.parentNode.previousElementSibling.innerText;
+        $('#little-button-edit-module>input').attr("placeholder", moduleName);
+        moduleID_need_to_be_changed = moduleID;
+    })
+
+    $("#edit_module_submit").on("click", function () {
+        console.log(moduleID_need_to_be_changed);
+        var newModuleName = $("#module-edit-input").val();
+        if (newModuleName === "") {
+            newModuleName = $("#module-edit-input").attr("placeholder");
+        }
+        var newModuleColor = $("#module-edit-color").css("background-color");
+        $.ajax({
+            url: '/module/edit_module',
+            type: 'POST',
+            data: {
+                'moduleID': moduleID_need_to_be_changed,
+                'new_module': newModuleName,
+                'new_color': newModuleColor
+            },
+            success: function (res) {
+                console.log(res);
+                if (res['status'] === 200) {
+                    alert("Successfully edited!");
+                    window.location.reload();
+                } else {
+                    alert("Failed to edit!");
+                    window.location.reload();
+                }
+            }
+        })
+    });
+
+    $("#delete_module_submit").on("click", function () {
+        var location = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2];
+        $.ajax({
+            url: '/module/delete_module',
+            type: 'POST',
+            data: {
+                'moduleID': moduleID_need_to_be_changed
+            },
+            success: function (res) {
+                console.log(res);
+                if (res['status'] === 200) {
+                    alert("Successfully deleted!");
+                    if (location === "/module/" + moduleID_need_to_be_changed) {
+                        window.location.href = "/today";
+                    } else {
+                        window.location.reload();
+                    }
+                } else {
+                    alert("Failed to delete!");
+                    window.location.reload();
+                }
+            }
+        })
+    });
+
+    var unclassified_modules = $(".Unclassified");
+    for (var i = 0; i < unclassified_modules.length; i++) {
+        console.log(unclassified_modules[i]);
+        unclassified_modules[i].children[0].children[0].style.visibility = "hidden";
+        unclassified_modules[i].children[3].children[0].style.visibility = "hidden";
+    }
 });
 
 function adaptive() {

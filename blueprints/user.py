@@ -29,6 +29,8 @@ def login():
                 return redirect(url_for('today.index'))
             else:
                 return 'Email or password is incorrect.'
+        else:
+            return 'Invalid email or password.'
 
 
 @bp.route('/signup', methods=['GET', 'POST'])
@@ -51,9 +53,12 @@ def signup():
             hash_password = generate_password_hash(password)
             user = User(usermail=usermail, password=hash_password)
             db.session.add(user)
-            db.session.commit()
-
-            return jsonify({'status': 200, 'msg': 'Sign up successfully!'})
+            try:
+                db.session.commit()
+                return jsonify({'status': 200, 'msg': 'Sign up successfully!'})
+            except Exception as e:
+                db.session.rollback()
+                return jsonify({'status': 400, 'msg': 'Sign up failed!'})
         else:
             key = list(form.errors.keys())[0]
             return jsonify({'status': 400, 'msg': form.errors[key][0]})
@@ -77,11 +82,19 @@ def get_captcha():
     if captcha_model:
         captcha_model.captcha = captcha
         captcha_model.create_time = datetime.now()
-        db.session.commit()
+        try:
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'code': 400, 'msg': 'Get captcha failed.'})
     else:
         captcha_model = Captcha(usermail=usermail, captcha=captcha, create_time=datetime.now())
         db.session.add(captcha_model)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'code': 400, 'msg': 'Get captcha failed.'})
     mail.send(message)
 
     return jsonify({'status': 200, 'msg': 'Captcha has been sent to your email address!'})

@@ -39,7 +39,11 @@ def newTask():
 
         task = Task(task_name=task_name, task_description=task_description, task_status=task_status, task_date=task_date, task_time=task_time, user_id=user_id, class_id=class_id)
         db.session.add(task)
-        db.session.commit()
-
-        return '添加成功'
-    return 'fail'
+        try:
+            db.session.commit()
+            return 'success'
+        except Exception as e:
+            db.session.rollback()
+            return 'fail'
+    else:
+        return 'fail'
