@@ -28,7 +28,7 @@ def edit_module():
         return jsonify({'status': 200, 'msg': 'success'})
     except Exception as e:
         db.session.rollback()
-        return jsonify({'status': 400, 'msg': e.__str__()})
+        return jsonify({'status': 400, 'msg': str(e)})
 
 
 @bp.route('/delete_module', methods=['POST'])
@@ -42,7 +42,7 @@ def delete_module():
         return jsonify({'status': 200, 'msg': 'success'})
     except Exception as e:
         db.session.rollback()
-        return jsonify({'status': 400, 'msg': e.__str__()})
+        return jsonify({'status': 400, 'msg': str(e)})
 
 
 @bp.route('/add_module', methods=['POST'])
@@ -60,4 +60,4 @@ def add_module():
         return jsonify({'status': 200, 'msg': 'Successfully added!'})
     except Exception as e:
         db.session.rollback()
-        return jsonify({'status': 400, 'msg': e.__str__()})
+        return jsonify({'status': 400, 'msg': str(e)})

@@ -1,9 +1,11 @@
-from flask import Blueprint, session, request, render_template, redirect, url_for
+from flask import Blueprint, session, request, render_template, redirect, url_for, jsonify
 from blueprints import user
 from forms import NewTaskForm
 import datetime
-from models import Task
+import wtforms
+from models import Task, Class
 from exts import db
+import datetime
 from utils import get_modules
 
 bp = Blueprint('all', __name__, url_prefix='/all')
@@ -19,31 +21,25 @@ def index():
 
 @bp.route('/newTask', methods=['POST'])
 def newTask():
-    form = NewTaskForm(request.form)
+    date = request.form.get('date')
+    date = datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))
+    time = request.form.get('time')
+    time = datetime.time(int(time[0:2]), int(time[3:5]))
+    module = request.form.get('module').strip()
+    title = request.form.get('title')
+    description = request.form.get('description')
     uid = session.get('uid')
-    print(form.data)
-    if form.validate():
-        task_name = form.task_name.data
-        task_description = form.task_description.data
-        task_status = False
-        task_date = form.task_date.data
-        if (task_date != None):
-            if (form.task_time.data != None):
-                task_time = form.task_time.data
-            else:
-                task_time = datetime.time(20, 0, 0)
-        else:
-            task_time = None
-        user_id = uid
-        class_id = form.classid.data
+    cid = Class.query.filter_by(cname=module, uid=uid).first().cid
 
-        task = Task(task_name=task_name, task_description=task_description, task_status=task_status, task_date=task_date, task_time=task_time, user_id=user_id, class_id=class_id)
-        db.session.add(task)
-        try:
-            db.session.commit()
-            return 'success'
-        except Exception as e:
-            db.session.rollback()
-            return 'fail'
-    else:
-        return 'fail'
+    repeated_task = Task.query.filter_by(task_name=title).first()
+    if repeated_task:
+        return jsonify({'status': 401, 'msg': 'Repeated task!'})
+
+    task = Task(task_name=title, task_description=description, task_status=False, task_date=date, task_time=time, informed=False, cid=cid)
+    db.session.add(task)
+    try:
+        db.session.commit()
+        return jsonify({'status': 200, 'msg': 'Successfully added a new task!'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 400, 'msg': str(e)})

@@ -55,7 +55,7 @@ def signup():
                 return jsonify({'status': 200, 'msg': 'Sign up successfully!'})
             except Exception as e:
                 db.session.rollback()
-                return jsonify({'status': 400, 'msg': 'Sign up failed!'})
+                return jsonify({'status': 400, 'msg': 'Sign up failed!' + str(e)})
         else:
             key = list(form.errors.keys())[0]
             return jsonify({'status': 400, 'msg': form.errors[key][0]})
@@ -83,7 +83,7 @@ def get_captcha():
             db.session.commit()
         except Exception as e:
             db.session.rollback()
-            return jsonify({'code': 400, 'msg': 'Get captcha failed.'})
+            return jsonify({'code': 400, 'msg': 'Get captcha failed.' + str(e)})
     else:
         captcha_model = Captcha(usermail=usermail, captcha=captcha, create_time=datetime.now())
         db.session.add(captcha_model)
@@ -91,7 +91,7 @@ def get_captcha():
             db.session.commit()
         except Exception as e:
             db.session.rollback()
-            return jsonify({'code': 400, 'msg': 'Get captcha failed.'})
+            return jsonify({'code': 400, 'msg': 'Get captcha failed.' + str(e)})
     mail.send(message)
 
     return jsonify({'status': 200, 'msg': 'Captcha has been sent to your email address!'})
