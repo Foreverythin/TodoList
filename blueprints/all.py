@@ -1,15 +1,21 @@
-from flask import Blueprint, session, request, render_template
+from flask import Blueprint, session, request, render_template, redirect, url_for
 from blueprints import user
 from forms import NewTaskForm
 import datetime
 from models import Task
 from exts import db
+from utils import get_modules
 
 bp = Blueprint('all', __name__, url_prefix='/all')
 
-@bp.route('/', methods=['GET', 'POST'])
+
+@bp.route('/')
 def index():
-    return render_template('all.html')
+    if session.get('uid'):
+        return render_template('all.html', modules=get_modules())
+    else:
+        return redirect(url_for('user.login'))
+
 
 @bp.route('/newTask', methods=['POST'])
 def newTask():
