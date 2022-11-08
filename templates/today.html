@@ -1,26 +1,235 @@
+<script src="../static/jquery/jquery-3.6.1.min.js"></script>
+<link href="../static/style/today.css" rel="stylesheet">
+<script src="../static/script/today.js"></script>
+
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container" style="width: 75%">
-        <div>asdfdfsfsfds</div>
-        <form action="/all/newTask" method="post">
-            <input type="text" placeholder="task_name" name="task_name">
-            <input type="text" placeholder="task_description" name="task_description">
-            <input type="text" placeholder="task_date" name="task_date">
-            <input type="text" placeholder="task_time" name="task_time">
-            <input type="text" placeholder="class" name="classid">
-            <button>submit</button>
-        </form>
+    <div class="container" id="today-mainContent">
+        {#        <form action="/all/newTask" method="post">#}
+        {#            <input type="text" placeholder="task_name" name="task_name">#}
+        {#            <input type="text" placeholder="task_description" name="task_description">#}
+        {#            <input type="text" placeholder="task_date" name="task_date">#}
+        {#            <input type="text" placeholder="task_time" name="task_time">#}
+        {#            <input type="text" placeholder="class" name="classid">#}
+        {#            <button>submit</button>#}
+        {#        </form>#}
+        <div id="status-dock">
+            <table>
+                <tr>
+                    <th>
+                        <svg class="icon" width="70px" height="70px" viewBox="0 0 1024 900" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M270.387022 463.499421A226.484357 226.484357 0 1 1 496.871379 689.983778a226.484357 226.484357 0 0 1-226.484357-226.484357z"
+                                  fill="#FFDA6A"/>
+                            <path d="M496.12978 823.76825a16.31518 16.31518 0 0 1-8.899189-2.966396L444.959444 790.396292a16.611819 16.611819 0 0 1-3.707996-22.989571 16.760139 16.760139 0 0 1 23.137892-3.856315l33.371958 24.176129 36.190035-22.247972a16.463499 16.463499 0 0 1 16.908458 28.329085l-46.127462 27.735805a16.611819 16.611819 0 0 1-8.602549 2.224797z m193.705678-88.10197a16.463499 16.463499 0 0 1-4.746234-32.482039l41.677868-10.382387 6.674391-40.19467a16.463499 16.463499 0 0 1 32.630359 5.339514l-8.454229 51.318655a16.908459 16.908459 0 0 1-12.310545 13.348784l-52.208574 13.052143zM311.471611 733.738123a12.013905 12.013905 0 0 1-3.263036 0l-51.318656-8.45423a16.463499 16.463499 0 0 1-13.348783-12.310544l-13.052144-52.060255a16.463499 16.463499 0 1 1 31.59212-8.30591l10.382387 41.826188 40.49131 6.526072a16.463499 16.463499 0 0 1-1.483198 32.778679z m187.772885-17.650058a251.253766 251.253766 0 1 1 250.660487-251.253766 251.253766 251.253766 0 0 1-251.105446 251.253766z m0-32.926999a218.326767 218.326767 0 1 0-218.771727-218.326767 218.326767 218.326767 0 0 0 218.326768 218.326767z m-312.954809-156.180765a16.01854 16.01854 0 0 1-14.831981-7.86095l-27.735806-46.275782a16.463499 16.463499 0 0 1 0.741599-18.095017l29.663963-42.271148a16.463499 16.463499 0 0 1 26.697567 19.281576L177.983778 465.279258l22.099652 36.783314a16.463499 16.463499 0 0 1-5.636153 22.544612 14.831981 14.831981 0 0 1-8.15759 2.373117z m625.019699 0a14.831981 14.831981 0 0 1-7.71263-2.373117 16.463499 16.463499 0 0 1-5.636153-22.544612l22.099652-36.783314-23.87949-33.520278a16.16686 16.16686 0 0 1 3.707995-22.841251 16.463499 16.463499 0 0 1 22.989571 3.559675l30.405562 42.271148a16.31518 16.31518 0 0 1 0 18.095017L826.141367 519.119351a16.01854 16.01854 0 0 1-14.831981 7.86095zM338.910776 470.173812a16.463499 16.463499 0 0 1-14.831981-17.501738c3.263036-50.577057 19.429896-90.030127 49.242178-117.469293a185.103129 185.103129 0 0 1 118.655852-43.012746 16.463499 16.463499 0 1 1 1.779838 32.926999c-44.495944 2.373117-76.533024 14.090382-98.780997 34.410197s-35.745075 50.577057-38.563152 95.221321a16.611819 16.611819 0 0 1-17.501738 15.42526zM749.015064 294.414832a16.611819 16.611819 0 0 1-14.831982-13.793743l-7.41599-40.639629-41.677868-10.382387a16.463499 16.463499 0 0 1 8.00927-32.03708l52.208574 13.052144a16.760139 16.760139 0 0 1 12.310545 13.348783l8.454229 51.318656a16.908459 16.908459 0 0 1-13.645423 18.984936z m-504.28737-1.928158a12.310545 12.310545 0 0 1-3.263036 0 16.31518 16.31518 0 0 1-12.013905-20.023175l13.052144-52.208574a16.760139 16.760139 0 0 1 13.348783-12.310545l51.318656-8.30591a16.463499 16.463499 0 1 1 5.191194 32.48204l-40.49131 6.674392-10.382387 41.677867a16.463499 16.463499 0 0 1-16.16686 12.013905z m209.872538-120.287369a16.463499 16.463499 0 0 1-10.234067-29.663963l42.271147-29.663963a16.463499 16.463499 0 0 1 18.095017 0l46.127462 27.735805a16.31518 16.31518 0 0 1 5.636153 22.544612 16.463499 16.463499 0 0 1-22.544611 5.784473l-36.783314-22.247972-32.778679 22.396292a17.056779 17.056779 0 0 1-9.195829 3.114716z"
+                                  fill="#333333"/>
+                        </svg>
+                    </th>
+                    <td style="font-size: 30px;">Today</td>
+                    <td style="font-size: 16px;padding-left: 8px;position: relative;top: 8px;" class="date" id="today-date">11月08日</td>
+                    <td style="font-size: 16px;position: relative;top: 8px;" class="date" id="today-day">/Tues</td>
+                </tr>
+            </table>
+            <div class="btn-group" style="position: absolute; right: 0; top: 20px">
+                <button type="button" class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown">
+                    Sort <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Created Time</a></li>
+                    <li><a href="#">Deadline</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="today-task-list">
+            <ul>
+                {% for task in tasks %}
+                <li>
+                    <div style="display: flex; flex-direction: row; position: relative">
+                        <table>
+                            <tr>
+                                <td>
+                                    <svg t="1667870868387" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         style="display: none"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="3715" width="40" height="40">
+                                        <path d="M512 192c176.768 0 320 143.275 320 320 0 176.768-143.275 320-320 320-176.768 0-320-143.275-320-320 0-176.768 143.275-320 320-320z m0 41.28c-153.963 0-278.72 124.757-278.72 278.72S358.037 790.72 512 790.72 790.72 665.963 790.72 512 665.963 233.28 512 233.28z"
+                                              p-id="3716"></path>
+                                    </svg>
+                                </td>
+                                <td>
+                                    <svg t="1667870888459" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="3868" width="40" height="40">
+                                        <path d="M501.504 170.667c182.741 0 330.816 148.117 330.816 330.837 0 182.741-148.117 330.816-330.816 330.816-182.784 0-330.837-148.117-330.837-330.816 0-182.784 148.117-330.837 330.837-330.837z m0 42.666c-159.168 0-288.17 128.982-288.17 288.171 0 159.147 128.98 288.15 288.17 288.15 159.147 0 288.15-128.982 288.15-288.15 0-159.168-128.96-288.17-288.15-288.17z m144.064 150.55a25.152 25.152 0 0 1 36.053 35.05L462.955 623.83a25.152 25.152 0 0 1-35.243 0.79L321.515 524.65a25.152 25.152 0 1 1 34.453-36.608l88.405 83.2 201.195-207.36z"
+                                              p-id="3869"></path>
+                                    </svg>
+                                </td>
+                                <td><span style="font-size: 18px"><strong>{{ task.task_name }}</strong></span></td>
+                                <td style="padding-left: 10px">
+                                    <svg t="1667876322381" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="2035" width="15" height="15">
+                                        <path d="M872 64c13.2544 0 24 10.7456 24 24 0 13.2544-10.7456 24-24 24h-104v177.456c0 67.0672-36.4912 128.8224-95.2368 161.1744l-111.0816 61.1744 111.328 61.536C731.6176 605.7328 768 667.4112 768 734.376V912h104c13.2544 0 24 10.7456 24 24 0 13.2544-10.7456 24-24 24H152c-13.2544 0-24-10.7456-24-24 0-13.2544 10.7456-24 24-24h104V734.544c0-67.0672 36.4912-128.8224 95.2368-161.1744l111.08-61.176-111.328-61.5328C292.3824 418.2656 256 356.5872 256 289.6224V112H152c-13.2544 0-24-10.7456-24-24 0-13.2544 10.7456-24 24-24h720zM512.4 539.4112l-138.0064 76.0032A136 136 0 0 0 304 734.544V912h416V734.3776a136 136 0 0 0-70.2096-119.0272l-137.3904-75.9392zM720 112H304v177.6224a136 136 0 0 0 70.2096 119.0272l137.3904 75.9392 138.0064-76.0032A136 136 0 0 0 720 289.456V112z"
+                                              fill="#979797" p-id="2036"></path>
+                                    </svg>
+                                </td>
+                                <td><span style="font-size: 14px; font-weight: lighter">{{ task.date }} {{ task.time.strftime("%H:%M") }}</span></td>
+                            </tr>
+                        </table>
+                        <table style="position: absolute; right: 0; height: 40px">
+                            <tr>
+                                <td style="padding-right: 7px" class="editTask-td">
+                                    <svg t="1667877123131" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="5617" width="18" height="18">
+                                        <path d="M651.636364 0H186.181818C83.781818 0 0 83.781818 0 186.181818v651.636364c0 102.4 83.781818 186.181818 186.181818 186.181818h651.636364c102.4 0 186.181818-83.781818 186.181818-186.181818V325.818182h-46.545455v512c0 79.127273-60.509091 139.636364-139.636363 139.636363H186.181818c-79.127273 0-139.636364-60.509091-139.636363-139.636363V186.181818c0-79.127273 60.509091-139.636364 139.636363-139.636363h465.454546V0z"
+                                              fill="" p-id="5618"></path>
+                                        <path d="M231.098182 751.336727L889.344 93.090909l32.907636 32.907636L264.005818 784.290909z"
+                                              fill="" p-id="5619"></path>
+                                    </svg>
+                                </td>
+                                <td onclick="deleteTask()">
+                                    <svg t="1667877062531" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="3902" width="20" height="20">
+                                        <path d="M687.603949 656.994302 541.10027 510.457878 687.603949 363.943966c8.829086-8.840342 8.829086-23.122627 0-31.961946-8.850575-8.840342-23.13286-8.840342-31.962969 0L509.138324 478.495932 362.623389 331.980997c-8.840342-8.818853-23.122627-8.818853-31.962969 0-8.840342 8.840342-8.840342 23.144116 0 31.984459l146.493445 146.514935L330.638931 656.994302c-8.819876 8.830109-8.819876 23.133883 0 31.962969 8.840342 8.829086 23.144116 8.829086 31.984459 0l146.514935-146.514935 146.502655 146.514935c8.830109 8.829086 23.112394 8.829086 31.962969 0C696.433034 680.129208 696.45657 665.824411 687.603949 656.994302z"
+                                              p-id="3903"></path>
+                                        <path d="M938.362063 510.457878c0-237.061161-192.174857-429.234995-429.247274-429.234995-237.062184 0-429.246251 192.173834-429.246251 429.234995 0 237.083673 192.185091 429.257507 429.246251 429.257507 97.345072 0 186.435133-33.110095 258.440074-87.677898 2.958378-3.354398 4.900613-7.636934 4.900613-12.449543 0-10.506285-8.521071-19.026332-19.027355-19.026332-5.431709 0-10.287297 2.162246-13.752212 5.826705l-0.2415 0c-64.456011 47.414893-143.745868 75.800383-229.876528 75.800383-214.679407 0-388.730489-174.073594-388.730489-388.719232 0-214.688617 174.051081-388.718209 388.730489-388.718209 214.688617 0 388.697743 174.029592 388.697743 388.718209 0 65.548902-15.386432 127.277802-44.081984 181.490517l0 0.309038c-0.508583 1.811252-1.104147 3.576455-1.104147 5.519714 0 10.507308 8.520047 19.028379 19.028379 19.028379 8.18952 0 15.054881-5.254677 17.703197-12.494569l0 0.132006C920.349827 648.38625 938.362063 581.536726 938.362063 510.457878z"
+                                              p-id="3904"></path>
+                                    </svg>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <span class="description">{{ task.task_description }}</span>
+                    <hr style="margin-top: 2px;">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
     </div>
 
 
 
+    <!-- Model of edit a new task -->
+    <div class="modal fade" id="editTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Task Edit
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="name">Title</label>
+                            <input id="edit-task-title-placeholder-in-modal" type="text" class="form-control"
+                                   placeholder="The task title here.">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Description</label>
+                            <textarea id="edit-task-description-in-modal" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="date" style="margin-right: 10px">Deadline</label>
+                            <input id="datepicker" class="flatpickr selector" data-min-date=today data-enable-time=true
+                                   data-time_24hr=true placeholder="Select Date.."
+                                   style="text-align: center; height: 34px;">
+                            <div style="float: right">
+                                <label for="date" style="margin-right: 10px;">Module</label>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" style="width: 137px;"
+                                            id="module-selected">Unclassified
+                                    </button>
+                                    <button type="button" class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {% for module in modules %}
+                                            {% if module['name']!='Unclassified' %}
+                                                <li class="modules"><a href="#">{{ module['name'] }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <li class="divider"></li>
+                                        <li class="modules"><a href="#">Unclassified</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="new_task_submit">
+                        Submit
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- Model of delete a task -->
+    <div class="modal fade" id="deleteTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Are you sure to delete this task?
+                    </h4>
+                </div>
+{#                <div class="modal-body">#}
+{#                    asdfds#}
+{#                </div>#}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="new_task_submit">
+                        Submit
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 
 
-
-
-
-
+    <!-- Model of delete a task -->
+{#    <div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"#}
+{#         aria-hidden="true">#}
+{#        <div class="modal-dialog">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">#}
+{#                        &times;#}
+{#                    </button>#}
+{#                    <h4 class="modal-title" id="myModalLabel">#}
+{#                        模态框（Modal）标题#}
+{#                    </h4>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    在这里添加一些文本#}
+{#                </div>#}
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭#}
+{#                    </button>#}
+{#                    <button type="button" class="btn btn-primary">#}
+{#                        提交更改#}
+{#                    </button>#}
+{#                </div>#}
+{#            </div><!-- /.modal-content -->#}
+{#        </div><!-- /.modal -->#}
+{#    </div>#}
 
 
 

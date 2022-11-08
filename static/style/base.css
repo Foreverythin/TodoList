@@ -243,4 +243,7 @@ input {
 .dropdown-menu>li:hover {
     cursor: pointer;
 }
+button.btn.btn-default.dropdown-toggle {
+    height: 34px;
+}
 /* ---------------------------------------------------------------- */

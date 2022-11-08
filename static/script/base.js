@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    adaptive();
     var moduleID_need_to_be_changed;
 
     var dayMode = localStorage.getItem('dayMode');
@@ -30,6 +31,22 @@ $(document).ready(function () {
     $("#datepicker").flatpickr({
         time: (new Date()).getTime()
     });
+
+    // Toastify({
+    //     text: "This is a toast",
+    //     duration: 3000,
+    //     destination: "https://github.com/apvarun/toastify-js",
+    //     newWindow: true,
+    //     close: true,
+    //     gravity: "top", // `top` or `bottom`
+    //     position: "left", // `left`, `center` or `right`
+    //     stopOnFocus: true, // Prevents dismissing of toast on hover
+    //     style: {
+    //         background: "linear-gradient(to right, #00b09b, #96c93d)",
+    //     },
+    //     onClick: function () {
+    //     } // Callback after click
+    // }).showToast();
 
     // change the saying every 5 seconds
     $.get('/static/sayings.txt', function (data) {
@@ -236,6 +253,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/module/add_module',
                 type: 'POST',
+                async: true,
                 data: {
                     'new_module': newModuleName,
                     'new_color': newModuleColor
@@ -245,6 +263,10 @@ $(document).ready(function () {
                     if (res['status'] === 200) {
                         alert(res['msg']);
                         window.location.reload();
+                        // Toastify({
+                        //     text: "This is a toast",
+                        //     duration: 3000
+                        // }).showToast();
                     } else {
                         alert(res['msg']);
                     }
@@ -301,6 +323,8 @@ $(document).ready(function () {
 
 function adaptive() {
     let sidebarLeft = $("#sidebar").css('left');
+    // let sidebarLeft = $("#sidebar").getComputedStyle('left');
+    // let sidebarLeft = getComputedStyle("#sidebar").getPropertyValue("left");
     if (sidebarLeft == '0px') {
         if ($(window).width() < 700) {
             $('#sidebar').css('position', 'fixed');
