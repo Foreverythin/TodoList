@@ -2,6 +2,7 @@ function deleteTask() {
     $("#deleteTaskModel").modal("show");
 }
 
+
 function todayAdaptive() {
     if ($(window).width() < 800) {
         $(".date").css('display', 'none');
@@ -38,5 +39,29 @@ $(document).ready(function () {
         $("#edit-task-title-placeholder-in-modal").val(previousTask);
         $("#edit-task-description-in-modal").val(previousDescription);
         $("#module-selected-editing-task").text(previousTaskModuleName);
+    });
+
+    var taskID;
+    $(".deleteTask-td").on("click", function () {
+        taskID = this.attributes[0].value;
+        $("#deleteTaskModel").modal("show");
+    });
+
+    $("#delete_task_submit").on("click", function () {
+        $.ajax({
+            url: "/all/deleteTask",
+            type: "POST",
+            data: {
+                taskID: taskID
+            },
+            success: function (res) {
+                if (res["status"] === 200) {
+                    alert(res["msg"]);
+                    location.reload();
+                } else {
+                    alert(res["msg"]);
+                }
+            }
+        });
     });
 })

@@ -28,7 +28,7 @@ $(document).ready(function () {
         $('#flatpickrDark')[0].setAttribute('href', '../static/style/flatpickr-dark.css');
     }
 
-    $("#datepicker").flatpickr({
+    $(".flatpickr.selector").flatpickr({
         time: (new Date()).getTime()
     });
 
@@ -286,7 +286,7 @@ $(document).ready(function () {
         $("#module-selected").text(module);
     });
     $("#new_task_submit").on("click", function () {
-        let fullDate = $("#datepicker").val();
+        let fullDate = $("#datepicker-newTask").val();
         let module = $("#module-selected").text();
         let title = $("#new_task_title").val();
         let description = $("#new_task_description").val();
@@ -295,8 +295,8 @@ $(document).ready(function () {
         } else if (title.length > 50) {
             alert("The task title is too long!");
         } else {
-            let date = $("#datepicker").val().split(" ")[0];
-            let time = $("#datepicker").val().split(" ")[1];
+            let date = $("#datepicker-newTask").val().split(" ")[0];
+            let time = $("#datepicker-newTask").val().split(" ")[1];
             $.ajax({
                 url: '/all/newTask',
                 type: 'POST',
