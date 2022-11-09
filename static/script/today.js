@@ -22,6 +22,11 @@ $(document).ready(function () {
         todayAdaptive();
     });
 
+    $(".modules").on('click', function () {
+        let module = this.childNodes[0].innerText;
+        $("#module-selected-editing-task").text(module);
+    });
+
     // get today's date
     let now = new Date();
     let today = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
@@ -34,7 +39,7 @@ $(document).ready(function () {
         $("#editTaskModel").modal("show");
         let previousTask = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].textContent;
         let previousTaskModuleName = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].attributes[0].value;
-        let previousTaskModuleColor = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].attributes[1].value;
+        // let previousTaskModuleColor = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].attributes[1].value;
         let previousDescription = this.parentNode.parentNode.parentNode.parentNode.parentNode.children[1].innerText;
         $("#edit-task-title-placeholder-in-modal").val(previousTask);
         $("#edit-task-description-in-modal").val(previousDescription);
@@ -46,6 +51,10 @@ $(document).ready(function () {
         taskID = this.attributes[0].value;
         $("#deleteTaskModel").modal("show");
     });
+    $(".editTask-td").on("click", function () {
+        taskID = this.attributes[0].value;
+        $("#editTaskModel").modal("show");
+    });
 
     $("#delete_task_submit").on("click", function () {
         $.ajax({
@@ -56,12 +65,69 @@ $(document).ready(function () {
             },
             success: function (res) {
                 if (res["status"] === 200) {
-                    alert(res["msg"]);
-                    location.reload();
+                    Toastify({
+                        text: res['msg'],
+                        duration: 1200
+                    }).showToast();
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1200);
                 } else {
-                    alert(res["msg"]);
+                    Toastify({
+                        text: res['msg'],
+                        duration: 1200
+                    }).showToast();
                 }
             }
         });
+    });
+
+    $("#edit_task_submit").on("click", function () {
+        let fullDate = $("#datepicker-editTask").val();
+        let moduleName = $("#module-selected-editing-task").text();
+        let taskTitle = $("#edit-task-title-placeholder-in-modal").val();
+        let taskDescription = $("#edit-task-description-in-modal").val();
+        if (fullDate === "" || moduleName === "" || taskTitle === "") {
+            Toastify({
+                text: "Please fill in all the fields! (Description is optional)",
+                duration: 1200
+            }).showToast();
+        } else if (taskTitle.length > 50) {
+            Toastify({
+                text: "The task title is too long",
+                duration: 1200
+            }).showToast();
+        } else {
+            let date = fullDate.split(" ")[0];
+            let time = fullDate.split(" ")[1];
+            $.ajax({
+                url: "/all/editTask",
+                type: "POST",
+                data: {
+                    'taskID': taskID,
+                    'date': date,
+                    'time': time,
+                    'moduleName': moduleName,
+                    'taskTitle': taskTitle,
+                    'taskDescription': taskDescription
+                },
+                success: function (res) {
+                    if (res["status"] === 200) {
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1200);
+                    } else {
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
+                    }
+                }
+            })
+        }
     });
 })

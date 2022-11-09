@@ -209,10 +209,18 @@ $(document).ready(function () {
             success: function (res) {
                 console.log(res);
                 if (res['status'] === 200) {
-                    alert("Successfully edited!");
-                    window.location.reload();
+                    Toastify({
+                        text: res['msg'],
+                        duration: 1200
+                    }).showToast();
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1200);
                 } else {
-                    alert("Failed to edit!");
+                    Toastify({
+                        text: res['msg'],
+                        duration: 1200
+                    }).showToast();
                 }
             }
         })
@@ -229,15 +237,22 @@ $(document).ready(function () {
             success: function (res) {
                 console.log(res);
                 if (res['status'] === 200) {
-                    alert("Successfully deleted!");
-                    if (location === "/module/" + moduleID_need_to_be_changed) {
-                        window.location.href = "/today";
-                    } else {
-                        window.location.reload();
-                    }
+                    Toastify({
+                        text: res['msg'],
+                        duration: 1200
+                    }).showToast();
+                    setTimeout(function () {
+                        if (location === "/module/" + moduleID_need_to_be_changed) {
+                            window.location.href = "/today";
+                        } else {
+                            window.location.reload();
+                        }
+                    }, 1200);
                 } else {
-                    alert("Failed to delete!");
-                    window.location.reload();
+                    Toastify({
+                        text: res['msg'],
+                        duration: 1200
+                    }).showToast();
                 }
             }
         })
@@ -261,14 +276,18 @@ $(document).ready(function () {
                 success: function (res) {
                     console.log(res);
                     if (res['status'] === 200) {
-                        alert(res['msg']);
-                        window.location.reload();
-                        // Toastify({
-                        //     text: "This is a toast",
-                        //     duration: 3000
-                        // }).showToast();
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1200);
                     } else {
-                        alert(res['msg']);
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
                     }
                 }
             });
@@ -283,7 +302,7 @@ $(document).ready(function () {
 
     $(".modules").on('click', function () {
         let module = this.childNodes[0].innerText;
-        $("#module-selected").text(module);
+        $("#module-selected-basePage").text(module);
     });
     $("#new_task_submit").on("click", function () {
         let fullDate = $("#datepicker-newTask").val();
@@ -291,12 +310,18 @@ $(document).ready(function () {
         let title = $("#new_task_title").val();
         let description = $("#new_task_description").val();
         if (fullDate === "" || module === "" || title === "") {
-            alert("Please fill in all the fields! (Description is optional)");
+            Toastify({
+                text: "Please fill in all the fields! (Description is optional)",
+                duration: 1200
+            }).showToast();
         } else if (title.length > 50) {
-            alert("The task title is too long!");
+            Toastify({
+                text: "The task title is too long",
+                duration: 1200
+            }).showToast();
         } else {
-            let date = $("#datepicker-newTask").val().split(" ")[0];
-            let time = $("#datepicker-newTask").val().split(" ")[1];
+            let date = fullDate.val().split(" ")[0];
+            let time = fullDate.val().split(" ")[1];
             $.ajax({
                 url: '/all/newTask',
                 type: 'POST',
@@ -309,10 +334,20 @@ $(document).ready(function () {
                 },
                 success: function (res) {
                     if (res['status'] === 200) {
-                        alert(res['msg']);
-                        window.location.reload();
+                        // alert(res['msg']);
+                        // window.location.reload();
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1200);
                     } else {
-                        alert(res['msg']);
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
                     }
                 }
             })

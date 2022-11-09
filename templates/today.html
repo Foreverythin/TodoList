@@ -56,7 +56,7 @@
                                         <svg t="1667870868387" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg" p-id="3715" width="40" height="40">
                                             <path d="M512 192c176.768 0 320 143.275 320 320 0 176.768-143.275 320-320 320-176.768 0-320-143.275-320-320 0-176.768 143.275-320 320-320z m0 41.28c-153.963 0-278.72 124.757-278.72 278.72S358.037 790.72 512 790.72 790.72 665.963 790.72 512 665.963 233.28 512 233.28z"
-                                                  p-id="3716"></path>
+                                                  p-id="3716" fill="{{ task.module_color }}"></path>
                                         </svg>
                                     </td>
                                     <td>
@@ -84,7 +84,7 @@
                             </table>
                             <table style="position: absolute; right: 0; height: 40px">
                                 <tr>
-                                    <td style="padding-right: 7px" class="editTask-td">
+                                    <td data-task-id="{{ task.id }}" style="padding-right: 7px" class="editTask-td">
                                         <svg t="1667877123131" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg" p-id="5617" width="18" height="18">
                                             <path d="M651.636364 0H186.181818C83.781818 0 0 83.781818 0 186.181818v651.636364c0 102.4 83.781818 186.181818 186.181818 186.181818h651.636364c102.4 0 186.181818-83.781818 186.181818-186.181818V325.818182h-46.545455v512c0 79.127273-60.509091 139.636364-139.636363 139.636363H186.181818c-79.127273 0-139.636364-60.509091-139.636363-139.636363V186.181818c0-79.127273 60.509091-139.636364 139.636363-139.636363h465.454546V0z"
@@ -117,7 +117,7 @@
 
 
 
-    <!-- Model of edit a new task -->
+    <!-- Model of edit a task -->
     <div class="modal fade" id="editTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">

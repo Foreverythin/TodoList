@@ -25,7 +25,7 @@ def edit_module():
     module.color = new_color
     try:
         db.session.commit()
-        return jsonify({'status': 200, 'msg': 'success'})
+        return jsonify({'status': 200, 'msg': 'Successfully edited the module!'})
     except Exception as e:
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})
@@ -39,7 +39,7 @@ def delete_module():
     db.session.delete(module)
     try:
         db.session.commit()
-        return jsonify({'status': 200, 'msg': 'success'})
+        return jsonify({'status': 200, 'msg': 'Successfully deleted the module!'})
     except Exception as e:
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})
@@ -57,7 +57,7 @@ def add_module():
     db.session.add(module)
     try:
         db.session.commit()
-        return jsonify({'status': 200, 'msg': 'Successfully added!'})
+        return jsonify({'status': 200, 'msg': 'Successfully added a new module!'})
     except Exception as e:
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})

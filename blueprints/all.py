@@ -47,14 +47,14 @@ def newTask():
 
 @bp.route('/editTask', methods=['POST'])
 def editTask():
-    tid = request.form.get('tid')
+    tid = request.form.get('taskID')
     date = request.form.get('date')
     date = datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))
     time = request.form.get('time')
     time = datetime.time(int(time[0:2]), int(time[3:5]))
-    module = request.form.get('module').strip()
-    title = request.form.get('title')
-    description = request.form.get('description')
+    module = request.form.get('moduleName').strip()
+    title = request.form.get('taskTitle')
+    description = request.form.get('taskDescription')
     uid = session.get('uid')
     cid = Class.query.filter_by(cname=module, uid=uid).first().cid
 
