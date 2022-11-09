@@ -6,7 +6,7 @@ import wtforms
 from models import Task, Class
 from exts import db
 import datetime
-from utils import get_modules, get_uncompleted_tasks, get_number_of_uncompleted_tasks, get_number_of_completed_tasks
+from utils import get_modules, get_uncompleted_tasks, get_number_of_uncompleted_tasks, get_number_of_completed_tasks, get_sorted_tasks
 
 bp = Blueprint('all', __name__, url_prefix='/all')
 
@@ -14,11 +14,18 @@ bp = Blueprint('all', __name__, url_prefix='/all')
 @bp.route('/')
 def index():
     if session.get('uid'):
-        return render_template('all.html', modules=get_modules(), tasks=get_uncompleted_tasks(),
+        return render_template('all.html', modules=get_modules(), tasks=get_sorted_tasks(get_uncompleted_tasks, 'created_time_desc'),
                                number_of_completed_tasks=get_number_of_completed_tasks(),
                                number_of_tasks=get_number_of_completed_tasks()+get_number_of_uncompleted_tasks())
     else:
         return redirect(url_for('user.login'))
+
+
+@bp.route('/<sort_by>')
+def index_sort(sort_by):
+    return render_template('all.html', modules=get_modules(), tasks=get_sorted_tasks(get_uncompleted_tasks, sort_by),
+                           number_of_completed_tasks=get_number_of_completed_tasks(),
+                           number_of_tasks=get_number_of_completed_tasks()+get_number_of_uncompleted_tasks())
 
 
 @bp.route('/newTask', methods=['POST'])

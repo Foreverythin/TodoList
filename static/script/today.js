@@ -3,6 +3,11 @@
 // }
 //
 //
+function sortTask(sort_by) {
+    window.location.href = "/today/" + sort_by;
+    // console.log(window.href);
+}
+
 function todayAdaptive() {
     if ($(window).width() < 800) {
         $(".date").css('display', 'none');

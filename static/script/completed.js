@@ -1,3 +1,7 @@
+function sortTask(sort_by) {
+    window.location.href = "/completed/" + sort_by;
+}
+
 $(document).ready(function () {
     $(".completed.icon").on("click", function () {
         let taskID = this.attributes[0].value;

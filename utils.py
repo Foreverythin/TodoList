@@ -67,3 +67,24 @@ def get_unCompletedTasks_by_moduleID(i):
             res.append(task)
     print(res)
     return res
+
+
+def get_sorted_tasks(func, sort_by):
+    tasks = func()
+    if sort_by == 'created_time_desc':
+        # sort by module id
+        res = sorted(tasks, key=lambda x: x['id'], reverse=True)
+        return res
+    elif sort_by == 'created_time_asc':
+        # sort by module id
+        res = sorted(tasks, key=lambda x: x['id'])
+        return res
+    elif sort_by == 'deadline_desc':
+        # sort by deadline
+        res = sorted(tasks, key=lambda x: datetime.datetime.combine(x['date'], x['time']), reverse=True)
+        return res
+    elif sort_by == 'deadline_asc':
+        # sort by deadline
+        res = sorted(tasks, key=lambda x: datetime.datetime.combine(x['date'], x['time']))
+        return res
+

@@ -368,7 +368,8 @@ $(document).ready(function () {
         let previousTaskModuleName = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].attributes[0].value;
         // let previousTaskModuleColor = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].attributes[1].value;
         let previousDescription = this.parentNode.parentNode.parentNode.parentNode.parentNode.children[1].innerText;
-        let previousDueDate = this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[0].innerText.substring(7);
+        let previousDueDate = this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[0].innerText;
+        previousDueDate = previousDueDate.substring(previousDueDate.length - 16);
         $("#datepicker-editTask").val(previousDueDate);
         $("#edit-task-title-placeholder-in-modal").val(previousTask);
         $("#edit-task-description-in-modal").val(previousDescription);

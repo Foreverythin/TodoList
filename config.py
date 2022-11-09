@@ -34,7 +34,7 @@ class remindConfig(object):
             'func': 'app:taskReminder',
             'args': None,
             'trigger': 'interval',
-            'seconds': 60
+            'seconds': 2
         }
     ]
 
