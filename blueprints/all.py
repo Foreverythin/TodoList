@@ -6,7 +6,7 @@ import wtforms
 from models import Task, Class
 from exts import db
 import datetime
-from utils import get_modules, get_uncompleted_tasks, get_number_of_uncompleted_tasks, get_number_of_completed_tasks, get_sorted_tasks
+from utils import get_modules, get_uncompleted_tasks, get_completed_tasks, get_number_of_uncompleted_tasks, get_number_of_completed_tasks, get_sorted_tasks
 
 bp = Blueprint('all', __name__, url_prefix='/all')
 
@@ -40,9 +40,14 @@ def newTask():
     uid = session.get('uid')
     cid = Class.query.filter_by(cname=module, uid=uid).first().cid
 
-    repeated_task = Task.query.filter_by(task_name=title).first()
-    if repeated_task:
-        return jsonify({'status': 401, 'msg': 'Repeated task!'})
+    # repeated_task = Task.query.filter_by(task_name=title).first()
+    # if repeated_task:
+    for task in get_completed_tasks():
+        if task.get('task_name') == title:
+            return jsonify({'status': 401, 'msg': 'Repeated task!'})
+    for task in get_uncompleted_tasks():
+        if task.get('task_name') == title:
+            return jsonify({'status': 401, 'msg': 'Repeated task!'})
 
     task = Task(task_name=title, task_description=description, task_status=False, task_date=date, task_time=time, informed=False, cid=cid)
     db.session.add(task)
