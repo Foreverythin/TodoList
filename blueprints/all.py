@@ -78,6 +78,7 @@ def editTask():
     task.task_date = date
     task.task_time = time
     task.cid = cid
+    task.task_status = False
     try:
         db.session.commit()
         return jsonify({'status': 200, 'msg': 'Successfully edited the task!'})
