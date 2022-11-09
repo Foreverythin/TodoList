@@ -306,7 +306,8 @@ $(document).ready(function () {
     });
     $("#new_task_submit").on("click", function () {
         let fullDate = $("#datepicker-newTask").val();
-        let module = $("#module-selected").text();
+        console.log(fullDate);
+        let module = $("#module-selected-basePage").text();
         let title = $("#new_task_title").val();
         let description = $("#new_task_description").val();
         if (fullDate === "" || module === "" || title === "") {
@@ -320,8 +321,8 @@ $(document).ready(function () {
                 duration: 1200
             }).showToast();
         } else {
-            let date = fullDate.val().split(" ")[0];
-            let time = fullDate.val().split(" ")[1];
+            let date = fullDate.split(" ")[0];
+            let time = fullDate.split(" ")[1];
             $.ajax({
                 url: '/all/newTask',
                 type: 'POST',

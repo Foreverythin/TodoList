@@ -1,5 +1,6 @@
 from flask import session
 from models import Class, Task
+import datetime
 
 
 def get_modules():
@@ -19,7 +20,16 @@ def get_uncompleted_tasks():
         cid = module['id']
         tasks = Task.query.filter_by(cid=cid, task_status=False).all()
         for task in tasks:
-            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'module_name': module['name'], 'module_color': module['color']})
+            if task.task_date < datetime.date.today():
+                task_color = 'red'
+            elif task.task_date > datetime.date.today():
+                task_color = 'black'
+            else:
+                if task.task_time < datetime.datetime.now().time():
+                    task_color = 'red'
+                else:
+                    task_color = 'black'
+            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'module_name': module['name'], 'module_color': module['color'], 'task_color': task_color})
 
     return res
 

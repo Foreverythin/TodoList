@@ -83,3 +83,16 @@ def deleteTask():
     except Exception as e:
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})
+
+
+@bp.route('/completeTask', methods=['POST'])
+def completeTask():
+    tid = request.form.get('taskID')
+    task = Task.query.filter_by(tid=tid).first()
+    task.task_status = True
+    try:
+        db.session.commit()
+        return jsonify({'status': 200, 'msg': 'Successfully completed the task!'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 400, 'msg': str(e)})
