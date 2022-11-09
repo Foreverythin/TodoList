@@ -43,3 +43,30 @@ def newTask():
     except Exception as e:
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})
+
+
+@bp.route('/editTask', methods=['POST'])
+def editTask():
+    tid = request.form.get('tid')
+    date = request.form.get('date')
+    date = datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))
+    time = request.form.get('time')
+    time = datetime.time(int(time[0:2]), int(time[3:5]))
+    module = request.form.get('module').strip()
+    title = request.form.get('title')
+    description = request.form.get('description')
+    uid = session.get('uid')
+    cid = Class.query.filter_by(cname=module, uid=uid).first().cid
+
+    task = Task.query.filter_by(tid=tid).first()
+    task.task_name = title
+    task.task_description = description
+    task.task_date = date
+    task.task_time = time
+    task.cid = cid
+    try:
+        db.session.commit()
+        return jsonify({'status': 200, 'msg': 'Successfully edited the task!'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 400, 'msg': str(e)})

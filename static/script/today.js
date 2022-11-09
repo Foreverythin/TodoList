@@ -32,8 +32,11 @@ $(document).ready(function () {
     $(".editTask-td").on("click", function () {
         $("#editTaskModel").modal("show");
         let previousTask = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].textContent;
+        let previousTaskModuleName = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].attributes[0].value;
+        let previousTaskModuleColor = this.parentNode.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[2].attributes[1].value;
         let previousDescription = this.parentNode.parentNode.parentNode.parentNode.parentNode.children[1].innerText;
         $("#edit-task-title-placeholder-in-modal").val(previousTask);
         $("#edit-task-description-in-modal").val(previousDescription);
+        $("#module-selected-editing-task").text(previousTaskModuleName);
     });
 })
