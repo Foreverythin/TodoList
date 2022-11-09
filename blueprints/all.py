@@ -6,7 +6,7 @@ import wtforms
 from models import Task, Class
 from exts import db
 import datetime
-from utils import get_modules
+from utils import get_modules, get_uncompleted_tasks, get_number_of_uncompleted_tasks, get_number_of_completed_tasks
 
 bp = Blueprint('all', __name__, url_prefix='/all')
 
@@ -14,7 +14,9 @@ bp = Blueprint('all', __name__, url_prefix='/all')
 @bp.route('/')
 def index():
     if session.get('uid'):
-        return render_template('all.html', modules=get_modules())
+        return render_template('all.html', modules=get_modules(), tasks=get_uncompleted_tasks(),
+                               number_of_completed_tasks=get_number_of_completed_tasks(),
+                               number_of_tasks=get_number_of_completed_tasks()+get_number_of_uncompleted_tasks())
     else:
         return redirect(url_for('user.login'))
 
@@ -93,6 +95,19 @@ def completeTask():
     try:
         db.session.commit()
         return jsonify({'status': 200, 'msg': 'Successfully completed the task!'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 400, 'msg': str(e)})
+
+
+@bp.route('/uncompleteTask', methods=['POST'])
+def uncompleteTask():
+    tid = request.form.get('taskID')
+    task = Task.query.filter_by(tid=tid).first()
+    task.task_status = False
+    try:
+        db.session.commit()
+        return jsonify({'status': 200, 'msg': 'Successfully uncompleted the task!'})
     except Exception as e:
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})

@@ -29,7 +29,7 @@ def get_uncompleted_tasks():
                     task_color = 'red'
                 else:
                     task_color = 'black'
-            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'module_name': module['name'], 'module_color': module['color'], 'task_color': task_color})
+            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'cid': cid, 'module_name': module['name'], 'module_color': module['color'], 'task_color': task_color})
 
     return res
 
@@ -41,7 +41,7 @@ def get_completed_tasks():
         cid = module['id']
         tasks = Task.query.filter_by(cid=cid, task_status=True).all()
         for task in tasks:
-            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'module_name': module['name'], 'module_color': module['color']})
+            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'cid': cid, 'module_name': module['name'], 'module_color': module['color']})
 
     return res
 
@@ -54,3 +54,13 @@ def get_number_of_uncompleted_tasks():
 def get_number_of_completed_tasks():
     tasks = get_completed_tasks()
     return len(tasks)
+
+
+def get_unCompletedTasks_by_moduleID(i):
+    tasks = get_uncompleted_tasks()
+    res = []
+    for task in tasks:
+        if str(task.get('cid')) == str(i):
+            res.append(task)
+    print(res)
+    return res

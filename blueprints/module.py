@@ -1,15 +1,19 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request, jsonify
-from utils import get_modules
+from utils import get_modules, get_number_of_uncompleted_tasks, get_number_of_completed_tasks, get_unCompletedTasks_by_moduleID
 from models import Class
 from exts import db
 
 bp = Blueprint('module', __name__, url_prefix='/module')
 
 
-@bp.route('/<module_title>')
-def index(module_title):
+@bp.route('/<moduleID>')
+def index(moduleID):
     if session.get('uid'):
-        return render_template('module.html', module_title = module_title, modules=get_modules())
+        module = Class.query.filter_by(cid=moduleID).first()
+        return render_template('module.html', module_title=module.cname, modules=get_modules(),
+                               tasks=get_unCompletedTasks_by_moduleID(moduleID),
+                               number_of_completed_tasks=get_number_of_completed_tasks(),
+                               number_of_tasks=get_number_of_completed_tasks() + get_number_of_uncompleted_tasks())
     else:
         return redirect(url_for('user.login'))
 

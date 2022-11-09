@@ -1,0 +1,29 @@
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+svg:hover {
+    cursor: pointer;
+}
+
+#all-mainContent {
+    width: 75%;
+    transition: all .5s;
+}
+
+#status-dock {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 30px
+}
+#all-task-list {
+    padding-left: 10px;
+}
+.description {
+    padding-left: 40px;
+    font-size: 12px;
+}

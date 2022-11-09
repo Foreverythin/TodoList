@@ -6,14 +6,6 @@
 
 {% block content %}
     <div class="container" id="today-mainContent">
-        {#        <form action="/all/newTask" method="post">#}
-        {#            <input type="text" placeholder="task_name" name="task_name">#}
-        {#            <input type="text" placeholder="task_description" name="task_description">#}
-        {#            <input type="text" placeholder="task_date" name="task_date">#}
-        {#            <input type="text" placeholder="task_time" name="task_time">#}
-        {#            <input type="text" placeholder="class" name="classid">#}
-        {#            <button>submit</button>#}
-        {#        </form>#}
         <div id="status-dock">
             <table>
                 <tr>
@@ -28,7 +20,7 @@
                     </th>
                     <td style="font-size: 30px;">Today</td>
                     <td style="font-size: 16px;padding-left: 8px;position: relative;top: 8px;" class="date"
-                        id="today-date">11月08日
+                        id="today-date">
                     </td>
                     <td style="font-size: 16px;position: relative;top: 8px;" class="date" id="today-day">/Tues</td>
                 </tr>
@@ -117,123 +109,95 @@
 
 
 
-    <!-- Model of edit a task -->
-    <div class="modal fade" id="editTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        Task Edit
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="name">Title</label>
-                            <input id="edit-task-title-placeholder-in-modal" type="text" class="form-control"
-                                   placeholder="The task title here.">
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Description</label>
-                            <textarea id="edit-task-description-in-modal" class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="date" style="margin-right: 10px">Deadline</label>
-                            <input id="datepicker-editTask" class="flatpickr selector" data-min-date=today
-                                   data-enable-time=true
-                                   data-time_24hr=true placeholder="Select Date.."
-                                   style="text-align: center; height: 34px;">
-                            <div style="float: right">
-                                <label for="date" style="margin-right: 10px;">Module</label>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default" style="width: 137px;"
-                                            id="module-selected-editing-task">Unclassified
-                                    </button>
-                                    <button type="button" class="btn btn-default dropdown-toggle"
-                                            data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        {% for module in modules %}
-                                            {% if module['name']!='Unclassified' %}
-                                                <li class="modules"><a href="#">{{ module['name'] }}</a></li>
-                                            {% endif %}
-                                        {% endfor %}
-                                        <li class="divider"></li>
-                                        <li class="modules"><a href="#">Unclassified</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
-                    </button>
-                    <button type="button" class="btn btn-primary" id="edit_task_submit">
-                        Submit
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
+{#    <!-- Model of edit a task -->#}
+{#    <div class="modal fade" id="editTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"#}
+{#         aria-hidden="true">#}
+{#        <div class="modal-dialog">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">#}
+{#                        &times;#}
+{#                    </button>#}
+{#                    <h4 class="modal-title" id="myModalLabel">#}
+{#                        Task Edit#}
+{#                    </h4>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    <form role="form">#}
+{#                        <div class="form-group">#}
+{#                            <label for="name">Title</label>#}
+{#                            <input id="edit-task-title-placeholder-in-modal" type="text" class="form-control"#}
+{#                                   placeholder="The task title here.">#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label for="name">Description</label>#}
+{#                            <textarea id="edit-task-description-in-modal" class="form-control" rows="3"></textarea>#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label for="date" style="margin-right: 10px">Deadline</label>#}
+{#                            <input id="datepicker-editTask" class="flatpickr selector" data-min-date=today#}
+{#                                   data-enable-time=true#}
+{#                                   data-time_24hr=true placeholder="Select Date.."#}
+{#                                   style="text-align: center; height: 34px;">#}
+{#                            <div style="float: right">#}
+{#                                <label for="date" style="margin-right: 10px;">Module</label>#}
+{#                                <div class="btn-group">#}
+{#                                    <button type="button" class="btn btn-default" style="width: 137px;"#}
+{#                                            id="module-selected-editing-task">Unclassified#}
+{#                                    </button>#}
+{#                                    <button type="button" class="btn btn-default dropdown-toggle"#}
+{#                                            data-toggle="dropdown">#}
+{#                                        <span class="caret"></span>#}
+{#                                        <span class="sr-only">Toggle Dropdown</span>#}
+{#                                    </button>#}
+{#                                    <ul class="dropdown-menu" role="menu">#}
+{#                                        {% for module in modules %}#}
+{#                                            {% if module['name']!='Unclassified' %}#}
+{#                                                <li class="modules"><a href="#">{{ module['name'] }}</a></li>#}
+{#                                            {% endif %}#}
+{#                                        {% endfor %}#}
+{#                                        <li class="divider"></li>#}
+{#                                        <li class="modules"><a href="#">Unclassified</a></li>#}
+{#                                    </ul>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </form>#}
+{#                </div>#}
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel#}
+{#                    </button>#}
+{#                    <button type="button" class="btn btn-primary" id="edit_task_submit">#}
+{#                        Submit#}
+{#                    </button>#}
+{#                </div>#}
+{#            </div><!-- /.modal-content -->#}
+{#        </div><!-- /.modal -->#}
+{#    </div>#}
 
-    <!-- Model of delete a task -->
-    <div class="modal fade" id="deleteTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        Are you sure to delete this task?
-                    </h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
-                    </button>
-                    <button type="button" class="btn btn-primary" id="delete_task_submit">
-                        Submit
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-
-    <!-- Model of delete a task -->
-    <div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        模态框（Modal）标题
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    在这里添加一些文本
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        提交更改
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
+{#    <!-- Model of delete a task -->#}
+{#    <div class="modal fade" id="deleteTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"#}
+{#         aria-hidden="true">#}
+{#        <div class="modal-dialog">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">#}
+{#                        &times;#}
+{#                    </button>#}
+{#                    <h4 class="modal-title" id="myModalLabel">#}
+{#                        Are you sure to delete this task?#}
+{#                    </h4>#}
+{#                </div>#}
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel#}
+{#                    </button>#}
+{#                    <button type="button" class="btn btn-primary" id="delete_task_submit">#}
+{#                        Submit#}
+{#                    </button>#}
+{#                </div>#}
+{#            </div><!-- /.modal-content -->#}
+{#        </div><!-- /.modal -->#}
+{#    </div>#}
 
 
 

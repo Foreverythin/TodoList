@@ -56,7 +56,7 @@
                 <path d="M520.533333 597.333333l128-128 29.866667 29.866667-153.6 153.6-110.933333-110.933333 29.866666-29.866667 76.8 85.333333zM640 256v42.666667h-213.333333V234.666667c0-8.533333 0-12.8 4.266666-21.333334H298.666667v640h469.333333V213.333333h-132.266667c4.266667 8.533333 4.266667 12.8 4.266667 21.333334V256z m-42.666667 0v-21.333333c0-34.133333-29.866667-64-64-64S469.333333 200.533333 469.333333 234.666667V256h128z m-149.333333-85.333333c21.333333-25.6 51.2-42.666667 85.333333-42.666667s64 17.066667 85.333334 42.666667H810.666667v725.333333H256V170.666667h192z"
                       fill="#395B64"/>
             </svg>
-            <div id="numOfCompleted">{{ number_of_completed_tasks}}/{{ number_of_tasks }}</div>
+            <div id="numOfCompleted">{{ number_of_completed_tasks }}/{{ number_of_tasks }}</div>
         </div>
         <button id="day-night">
             <svg t="1666178958917" class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1"
@@ -216,7 +216,8 @@
                     </div>
                     <div class="form-group">
                         <label for="date" style="margin-right: 10px">Deadline</label>
-                        <input id="datepicker-newTask" class="flatpickr selector" data-min-date=today data-enable-time=true
+                        <input id="datepicker-newTask" class="flatpickr selector" data-min-date=today
+                               data-enable-time=true
                                data-time_24hr=true placeholder="Select Date.."
                                style="text-align: center; height: 34px;">
                         <div style="float: right">
@@ -467,6 +468,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+
 <!-- model of new module -->
 <div class="modal fade" id="new-module" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -641,5 +643,96 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+
+<!-- Model of delete a task -->
+<div class="modal fade" id="deleteTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Are you sure to delete this task?
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="delete_task_submit">
+                    Submit
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- Model of edit a task -->
+<div class="modal fade" id="editTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Task Edit
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="name">Title</label>
+                        <input id="edit-task-title-placeholder-in-modal" type="text" class="form-control"
+                               placeholder="The task title here.">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Description</label>
+                        <textarea id="edit-task-description-in-modal" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="date" style="margin-right: 10px">Deadline</label>
+                        <input id="datepicker-editTask" class="flatpickr selector" data-min-date=today
+                               data-enable-time=true
+                               data-time_24hr=true placeholder="Select Date.."
+                               style="text-align: center; height: 34px;">
+                        <div style="float: right">
+                            <label for="date" style="margin-right: 10px;">Module</label>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" style="width: 137px;"
+                                        id="module-selected-editing-task">Unclassified
+                                </button>
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    {% for module in modules %}
+                                        {% if module['name']!='Unclassified' %}
+                                            <li class="modules"><a href="#">{{ module['name'] }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <li class="divider"></li>
+                                    <li class="modules"><a href="#">Unclassified</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="edit_task_submit">
+                    Submit
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 </body>
 </html>
