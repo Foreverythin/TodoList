@@ -18,19 +18,15 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
     else:
-        form = LoginForm(request.form)
-        if form.validate():
-            usermail = form.usermail.data
-            password = form.password.data
-            user = User.query.filter(User.usermail == usermail).first()
-            if user and check_password_hash(user.password, password):
-                session['uid'] = user.uid
-                print(session['uid'])
-                return redirect(url_for('today.index'))
-            else:
-                return 'Email or password is incorrect.'
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = User.query.filter(User.usermail == email).first()
+        if user and check_password_hash(user.password, password):
+            session['uid'] = user.uid
+            print(session['uid'])
+            return jsonify({'status': 200, 'msg': 'Successfully logged in!'})
         else:
-            return 'Invalid email or password.'
+            return jsonify({'status': 400, 'msg': 'Wrong email or password!'})
 
 
 @bp.route('/signup', methods=['GET', 'POST'])

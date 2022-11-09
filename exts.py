@@ -1,9 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from flask import session, redirect
+from flask_apscheduler import APScheduler
 
 db = SQLAlchemy() 
 mail = Mail()
+aps = APScheduler()
 
 
 def login_identify(func):

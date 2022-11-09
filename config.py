@@ -25,3 +25,17 @@ MAIL_DEBUG = True
 MAIL_USERNAME = "1510397456@qq.com"
 MAIL_PASSWORD = "vqcwrrixwonwfhgi"
 MAIL_DEFAULT_SENDER = "1510397456@qq.com"
+
+
+class remindConfig(object):
+    JOBS = [
+        {
+            'id': 'reminder',
+            'func': 'app:taskReminder',
+            'args': None,
+            'trigger': 'interval',
+            'seconds': 60
+        }
+    ]
+
+    SCHEDULER_API_ENABLED = True
