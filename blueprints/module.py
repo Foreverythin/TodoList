@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request, jsonify
 from utils import get_modules, get_number_of_uncompleted_tasks, get_number_of_completed_tasks, get_unCompletedTasks_by_moduleID
-from models import Class
+from models import Class, Task
 from exts import db
 
 bp = Blueprint('module', __name__, url_prefix='/module')
@@ -38,6 +38,9 @@ def edit_module():
 @bp.route('/delete_module', methods=['POST'])
 def delete_module():
     moduleID = request.form.get('moduleID')
+    tasks = Task.query.filter_by(cid=moduleID).all()
+    for task in tasks:
+        db.session.delete(task)
 
     module = Class.query.filter_by(cid=moduleID).first()
     db.session.delete(module)
