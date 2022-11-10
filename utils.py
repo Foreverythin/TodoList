@@ -44,7 +44,7 @@ def get_completed_tasks():
         cid = module['id']
         tasks = Task.query.filter_by(cid=cid, task_status=True).all()
         for task in tasks:
-            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'cid': cid, 'module_name': module['name'], 'module_color': module['color']})
+            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'cid': cid, 'module_name': module['name'], 'module_color': module['color'], 'completed_date': task.completed_date})
 
     return res
 

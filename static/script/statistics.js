@@ -8,16 +8,24 @@ $(document).ready(function () {
     var numTotal = numTasks.split("/")[1];
     // convert to int
     numCompleted = parseInt(numCompleted);
-    numTotal = parseInt(numTotal);
+    var numUncompleted = parseInt(numTotal) - numCompleted;
     var chart2_data;
 
     $.ajax({
         url: '/statistics/numTasksInEachModule',
         type: 'GET',
         success: function (res) {
-            console.log(res);
             chart2_data = res;
             option2 = {
+                title: {
+                    text: 'Tasks in each module',
+                    show: true,
+                    x: 'center',
+                    y: 'bottom',
+                    textStyle: {
+                        fontSize: 18,
+                    }
+                },
                 tooltip: {
                     trigger: 'item'
                 },
@@ -60,9 +68,47 @@ $(document).ready(function () {
         type: 'GET',
         success: function (res) {
             console.log(res);
+            var dateArray = [];
+            for (let i = 0; i < res.length; i++) {
+                dateArray.push(res[i].date);
+            }
+            var valueArray = [];
+            for (let i = 0; i < res.length; i++) {
+                valueArray.push(res[i].value);
+            }
+            console.log(dateArray);
+            console.log(valueArray);
+
+            option3 = {
+                title: {
+                    text: 'Daily completion',
+                    show: true,
+                    x: 'center',
+                    y: 'bottom',
+                    textStyle: {
+                        fontSize: 18,
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dateArray
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        data: valueArray,
+                        type: 'line'
+                    }
+                ]
+            };
+
+            option3 && myChart3.setOption(option3);
+
+            $(window).resize(myChart3.resize);
         }
     })
-
 
 
     var myChart1 = echarts.init(chartDom1);
@@ -71,6 +117,15 @@ $(document).ready(function () {
     var option1, option2, option3;
 
     option1 = {
+        title: {
+            text: 'Task Completion Status',
+            show: true,
+            x: 'center',
+            y: 'bottom',
+            textStyle: {
+                fontSize: 18,
+            }
+        },
         tooltip: {
             trigger: 'item'
         },
@@ -100,31 +155,15 @@ $(document).ready(function () {
                 },
                 data: [
                     {value: numCompleted, name: 'Completed Tasks'},
-                    {value: numTotal, name: 'Total Tasks'}
+                    {value: numUncompleted, name: 'Uncompleted Tasks'}
                 ]
             }
         ]
     };
 
-    option3 = {
-        xAxis: {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                data: [150, 230, 224, 218, 135, 147, 260],
-                type: 'line'
-            }
-        ]
-    };
-
     option1 && myChart1.setOption(option1);
-    option3 && myChart3.setOption(option3);
+
     $(window).resize(myChart1.resize);
 
-    $(window).resize(myChart3.resize);
+
 });
