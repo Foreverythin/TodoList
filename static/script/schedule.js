@@ -5,8 +5,6 @@ function renderCalendar() {
         type: 'GET',
         success: function (res) {
             tasks = JSON.parse(res);
-            console.log(tasks);
-            console.log(tasks[0].task_name);
             var allEvents = [];
             for (let i = 0; i < tasks.length; i++) {
                 allEvents.push({
@@ -15,7 +13,6 @@ function renderCalendar() {
                     backgroundColor: tasks[i].color
                 });
             }
-            console.log(allEvents);
 
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
