@@ -26,6 +26,7 @@ class Task(db.Model):
     task_date = db.Column(db.Date)
     task_time = db.Column(db.Time)
     informed = db.Column(db.Boolean, nullable=False)
+    completed_date = db.Column(db.Date, nullable=True)
     cid = db.Column(db.Integer, db.ForeignKey('class.cid'), nullable=False)
 
 

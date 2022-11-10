@@ -2,6 +2,69 @@ $(document).ready(function () {
     var chartDom1 = document.getElementById('chart1');
     var chartDom2 = document.getElementById('chart2');
     var chartDom3 = document.getElementById('chart3');
+
+    var numTasks = $("#numOfCompleted").text();
+    var numCompleted = numTasks.split("/")[0];
+    var numTotal = numTasks.split("/")[1];
+    // convert to int
+    numCompleted = parseInt(numCompleted);
+    numTotal = parseInt(numTotal);
+    var chart2_data;
+
+    $.ajax({
+        url: '/statistics/numTasksInEachModule',
+        type: 'GET',
+        success: function (res) {
+            console.log(res);
+            chart2_data = res;
+            option2 = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    top: '5%',
+                    left: 'center'
+                },
+                series: [
+                    {
+                        name: 'Access From',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '40',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: res
+                    }
+                ]
+            };
+
+            option2 && myChart2.setOption(option2);
+            $(window).resize(myChart2.resize);
+        }
+    })
+
+    $.ajax({
+        url: '/statistics/numCompletedEachDay',
+        type: 'GET',
+        success: function (res) {
+            console.log(res);
+        }
+    })
+
+
+
     var myChart1 = echarts.init(chartDom1);
     var myChart2 = echarts.init(chartDom2);
     var myChart3 = echarts.init(chartDom3);
@@ -36,46 +99,8 @@ $(document).ready(function () {
                     show: false
                 },
                 data: [
-                    {value: 1048, name: 'Search Engine'},
-                    {value: 735, name: 'Direct'}
-                ]
-            }
-        ]
-    };
-    option2 = {
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            top: '5%',
-            left: 'center'
-        },
-        series: [
-            {
-                name: 'Access From',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '40',
-                        fontWeight: 'bold'
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [
-                    {value: 1048, name: 'Search Engine'},
-                    {value: 735, name: 'Direct'},
-                    {value: 580, name: 'Email'},
-                    {value: 484, name: 'Union Ads'},
-                    {value: 300, name: 'Video Ads'}
+                    {value: numCompleted, name: 'Completed Tasks'},
+                    {value: numTotal, name: 'Total Tasks'}
                 ]
             }
         ]
@@ -98,9 +123,8 @@ $(document).ready(function () {
     };
 
     option1 && myChart1.setOption(option1);
-    option2 && myChart2.setOption(option2);
     option3 && myChart3.setOption(option3);
     $(window).resize(myChart1.resize);
-    $(window).resize(myChart2.resize);
+
     $(window).resize(myChart3.resize);
 });
