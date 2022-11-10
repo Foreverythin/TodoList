@@ -32,7 +32,7 @@ def get_uncompleted_tasks():
                     task_color = 'red'
                 else:
                     task_color = 'black'
-            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'cid': cid, 'module_name': module['name'], 'module_color': module['color'], 'task_color': task_color})
+            res.append({"id": task.tid, "task_name": task.task_name, "task_description": task.task_description, "date": task.task_date, "time": task.task_time, "informed": task.informed, "cid": cid, "module_name": module['name'], "module_color": module['color'], "task_color": task_color})
 
     return res
 
