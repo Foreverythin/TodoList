@@ -96,48 +96,58 @@ def editTask():
         db.session.commit()
         return jsonify({'status': 200, 'msg': 'Successfully edited the task!'})
     except Exception as e:
+        # If there is an error, return an error
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})
 
 
+# This is the route for deleting a task
 @bp.route('/deleteTask', methods=['POST'])
 def deleteTask():
-    tid = request.form.get('taskID')
-    task = Task.query.filter_by(tid=tid).first()
-    db.session.delete(task)
+    tid = request.form.get('taskID')  # Get the task ID from the form
+    task = Task.query.filter_by(tid=tid).first()  # Get the task from the database
+    db.session.delete(task)  # Delete the task from the database
     try:
+        # Commit the changes to the database
         db.session.commit()
         return jsonify({'status': 200, 'msg': 'Successfully deleted the task!'})
     except Exception as e:
+        # If there is an error, return an error
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})
 
 
+# This is the route for completing a task
 @bp.route('/completeTask', methods=['POST'])
 def completeTask():
-    tid = request.form.get('taskID')
-    task = Task.query.filter_by(tid=tid).first()
-    task.task_status = True
-    task.completed_date = datetime.date.today()
-    task.completed_time = datetime.datetime.now().time()
+    tid = request.form.get('taskID')  # Get the task ID from the form
+    task = Task.query.filter_by(tid=tid).first()  # Get the task from the database
+    task.task_status = True  # Set the task status to True
+    task.completed_date = datetime.date.today()  # Set the completed date to today
+    task.completed_time = datetime.datetime.now().time()  # Set the completed time to now
     try:
+        # Commit the changes to the database
         db.session.commit()
         return jsonify({'status': 200, 'msg': 'Successfully completed the task!'})
     except Exception as e:
+        # If there is an error, return an error
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})
 
 
+# This is the route for uncompleting a task
 @bp.route('/uncompleteTask', methods=['POST'])
 def uncompleteTask():
-    tid = request.form.get('taskID')
-    task = Task.query.filter_by(tid=tid).first()
-    task.task_status = False
-    task.completed_date = None
-    task.completed_time = None
+    tid = request.form.get('taskID')  # Get the task ID from the form
+    task = Task.query.filter_by(tid=tid).first()  # Get the task from the database
+    task.task_status = False  # Set the task status to False
+    task.completed_date = None  # Set the completed date to None
+    task.completed_time = None  # Set the completed time to None
     try:
+        # Commit the changes to the database
         db.session.commit()
         return jsonify({'status': 200, 'msg': 'Successfully uncompleted the task!'})
     except Exception as e:
+        # If there is an error, return an error
         db.session.rollback()
         return jsonify({'status': 400, 'msg': str(e)})

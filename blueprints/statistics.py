@@ -6,31 +6,37 @@ import datetime
 bp = Blueprint('statistics', __name__, url_prefix='/statistics')
 
 
+# This function is called when the user clicks on the "Statistics" button on the navigation bar.
 @bp.route('/')
 def index():
+    # If the user is logged in, render the statistics.html template.
     if session.get('uid'):
         return render_template('statistics.html', modules=get_modules(),
                                number_of_completed_tasks=get_number_of_completed_tasks(),
                                number_of_tasks=get_number_of_completed_tasks() + get_number_of_uncompleted_tasks())
+    # If the user is not logged in, redirect the user to the login page.
     else:
         return redirect(url_for('user.login'))
 
 
+# This function is called when the page is loaded, as util functions are called to get the data for the charts.
 @bp.route('/numTasksInEachModule')
 def numTasksInEachModule():
-    modules = get_modules()
-    numTasksInEachModule = []
+    modules = get_modules()  # Get the modules
+    numTasksInEachModule = []  # Create an empty list to store the number of tasks in each module
     for module in modules:
-        tasks = Task.query.filter_by(cid=module.get('id')).all()
+        tasks = Task.query.filter_by(cid=module.get('id')).all()  # Get the tasks for each module
         numTasksInEachModule.append({'value': len(tasks), 'name': module.get('name')})
 
     return numTasksInEachModule
 
 
+# This function is called when the page is loaded, as util functions are called to get the data for the charts.
 @bp.route('/numCompletedEachDay')
 def numCompletedEachDay():
-    numCompletedEachDay = []
-    day = []
+    numCompletedEachDay = []  # Create an empty list to store the number of tasks completed each day
+    day = []  # Create an empty list to store the days
+    # last 7 days
     day7 = datetime.datetime.now() - datetime.timedelta(days=7)
     day6 = datetime.datetime.now() - datetime.timedelta(days=6)
     day5 = datetime.datetime.now() - datetime.timedelta(days=5)
@@ -48,9 +54,10 @@ def numCompletedEachDay():
     day.append(day1.strftime('%Y-%m-%d'))
     day.append(day0.strftime('%Y-%m-%d'))
     for i in range(8):
-        numCompletedEachDay.append({'value': 0, 'date': day[i]})
+        numCompletedEachDay.append({'value': 0, 'date': day[i]})  # Add the number of tasks completed each day to the list
 
-    tasks = get_completed_tasks()
+    tasks = get_completed_tasks()  # Get the completed tasks
+    # Loop through the completed tasks
     for task in tasks:
         if task.get('completed_date') == day7.date():
             numCompletedEachDay[0]['value'] += 1

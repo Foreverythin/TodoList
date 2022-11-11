@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
 });
 
@@ -10,11 +10,17 @@ function validateEmail(email) {
 function getCaptcha() {
     var usermail = $("input[name='usermail']").val();
     if (!usermail) {
-        alert("Please input your email address first!");
+        Toastify({
+            text: "Please input your email address first!",
+            duration: 1200
+        }).showToast();
         return;
     } else {
         if (!validateEmail(usermail)) {
-            alert("Please input a valid email address!");
+            Toastify({
+                text: "Please input a valid email address!",
+                duration: 1200
+            }).showToast();
             return;
         } else {
             $.ajax({
@@ -23,11 +29,14 @@ function getCaptcha() {
                 data: {
                     usermail: usermail
                 },
-                success: function(res) {
+                success: function (res) {
                     if (res['status'] === 200) {
-                        alert(res['msg']);
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
                         var count = 60;
-                        var timer = setInterval(function() {
+                        var timer = setInterval(function () {
                             if (count > 0) {
                                 count--;
                                 $('#captcha-btn').text(count + 's');
@@ -37,7 +46,10 @@ function getCaptcha() {
                             }
                         }, 1000);
                     } else {
-                        alert(res['msg']);
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
                     }
                 }
             })
@@ -70,11 +82,11 @@ function signup() {
                     captcha: captcha,
                     confirm: confirm
                 },
-                success: function(res) {
+                success: function (res) {
                     if (res['status'] === 200) {
                         // wait for 1 second and then redirect to the login page
                         alert(res['msg']);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             window.location.href = '/user/login';
                         }, 1000);
                     } else {

@@ -13,14 +13,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 bp = Blueprint('user', __name__, url_prefix='/user')
 
 
+# This function is called when the user first visits the website.
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    # If the request method is GET, render the login.html template.
     if request.method == 'GET':
         return render_template('login.html')
+    # If the request method is POST, get the username and password from the form.
     else:
         email = request.form.get('email')
         password = request.form.get('password')
-        user = User.query.filter(User.usermail == email).first()
+        user = User.query.filter(User.usermail == email).first()  # Get the user from the database.
         if user and check_password_hash(user.password, password):
             session['uid'] = user.uid
             print(session['uid'])
@@ -29,27 +32,33 @@ def login():
             return jsonify({'status': 400, 'msg': 'Wrong email or password!'})
 
 
+# This function is called when the user clicks on the register button.
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
+    # If the request method is GET, render the signup.html template.
     if request.method == 'GET':
         return render_template('signup.html')
+    # If the request method is POST, get the username, email, password, and captcha from the form.
     else:
-        form = RegisterForm(request.form)
+        form = RegisterForm(request.form)  # Get the form data.
 
+        # If the form data is valid, create a new user.
         if form.validate():
             usermail = form.usermail.data
             password = form.password.data
 
-            hash_password = generate_password_hash(password)
-            user = User(usermail=usermail, password=hash_password)
-            db.session.add(user)
+            hash_password = generate_password_hash(password)  # Hash the password.
+            user = User(usermail=usermail, password=hash_password)  # Create a new user.
+            db.session.add(user)  # Add the user to the database.
             try:
+                # Commit the changes to the database.
                 db.session.commit()
                 unclassified_module = Class(cname='Unclassified', uid=user.uid, color='rgb(128, 128,128)')
                 db.session.add(unclassified_module)
                 db.session.commit()
                 return jsonify({'status': 200, 'msg': 'Sign up successfully!'})
             except Exception as e:
+                # If there is an error, rollback the changes to the database.
                 db.session.rollback()
                 return jsonify({'status': 400, 'msg': 'Sign up failed!' + str(e)})
         else:
@@ -57,13 +66,11 @@ def signup():
             return jsonify({'status': 400, 'msg': form.errors[key][0]})
 
 
-
-
-
+# This function is called when the user wants to get the captcha while signing up.
 @bp.route('/captcha', methods=['POST'])
 def get_captcha():
-    usermail = request.form.get('usermail')
-    usermail_exist = User.query.filter(User.usermail == usermail).first()
+    usermail = request.form.get('usermail')  # Get the email from the form.
+    usermail_exist = User.query.filter(User.usermail == usermail).first()  # Check if the email already exists.
     if usermail_exist:
         return jsonify({'code': 400, 'msg': 'Email already exists.'})
 
