@@ -119,6 +119,7 @@ def completeTask():
     task = Task.query.filter_by(tid=tid).first()
     task.task_status = True
     task.completed_date = datetime.date.today()
+    task.completed_time = datetime.datetime.now().time()
     try:
         db.session.commit()
         return jsonify({'status': 200, 'msg': 'Successfully completed the task!'})
@@ -133,6 +134,7 @@ def uncompleteTask():
     task = Task.query.filter_by(tid=tid).first()
     task.task_status = False
     task.completed_date = None
+    task.completed_time = None
     try:
         db.session.commit()
         return jsonify({'status': 200, 'msg': 'Successfully uncompleted the task!'})

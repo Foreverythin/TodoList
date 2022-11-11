@@ -44,7 +44,7 @@ def get_completed_tasks():
         cid = module['id']
         tasks = Task.query.filter_by(cid=cid, task_status=True).all()
         for task in tasks:
-            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'cid': cid, 'module_name': module['name'], 'module_color': module['color'], 'completed_date': task.completed_date})
+            res.append({'id': task.tid, 'task_name': task.task_name, 'task_description': task.task_description, 'date': task.task_date, 'time': task.task_time, 'informed': task.informed, 'cid': cid, 'module_name': module['name'], 'module_color': module['color'], 'completed_date': task.completed_date, 'completed_time': task.completed_time})
 
     return res
 
@@ -86,5 +86,13 @@ def get_sorted_tasks(func, sort_by):
     elif sort_by == 'deadline_asc':
         # sort by deadline
         res = sorted(tasks, key=lambda x: datetime.datetime.combine(x['date'], x['time']))
+        return res
+    elif sort_by == 'completed_time_desc':
+        # sort by completed time
+        res = sorted(tasks, key=lambda x: datetime.datetime.combine(x['completed_date'], x['completed_time']), reverse=True)
+        return res
+    elif sort_by == 'completed_time_asc':
+        # sort by completed time
+        res = sorted(tasks, key=lambda x: datetime.datetime.combine(x['completed_date'], x['completed_time']))
         return res
 

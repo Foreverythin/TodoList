@@ -9,7 +9,7 @@ bp = Blueprint('completed', __name__, url_prefix='/completed')
 def index():
     if session.get('uid'):
         return render_template('completed.html', modules=get_modules(),
-                               tasks=get_sorted_tasks(get_completed_tasks, 'created_time_desc'),
+                               tasks=get_sorted_tasks(get_completed_tasks, 'completed_time_desc'),
                                number_of_completed_tasks=get_number_of_completed_tasks(),
                                number_of_tasks=get_number_of_completed_tasks() + get_number_of_uncompleted_tasks())
     else:
