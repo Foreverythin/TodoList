@@ -1,3 +1,6 @@
+"""
+This file includes interfaces which returns the subpage of "schedule", and task data to frontend to render the page.
+"""
 import json
 
 from flask import Blueprint, render_template, redirect, url_for, session, jsonify, request

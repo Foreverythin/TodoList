@@ -1,3 +1,6 @@
+"""
+This file includes interfaces which returns the subpage of "statistics", and task data to frontend to render the page.
+"""
 from flask import Blueprint, render_template, session, url_for, redirect
 from utils import get_modules, get_number_of_uncompleted_tasks, get_number_of_completed_tasks, get_completed_tasks
 from models import Task

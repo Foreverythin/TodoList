@@ -1,3 +1,8 @@
+"""
+This file corresponds to the all Todos page in the frontend.
+
+It includes some interfaces which can add, delete, edit, search tasks.
+"""
 from flask import Blueprint, session, request, render_template, redirect, url_for, jsonify
 from blueprints import user
 from forms import NewTaskForm

@@ -1,3 +1,8 @@
+"""
+The file containing all configuration needed in tha flask application, including the database, mail, APScheduler.
+
+All the configuration will be imported by the flask application.
+"""
 # sqlite config
 SQLALCHEMY_DATABASE_URI = 'sqlite:///./database/TodoList.sqlite3'
 

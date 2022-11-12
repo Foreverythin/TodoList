@@ -1,3 +1,6 @@
+"""
+This file includes some interfaces which can add, edit, delete modules.
+"""
 from flask import Blueprint, render_template, session, redirect, url_for, request, jsonify
 from utils import get_modules, get_number_of_uncompleted_tasks, get_number_of_completed_tasks, get_unCompletedTasks_by_moduleID
 from models import Class, Task

@@ -1,3 +1,6 @@
+"""
+The file defines some tool functions which will be used in the blueprints.
+"""
 from flask import session
 from models import Class, Task
 import datetime

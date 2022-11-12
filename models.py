@@ -1,3 +1,6 @@
+"""
+This file defines the structure of table in the database, using ORM.
+"""
 from exts import db
 from datetime import datetime
 

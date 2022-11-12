@@ -1,3 +1,8 @@
+"""
+This file includes some interfaces about users.
+
+User login, signup, logout, get_captcha can be achieved through interfaces in the file.
+"""
 import string
 import random
 from datetime import datetime

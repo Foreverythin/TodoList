@@ -1,3 +1,7 @@
+"""
+This file corresponds to the 'completed' page in the frontend, including some interfaces which returns the subpage
+"completed" and the task sorting result.
+"""
 from flask import Blueprint, render_template, session, url_for, redirect
 from utils import get_modules, get_completed_tasks, get_number_of_completed_tasks, get_number_of_uncompleted_tasks, \
     get_sorted_tasks

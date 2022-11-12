@@ -1,3 +1,8 @@
+"""
+This file includes some forms which corresponds to the forms in the frontend.
+
+Data validation is included in the form classes.
+"""
 import re
 from datetime import datetime
 from datetime import timedelta

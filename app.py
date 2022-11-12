@@ -1,3 +1,8 @@
+"""
+This is a file which create the flask application and register the blueprints, apscheduler, mail service and database.
+
+The entrance of the flask application. We can start the application by app.run(port=8000, debug=True)
+"""
 from flask import Flask, redirect, session, url_for
 from flask_apscheduler import APScheduler
 from flask_migrate import Migrate

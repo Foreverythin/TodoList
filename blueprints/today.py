@@ -1,3 +1,7 @@
+"""
+This file corresponds to the page 'today', and includes some interfaces which render the page, sort the tasks and
+get taday's uncompleted tasks.
+"""
 from flask import Blueprint, render_template, session, redirect, url_for, request
 from utils import get_modules, get_uncompleted_tasks, get_number_of_uncompleted_tasks, get_number_of_completed_tasks, get_sorted_tasks
 
