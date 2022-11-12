@@ -30,14 +30,12 @@ body {
     opacity: 0.85;
 }
 .form-group {
-    /*margin-bottom: 25px;*/
 }
 label {
     font-size: 17px;
     font-weight: 500;
 }
 a:hover{
-    /*text-decoration: none;*/
     cursor: pointer;
 }
 /* ---------------------------------------------------------------- */

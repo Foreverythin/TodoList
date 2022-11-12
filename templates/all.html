@@ -5,11 +5,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <!-- the subpage's main content -->
     <div class="container" id="all-mainContent">
+        <!-- the status-dock, which is about the icon and the sorting button -->
         <div id="status-dock">
             <table>
                 <tr>
                     <th>
+                        <!-- the icon -->
                         <svg t="1667975455514" class="icon" viewBox="0 0 1024 1024" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" p-id="6153" width="70" height="70">
                             <path d="M724.848405 608.07964a94.092936 94.092936 0 0 1-7.964336 6.223559c-1.240161 0.932965-2.514455 1.82042-3.765993 2.73063C532.065973 745.020702 513.645602 894.431637 512.075491 934.116784c0-0.409594 0-0.750923-0.079644-1.137762-10.865629-161.357439-140.991495-271.925173-187.969698-306.763452a341.328669 341.328669 0 1 1 400.822256-18.13593zM511.995847 944.356644s-0.182042-3.674972 0.079644-10.23986C525.205267 1129.345405 511.995847 944.356644 511.995847 944.356644z"
@@ -22,17 +25,20 @@
                                   fill="#029DBE" p-id="6157"></path>
                         </svg>
                     </th>
+                    <!-- the text beside the icon -->
                     <td style="font-size: 30px">All Todos</td>
                     <td style="font-size: 16px;padding-left: 8px;position: relative;top: 8px;" class="date"
                         id="today-date">
                     </td>
                 </tr>
             </table>
+            <!-- the sorting button -->
             <div class="btn-group" style="position: absolute; right: 0; top: 20px">
                 <button type="button" class="btn btn-default dropdown-toggle"
                         data-toggle="dropdown">
                     Sort <span class="caret"></span>
                 </button>
+                <!-- the sorting options -->
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#" onclick="sortTask('created_time_desc')">Created Time-Desc</a></li>
                     <li><a href="#" onclick="sortTask('created_time_asc')">Created Time-Asc</a></li>
@@ -43,6 +49,7 @@
             </div>
         </div>
 
+        <!-- the table of all todos, which uses data from the backend -->
         <div id="all-task-list">
             <ul>
                 {% for task in tasks %}
@@ -50,6 +57,7 @@
                         <div style="display: flex; flex-direction: row; position: relative">
                             <table>
                                 <tr>
+                                    <!-- the uncompleted icons -->
                                     <td>
                                         <svg data-task-id="{{ task.id }}" t="1667870868387" class="icon uncompleted"
                                              viewBox="0 0 1024 1024" version="1.1"
@@ -66,9 +74,11 @@
                                                   p-id="3869"></path>
                                         </svg>
                                     </td>
+                                    <!-- the task name -->
                                     <td data-module-name="{{ task.module_name }}"
                                         data-module-color="{{ task.module_color }}"><span
                                             style="font-size: 18px"><strong>{{ task.task_name }}</strong></span></td>
+                                    <!-- the deadline icon -->
                                     <td style="padding-left: 10px">
                                         <svg t="1667876322381" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg" p-id="2035" width="15" height="15">
@@ -76,13 +86,16 @@
                                                   fill="{{ task.task_color }}" p-id="2036"></path>
                                         </svg>
                                     </td>
+                                    <!-- the deadline -->
                                     <td><span class="deadline-time"
                                               style="font-size: 14px; font-weight: lighter; color: {{ task.task_color }}">{{ task.date }} {{ task.time.strftime("%H:%M") }}</span>
                                     </td>
                                 </tr>
                             </table>
+                            <!-- the deleting and editing icon -->
                             <table style="position: absolute; right: 0; height: 40px">
                                 <tr>
+                                    <!-- the editing icon -->
                                     <td data-task-id="{{ task.id }}" style="padding-right: 7px" class="editTask-td">
                                         <svg t="1667877123131" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg" p-id="5617" width="18" height="18">
@@ -92,6 +105,7 @@
                                                   fill="" p-id="5619"></path>
                                         </svg>
                                     </td>
+                                    <!-- the deleting icon -->
                                     <td data-task-id="{{ task.id }}" class="deleteTask-td">
                                         <svg t="1667877062531" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg" p-id="3902" width="20" height="20">
@@ -104,6 +118,7 @@
                                 </tr>
                             </table>
                         </div>
+                        <!-- the task description -->
                         <span class="description">{{ task.task_description }}</span>
                         <hr style="margin-top: 2px;">
                     </li>

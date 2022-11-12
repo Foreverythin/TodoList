@@ -2,6 +2,7 @@ from exts import db
 from datetime import datetime
 
 
+# Define the User class, which is used to store user information
 class User(db.Model):
     __tablename__ = 'user'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -9,6 +10,7 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)
 
 
+# Define the Module class, which is used to store the modules of the user
 class Class(db.Model):
     __tablename__ = 'class'
     cid = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -17,6 +19,7 @@ class Class(db.Model):
     uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
 
 
+# Define the Task class, which is used to store tasks
 class Task(db.Model):
     __tablename__ = 'task'
     tid = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -31,6 +34,7 @@ class Task(db.Model):
     cid = db.Column(db.Integer, db.ForeignKey('class.cid'), nullable=False)
 
 
+# Define the Captcha class, which is used to store the captcha
 class Captcha(db.Model):
     __tablename__ = 'captcha'
     captcha_id = db.Column(db.Integer, primary_key=True, autoincrement=True)

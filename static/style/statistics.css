@@ -1,3 +1,5 @@
+/* the common components */
+/* ---------------------------------------------------------------- */
 ul {
     list-style: none;
     margin: 0;
@@ -8,6 +10,11 @@ svg:hover {
     cursor: pointer;
 }
 
+/* ---------------------------------------------------------------- */
+
+
+/* the main content */
+/* ---------------------------------------------------------------- */
 #statistics-mainContent {
     width: 75%;
     transition: all .5s;
@@ -20,72 +27,47 @@ svg:hover {
     margin-bottom: 20px;
     margin-top: 30px
 }
+
 #statistics-task-list {
     padding-left: 10px;
 }
+
 .description {
     padding-left: 40px;
     font-size: 12px;
 }
 
-/*#echarts{*/
-/*	display: flex;*/
-/*	flex-wrap:wrap;*/
-/*	width: 100%;*/
-/*	justify-content:space-around;*/
-/*}*/
-/*#first{*/
-/*	width: 50%;*/
-/*	height: 400px;*/
-/*	display: inline-block;*/
-/*	box-shadow: 1px 1px 10px #888888;*/
-/*	border-radius: 30px;*/
-/*	margin-top: 20px;*/
-/*}*/
-/*#second{*/
-/*	width: 50%;*/
-/*	height: 400px;*/
-/*	display: inline-block;*/
-/*	border-radius: 30px;*/
-/*	box-shadow: 1px 1px 10px #888888;*/
-/*	margin-top: 20px;*/
-/*}*/
-/*@media screen and (max-width:957px){*/
-/*	#first{*/
-/*		width: 957px;*/
-/*	}*/
-/*	#second{*/
-/*		width: 957px;*/
-/*	}*/
-/*}*/
-
 #chart1 {
-	width: 100%;
-	height: 350px;
-	margin-top: 20px;
-	border-radius: 30px;
-	box-shadow: 1px 1px 10px #888888;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    width: 100%;
+    height: 350px;
+    margin-top: 20px;
+    border-radius: 30px;
+    box-shadow: 1px 1px 10px #888888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 #chart2 {
-	width: 100%;
-	height: 350px;
-	margin-top: 20px;
-	border-radius: 30px;
-	box-shadow: 1px 1px 10px #888888;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    width: 100%;
+    height: 350px;
+    margin-top: 20px;
+    border-radius: 30px;
+    box-shadow: 1px 1px 10px #888888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 #chart3 {
-	width: 100%;
-	height: 350px;
-	margin-top: 20px;
-	border-radius: 30px;
-	box-shadow: 1px 1px 10px #888888;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    width: 100%;
+    height: 350px;
+    margin-top: 20px;
+    border-radius: 30px;
+    box-shadow: 1px 1px 10px #888888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+/* ---------------------------------------------------------------- */

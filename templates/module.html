@@ -4,10 +4,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <!-- the main content of the subpage -->
     <div class="container" id="module-mainContent">
+        <!-- the status dock of page module -->
         <div id="status-dock">
             <table>
                 <tr>
+                    <!-- the icon of the module -->
                     <th>
                         <svg t="1667979122975" class="icon" viewBox="0 0 1024 1024" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" p-id="3868" width="70" height="70">
@@ -21,18 +24,20 @@
                                   fill="#046EA7" fill-opacity=".8" opacity=".302" p-id="3872"></path>
                         </svg>
                     </th>
+                    <!-- the title of the module -->
                     <td style="font-size: 30px;">{{ module_title }}</td>
                     <td style="font-size: 16px;padding-left: 8px;position: relative;top: 8px;" class="date"
                         id="today-date">
                     </td>
-                    {#                    <td style="font-size: 16px;position: relative;top: 8px;" class="date" id="today-day">/Tues</td>#}
                 </tr>
             </table>
+            <!-- the sorting button of the tasks -->
             <div class="btn-group" style="position: absolute; right: 0; top: 20px">
                 <button type="button" class="btn btn-default dropdown-toggle"
                         data-toggle="dropdown">
                     Sort <span class="caret"></span>
                 </button>
+                <!-- sorting options -->
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#">Created Time</a></li>
                     <li><a href="#">Deadline</a></li>
@@ -40,13 +45,16 @@
             </div>
         </div>
 
+        <!-- the task list -->
         <div id="module-task-list">
             <ul>
+                <!-- the task item -->
                 {% for task in tasks %}
                     <li>
                         <div style="display: flex; flex-direction: row; position: relative">
                             <table>
                                 <tr>
+                                    <!-- the completed icon -->
                                     <td>
                                         <svg data-task-id="{{ task.id }}" t="1667870868387" class="icon uncompleted"
                                              viewBox="0 0 1024 1024" version="1.1"
@@ -64,6 +72,7 @@
                                                   p-id="3869" fill="{{ task.module_color }}"></path>
                                         </svg>
                                     </td>
+                                    <!-- the title of the task -->
                                     <td data-module-name="{{ task.module_name }}"
                                         data-module-color="{{ task.module_color }}"><span
                                             style="font-size: 18px"><strong>{{ task.task_name }}</strong></span></td>
@@ -74,11 +83,13 @@
                                                   fill="{{ task.task_color }}" p-id="2036"></path>
                                         </svg>
                                     </td>
+                                    <!-- the deadline of the task -->
                                     <td><span class="deadline-time"
                                               style="font-size: 14px; font-weight: lighter; color: {{ task.task_color }}">{{ task.date }} {{ task.time.strftime("%H:%M") }}</span>
                                     </td>
                                 </tr>
                             </table>
+                            <!-- the deleting and editing button -->
                             <table style="position: absolute; right: 0; height: 40px">
                                 <tr>
                                     <td data-task-id="{{ task.id }}" style="padding-right: 7px" class="editTask-td">
@@ -102,6 +113,7 @@
                                 </tr>
                             </table>
                         </div>
+                        <!-- the description of the task -->
                         <span class="description">{{ task.task_description }}</span>
                         <hr style="margin-top: 2px;">
                     </li>

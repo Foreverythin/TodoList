@@ -36,6 +36,3 @@ def getTodayUncompletedTasks():
             todayUncompletedTasks.append(task)
 
     return todayUncompletedTasks
-
-
-

@@ -11,6 +11,8 @@ import datetime
 from blueprints import all_bp, completed_bp, schedule_bp, statistics_bp, today_bp, user_bp, module_bp
 
 
+# send to users who have tasks that are due in the future 4 hours.
+# the function is called every one minute
 def taskReminder():
     with app.app_context():
         uncompleted_tasks = Task.query.filter_by(task_status=False).all()
@@ -23,14 +25,14 @@ def taskReminder():
                 # if the time difference is less than 10 minutes, send an email to remind the user
                 if time_difference < datetime.timedelta(minutes=240):
                     if not task.informed:
-                        task.informed = True
+                        task.informed = True  # set the informed flag to True
                         try:
                             db.session.commit()
                         except Exception as e:
                             db.session.rollback()
                             print(e)
-                        uid = Class.query.filter_by(cid=task.cid).first().uid
-                        email = User.query.filter_by(uid=uid).first().usermail
+                        uid = Class.query.filter_by(cid=task.cid).first().uid  # get the uid of the user
+                        email = User.query.filter_by(uid=uid).first().usermail  # get the email of the user
                         message = Message('A reminder of about task', recipients=[email],
                                           body="Hello, this is a reminder about your task: " + task.task_name)
                         mail.send(message)
@@ -41,9 +43,14 @@ def taskReminder():
                 pass
 
 
+# initialize the app
 app = Flask(__name__)
+
+# set the configuration
 app.config.from_object(config)
 app.config.from_object(remindConfig)
+
+# register the blueprints
 app.register_blueprint(all_bp)
 app.register_blueprint(completed_bp)
 app.register_blueprint(schedule_bp)
@@ -51,20 +58,27 @@ app.register_blueprint(statistics_bp)
 app.register_blueprint(today_bp)
 app.register_blueprint(user_bp)
 app.register_blueprint(module_bp)
+
+# register the apscheduler and start it
 aps.init_app(app)
 aps.start()
+
+# register the database
 db.init_app(app)
+
+# register the mail
 mail.init_app(app)
 
+# register the migrate
 migrate = Migrate(app, db, compare_type=True, compare_server_default=True)
 
 
 @app.route('/')
 def index():
     if session.get('uid'):
-        return redirect(url_for('today.index'))
+        return redirect(url_for('today.index'))  # if the user has logged in, redirect to the today page
     else:
-        return redirect('/user/signup')
+        return redirect('/user/signup')  # if the user has not logged in, redirect to the signup page
 
 
 if __name__ == '__main__':

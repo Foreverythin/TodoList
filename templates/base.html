@@ -24,7 +24,9 @@
 <body>
 <!-- the top navigator -->
 <div class="topnav">
+    <!-- the left part of the top navigator -->
     <div class="topnav-left">
+        <!-- the select button -->
         <button>
             <svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1"
                  xmlns="http://www.w3.org/2000/svg">
@@ -32,6 +34,7 @@
                       fill="#395B64"/>
             </svg>
         </button>
+        <!-- the home page button -->
         <button id="home">
             <svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1"
                  xmlns="http://www.w3.org/2000/svg">
@@ -39,11 +42,14 @@
                       fill="#395B64"/>
             </svg>
         </button>
+        <!-- the running icon -->
         <img class="icon" src="../static/icon/run.gif" alt="run.gif"
              style="height: 25px; width: 25px; border-radius: 12px; opacity: 0.5; margin-left: 5px;">
         <div id="saying">今日事，今日毕。</div>
     </div>
+    <!-- the right part of the top navigator -->
     <div class="topnav-right">
+        <!-- the task adding button -->
         <button data-toggle="modal" data-target="#newTaskModel">
             <svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1"
                  xmlns="http://www.w3.org/2000/svg">
@@ -51,6 +57,7 @@
                       fill="#395B64"/>
             </svg>
         </button>
+        <!-- the ratio of the completed tasks -->
         <div>
             <svg id="numOfCompleted-icon" class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1"
                  xmlns="http://www.w3.org/2000/svg">
@@ -59,6 +66,7 @@
             </svg>
             <div id="numOfCompleted">{{ number_of_completed_tasks }}/{{ number_of_tasks }}</div>
         </div>
+        <!-- the day/night mode switch -->
         <button id="day-night">
             <svg t="1666178958917" class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" p-id="2705">
@@ -66,7 +74,7 @@
                       p-id="2706" fill="#395B64"></path>
             </svg>
         </button>
-        <!-- <button><svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M808 712l-48-108.8V448c0-102.4-65.6-195.2-160-232-3.2-44.8-41.6-80-88-80s-83.2 35.2-88 80c-96 36.8-160 129.6-160 232v155.2l-48 108.8c-6.4 14.4-4.8 30.4 3.2 43.2 8 12.8 22.4 20.8 38.4 20.8h508.8c16 0 30.4-8 38.4-20.8s9.6-30.4 3.2-43.2z m-547.2 16l51.2-115.2V448c0-88 59.2-166.4 144-192l19.2-6.4-3.2-20.8V224c0-22.4 17.6-40 40-40s40 17.6 40 40v6.4l-3.2 20.8 19.2 6.4c84.8 25.6 144 104 144 192v164.8l51.2 115.2H260.8zM512 880c44.8 0 80-35.2 80-80H432c0 44.8 35.2 80 80 80z" fill="#395B64" /></svg></button> -->
+        <!-- the user icon which is used to log out -->
         <button data-toggle="modal" data-target="#logout">
             <svg class="icon" width="25px" height="25px" viewBox="0 0 1024 1024" version="1.1"
                  xmlns="http://www.w3.org/2000/svg">
@@ -76,10 +84,13 @@
         </button>
     </div>
 </div>
+
+<!-- the main part of the page -->
 <div class="below container-fluid">
     <!-- the side bar -->
     <div id="sidebar">
         <table id="sidebar-top-table" class="table table-hover" style="width: 210px;">
+            <!-- the today icon -->
             <tr id="today" onclick="location.href={{ url_for('today.index') }};">
                 <td>
                     <svg class="icon sidebar-top-item-icon" width="30px" height="30px" viewBox="0 0 1024 1024"
@@ -89,6 +100,7 @@
                 </td>
                 <td>Day Todo</td>
             </tr>
+            <!-- the all icon -->
             <tr id="all" onclick="location.href={{ url_for('all.index') }};">
                 <td>
                     <svg t="1666269842937" class="icon sidebar-top-item-icon" width="30px" height="30px"
@@ -100,6 +112,7 @@
                 </td>
                 <td>All Todo</td>
             </tr>
+            <!-- the schedule icon -->
             <tr id="schedule" onclick="location.href={{ url_for('schedule.index') }};">
                 <td>
                     <svg t="1666269941297" class="icon sidebar-top-item-icon" width="27px" height="27px"
@@ -113,6 +126,7 @@
                 </td>
                 <td>Schedule</td>
             </tr>
+            <!-- the completed icon -->
             <tr id="completed" onclick="location.href={{ url_for('completed.index') }};">
                 <td>
                     <svg class="icon sidebar-top-item-icon" width="27px" height="27px" viewBox="0 0 1024 1024"
@@ -123,6 +137,7 @@
                 </td>
                 <td>Completed</td>
             </tr>
+            <!-- the statistics icon -->
             <tr id="statistics" onclick="location.href={{ url_for('statistics.index') }};">
                 <td>
                     <svg class="icon sidebar-top-item-icon" width="30px" height="30px" viewBox="0 0 1024 1024"
@@ -134,11 +149,13 @@
             </tr>
         </table>
         <div id="line"></div>
-        <div id="sidebar-text">Classification list</div>
+        <div id="sidebar-text">Module list</div>
         <table id="sidebar-bottom-table" class="table table-hover" style="width: 100%">
+            <!-- the module list of the current user, which is generated by the server -->
             {% for module in modules %}
                 <tr class={{ module['name'] }} id={{ module['id'] }}>
                     <th>
+                        <!-- the deleting icon -->
                         <button data-target="#little-button-delete" data-toggle="modal" class="little-button delete">
                             <svg width="18px" height="18px" t="1666363626416" class="icon" viewBox="0 0 1024 1024"
                                  version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8539">
@@ -157,11 +174,14 @@
                             </svg>
                         </button>
                     </th>
+                    <!-- the color of the module -->
                     <th>
                         <div id="ff5106_circle" class="circle"
                              style="background-color: {{ module['color'] }}; border-radius: 50%; width: 15px; height: 15px; position: relative; top: 2px;"></div>
                     </th>
+                    <!-- the name of the module -->
                     <th class="module-name">{{ module['name'] }}</th>
+                    <!-- the editing button -->
                     <th>
                         <button data-target="#little-button-edit" data-toggle="modal" class="little-button edit">
                             <svg width="20px" height="20px" t="1666362592215" class="icon" viewBox="0 0 1024 1024"
@@ -175,6 +195,7 @@
                     </th>
                 </tr>
             {% endfor %}
+            <!-- the button to add a new module-->
             <tr data-toggle="modal" data-target="#new-module">
                 <th></th>
                 <th>
@@ -189,38 +210,46 @@
             </tr>
         </table>
     </div>
-    <!-- the main content -->
+    <!-- the main content of the subpage -->
     <div id="mainContent">{% block content %}{% endblock %}</div>
 </div>
 
-<!-- Model of add a new task -->
+<!-- Model of adding a new task -->
 <div class="modal fade" id="newTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <!-- the button of closing the model -->
                 <button type="button" class="close cancel" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
+                <!-- the title of the model -->
                 <h4 class="modal-title" id="myModalLabel">
                     New Task
                 </h4>
             </div>
+            <!-- the main content of the model -->
             <div class="modal-body">
                 <form role="form">
+                    <!-- the name of the task -->
                     <div class="form-group">
                         <label for="name">Title</label>
                         <input id="new_task_title" type="text" class="form-control" placeholder="The task title here.">
                     </div>
+                    <!-- the description of the task -->
                     <div class="form-group">
                         <label for="name">Description</label>
                         <textarea id="new_task_description" class="form-control" rows="3"></textarea>
                     </div>
+                    <!-- the deadline and the module of the task -->
                     <div class="form-group">
+                        <!-- the deadline of the task -->
                         <label for="date" style="margin-right: 10px">Deadline</label>
                         <input id="datepicker-newTask" class="flatpickr selector" data-min-date=today
                                data-enable-time=true
                                data-time_24hr=true placeholder="Select Date.."
                                style="text-align: center; height: 34px;">
+                        <!-- the module of the task -->
                         <div style="float: right">
                             <label for="date" style="margin-right: 10px;">Module</label>
                             <div class="btn-group">
@@ -245,6 +274,7 @@
                     </div>
                 </form>
             </div>
+            <!-- the footer of the model -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel
                 </button>
@@ -260,11 +290,12 @@
 <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <!-- the header of the model -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Logout?</h4>
             </div>
-            <!-- <div class="modal-body">Logout?</div> -->
+            <!-- the footer of the model -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" onclick="logout()">Submit</button>
@@ -278,6 +309,7 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <!-- the header of the model -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h5 class="modal-title" id="myModalLabel">Are you sure to delete the module?</h5>
@@ -286,7 +318,7 @@
                     module
                 </div>
             </div>
-            <!-- <div class="modal-body">Logout?</div> -->
+            <!-- the footer of the model -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="delete_module_submit">Submit</button>
@@ -300,29 +332,35 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <!-- the header of the model -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Edit your module</h4>
             </div>
+            <!-- the main content of the model -->
             <div class="modal-body">
                 <form role="form">
+                    <!-- the name of the module -->
                     <div class="form-group" id="little-button-edit-module">
                         <label for="module">Module name</label>
                         <input type="text" id="module-edit-input" class="form-control"
                                placeholder="The module name here.">
                     </div>
+                    <!-- the color of the module -->
                     <div class="form-group">
-                        <label for="date" style="margin-right: 10px; margin-top: 15px;">Color</label>
+                        <label for="color" style="margin-right: 10px; margin-top: 15px;">Color</label>
                         <div class="btn-group color-selector">
                             <button type="button" class="btn btn-default selected-color-button" style="width: 137px;">
                                 <span class="color_dropdown_select__color" id="module-edit-color"
                                       style="background-color: rgb(126, 204, 73);"></span>
                                 <span class="color_dropdown_select__name">Lime Green</span>
                             </button>
+                            <!-- the button which is used to select one color -->
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
+                            <!-- the color list -->
                             <ul class="dropdown-menu" role="menu" style="overflow-y: scroll; max-height: 300px;">
                                 <li>
                                     <a>
@@ -462,6 +500,7 @@
                     </div>
                 </form>
             </div>
+            <!-- the footer of the modal-->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="edit_module_submit">Submit</button>
@@ -475,29 +514,35 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <!-- the header of the modal-->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">New Module</h4>
             </div>
+            <!-- the body of the modal-->
             <div class="modal-body">
                 <form role="form">
+                    <!-- the module name -->
                     <div class="form-group">
                         <label for="module">Module name</label>
                         <input type="text" class="form-control" id="newModuleName-input"
                                placeholder="The module name here.">
                     </div>
                     <div class="form-group">
-                        <label for="date" style="margin-right: 10px; margin-top: 15px;">Color</label>
+                        <!-- the color of the module -->
+                        <label for="color" style="margin-right: 10px; margin-top: 15px;">Color</label>
                         <div class="btn-group color-selector-2">
                             <button type="button" class="btn btn-default selected-color-button-2" style="width: 137px;">
                                 <span class="color_dropdown_select__color" id="newModuleColor-input"
                                       style="background-color: rgb(126, 204, 73);"></span>
                                 <span class="color_dropdown_select__name">Lime Green</span>
                             </button>
+                            <!-- the button which is used to select the color -->
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
+                            <!-- the color list -->
                             <ul class="dropdown-menu" role="menu" style="overflow-y: scroll; max-height: 300px;">
                                 <li>
                                     <a>
@@ -637,6 +682,7 @@
                     </div>
                 </form>
             </div>
+            <!-- the footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="new_module_submit">Submit</button>
@@ -650,14 +696,18 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <!-- the header -->
             <div class="modal-header">
+                <!-- the button which is to close the modal -->
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
+                <!-- the title of the modal -->
                 <h4 class="modal-title" id="myModalLabel">
                     Are you sure to delete this task?
                 </h4>
             </div>
+            <!-- the footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
                 </button>
@@ -674,7 +724,9 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <!-- the header -->
             <div class="modal-header">
+                <!-- the button which is to close the modal -->
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
@@ -682,23 +734,29 @@
                     Task Edit
                 </h4>
             </div>
+            <!-- the body -->
             <div class="modal-body">
                 <form role="form">
+                    <!-- the name of the task -->
                     <div class="form-group">
                         <label for="name">Title</label>
                         <input id="edit-task-title-placeholder-in-modal" type="text" class="form-control"
                                placeholder="The task title here.">
                     </div>
+                    <!-- the description of the task -->
                     <div class="form-group">
                         <label for="name">Description</label>
                         <textarea id="edit-task-description-in-modal" class="form-control" rows="3"></textarea>
                     </div>
+                    <!-- the deadline and the module of the task -->
                     <div class="form-group">
+                        <!-- the deadline of the task -->
                         <label for="date" style="margin-right: 10px">Deadline</label>
                         <input id="datepicker-editTask" class="flatpickr selector" data-min-date=today
                                data-enable-time=true
                                data-time_24hr=true placeholder="Select Date.."
                                style="text-align: center; height: 34px;">
+                        <!-- the module of the task -->
                         <div style="float: right">
                             <label for="date" style="margin-right: 10px;">Module</label>
                             <div class="btn-group">
@@ -724,6 +782,7 @@
                     </div>
                 </form>
             </div>
+            <!-- the footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
                 </button>

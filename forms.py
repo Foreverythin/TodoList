@@ -10,11 +10,13 @@ from models import Captcha, User
 from flask import flash
 
 
+# the form for user to login
 class LoginForm(wtforms.Form):
     usermail = wtforms.StringField('Email Address', [validators.Email()])
     password = wtforms.PasswordField('Password', [validators.Length(min=4, max=25)])
 
 
+# the form for user to add a new task
 class NewTaskForm(wtforms.Form):
     task_name = wtforms.StringField('Task Name', [validators.Length(min=1, max=50)])
     task_description = wtforms.StringField('Task Description', [validators.Length(min=0, max=100)])
@@ -23,23 +25,25 @@ class NewTaskForm(wtforms.Form):
     classid = wtforms.IntegerField('Class ID', validators=[validators.DataRequired()])
 
 
+# the form for user to register
 class RegisterForm(wtforms.Form):
     usermail = wtforms.StringField('Email Address', [validators.Length(min=6, max=35), validators.Email()])
     captcha = wtforms.StringField('Captcha', [validators.Length(min=4, max=4)])
     password = wtforms.PasswordField('Password', [validators.Length(min=4, max=25),
                                                   validators.EqualTo('confirm', message='Passwords must match')])
-    confirm = wtforms.PasswordField('Repeat Password')
+    confirm = wtforms.PasswordField('Repeat Password')  # validate the whether the confirm password is the same as the password
 
+    # validate the captcha
     def validate_captcha(self, field):
         captcha = field.data
         usermail = self.usermail.data
-        # 邮箱正则表达式
-        if not re.match(r'^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$', usermail):
+        if not re.match(r'^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$', usermail):  # check if the email address is valid
             raise validators.ValidationError('Invalid email address')
         captcha_model = Captcha.query.filter_by(usermail=usermail).order_by(Captcha.create_time.desc()).first()
         if not captcha_model or captcha_model.captcha.lower() != captcha.lower() or captcha_model.create_time + timedelta(minutes=5) < datetime.now():
             raise validators.ValidationError('Invalid captcha')
 
+    # validate the email address
     def validate_usermail(self, field):
         usermail = field.data
         user = User.query.filter_by(usermail=usermail).first()

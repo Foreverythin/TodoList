@@ -6,11 +6,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+    <!-- the main content of the subpage -->
     <div class="container" id="statistics-mainContent">
+        <!-- the status dock -->
         <div id="status-dock">
             <table>
                 <tr>
+                    <!-- the icon of statistics -->
                     <th>
                         <svg t="1668062800292" class="icon" viewBox="0 0 1024 1024" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" p-id="1486" width="70" height="70">
@@ -40,10 +42,7 @@
             </table>
         </div>
 
-        {#        <div id="charts">#}
-        {#            <div id="first"></div>#}
-        {#            <div id="second"></div>#}
-        {#        </div>#}
+        <!-- the three charts to show statistics -->
         <div class="row">
             <div class="col-md-6">
                 <div id="chart1"></div>

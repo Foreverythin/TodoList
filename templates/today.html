@@ -5,10 +5,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <!-- the main content of the subpage-->
     <div class="container" id="today-mainContent">
+        <!-- the status dock -->
         <div id="status-dock">
             <table>
                 <tr>
+                    <!-- the icon of today -->
                     <th>
                         <svg class="icon" width="70px" height="70px" viewBox="0 0 1024 900" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
@@ -25,11 +28,13 @@
                     <td style="font-size: 16px;position: relative;top: 8px;" class="date" id="today-day">/Tues</td>
                 </tr>
             </table>
+            <!-- the sorting button of task items-->
             <div class="btn-group" style="position: absolute; right: 0; top: 20px">
                 <button type="button" class="btn btn-default dropdown-toggle"
                         data-toggle="dropdown">
                     Sort <span class="caret"></span>
                 </button>
+                <!-- the sorting options-->
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#" onclick="sortTask('created_time_desc')">Created Time-Desc</a></li>
                     <li><a href="#" onclick="sortTask('created_time_asc')">Created Time-Asc</a></li>
@@ -40,15 +45,19 @@
             </div>
         </div>
 
+        <!-- the task list-->
         <div id="today-task-list">
             <ul>
+                <!-- the task item-->
                 {% for task in tasks %}
                     <li>
                         <div style="display: flex; flex-direction: row; position: relative">
                             <table>
                                 <tr>
+                                    <!-- the completed button-->
                                     <td>
-                                        <svg data-task-id="{{ task.id }}" t="1667870868387" class="icon uncompleted" viewBox="0 0 1024 1024" version="1.1"
+                                        <svg data-task-id="{{ task.id }}" t="1667870868387" class="icon uncompleted"
+                                             viewBox="0 0 1024 1024" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg" p-id="3715" width="40" height="40">
                                             <path d="M512 192c176.768 0 320 143.275 320 320 0 176.768-143.275 320-320 320-176.768 0-320-143.275-320-320 0-176.768 143.275-320 320-320z m0 41.28c-153.963 0-278.72 124.757-278.72 278.72S358.037 790.72 512 790.72 790.72 665.963 790.72 512 665.963 233.28 512 233.28z"
                                                   p-id="3716" fill="{{ task.module_color }}"></path>
@@ -62,6 +71,7 @@
                                                   p-id="3869"></path>
                                         </svg>
                                     </td>
+                                    <!-- the task title-->
                                     <td data-module-name="{{ task.module_name }}"
                                         data-module-color="{{ task.module_color }}"><span
                                             style="font-size: 18px"><strong>{{ task.task_name }}</strong></span></td>
@@ -72,11 +82,13 @@
                                                   fill="{{ task.task_color }}" p-id="2036"></path>
                                         </svg>
                                     </td>
+                                    <!-- the deadline-->
                                     <td><span class="deadline-time"
-                                            style="font-size: 14px; font-weight: lighter; color: {{ task.task_color }}">{{ task.date }} {{ task.time.strftime("%H:%M") }}</span>
+                                              style="font-size: 14px; font-weight: lighter; color: {{ task.task_color }}">{{ task.date }} {{ task.time.strftime("%H:%M") }}</span>
                                     </td>
                                 </tr>
                             </table>
+                            <!-- the deleting and editing button-->
                             <table style="position: absolute; right: 0; height: 40px">
                                 <tr>
                                     <td data-task-id="{{ task.id }}" style="padding-right: 7px" class="editTask-td">
@@ -100,6 +112,7 @@
                                 </tr>
                             </table>
                         </div>
+                        <!-- the task's description-->
                         <span class="description">{{ task.task_description }}</span>
                         <hr style="margin-top: 2px;">
                     </li>
@@ -109,100 +122,4 @@
 
 
     </div>
-
-
-
-{#    <!-- Model of edit a task -->#}
-{#    <div class="modal fade" id="editTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"#}
-{#         aria-hidden="true">#}
-{#        <div class="modal-dialog">#}
-{#            <div class="modal-content">#}
-{#                <div class="modal-header">#}
-{#                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">#}
-{#                        &times;#}
-{#                    </button>#}
-{#                    <h4 class="modal-title" id="myModalLabel">#}
-{#                        Task Edit#}
-{#                    </h4>#}
-{#                </div>#}
-{#                <div class="modal-body">#}
-{#                    <form role="form">#}
-{#                        <div class="form-group">#}
-{#                            <label for="name">Title</label>#}
-{#                            <input id="edit-task-title-placeholder-in-modal" type="text" class="form-control"#}
-{#                                   placeholder="The task title here.">#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <label for="name">Description</label>#}
-{#                            <textarea id="edit-task-description-in-modal" class="form-control" rows="3"></textarea>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <label for="date" style="margin-right: 10px">Deadline</label>#}
-{#                            <input id="datepicker-editTask" class="flatpickr selector" data-min-date=today#}
-{#                                   data-enable-time=true#}
-{#                                   data-time_24hr=true placeholder="Select Date.."#}
-{#                                   style="text-align: center; height: 34px;">#}
-{#                            <div style="float: right">#}
-{#                                <label for="date" style="margin-right: 10px;">Module</label>#}
-{#                                <div class="btn-group">#}
-{#                                    <button type="button" class="btn btn-default" style="width: 137px;"#}
-{#                                            id="module-selected-editing-task">Unclassified#}
-{#                                    </button>#}
-{#                                    <button type="button" class="btn btn-default dropdown-toggle"#}
-{#                                            data-toggle="dropdown">#}
-{#                                        <span class="caret"></span>#}
-{#                                        <span class="sr-only">Toggle Dropdown</span>#}
-{#                                    </button>#}
-{#                                    <ul class="dropdown-menu" role="menu">#}
-{#                                        {% for module in modules %}#}
-{#                                            {% if module['name']!='Unclassified' %}#}
-{#                                                <li class="modules"><a href="#">{{ module['name'] }}</a></li>#}
-{#                                            {% endif %}#}
-{#                                        {% endfor %}#}
-{#                                        <li class="divider"></li>#}
-{#                                        <li class="modules"><a href="#">Unclassified</a></li>#}
-{#                                    </ul>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </form>#}
-{#                </div>#}
-{#                <div class="modal-footer">#}
-{#                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary" id="edit_task_submit">#}
-{#                        Submit#}
-{#                    </button>#}
-{#                </div>#}
-{#            </div><!-- /.modal-content -->#}
-{#        </div><!-- /.modal -->#}
-{#    </div>#}
-
-{#    <!-- Model of delete a task -->#}
-{#    <div class="modal fade" id="deleteTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"#}
-{#         aria-hidden="true">#}
-{#        <div class="modal-dialog">#}
-{#            <div class="modal-content">#}
-{#                <div class="modal-header">#}
-{#                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">#}
-{#                        &times;#}
-{#                    </button>#}
-{#                    <h4 class="modal-title" id="myModalLabel">#}
-{#                        Are you sure to delete this task?#}
-{#                    </h4>#}
-{#                </div>#}
-{#                <div class="modal-footer">#}
-{#                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary" id="delete_task_submit">#}
-{#                        Submit#}
-{#                    </button>#}
-{#                </div>#}
-{#            </div><!-- /.modal-content -->#}
-{#        </div><!-- /.modal -->#}
-{#    </div>#}
-
-
-
-
 {% endblock %}

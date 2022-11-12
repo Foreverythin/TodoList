@@ -24,75 +24,79 @@
     overflow: hidden;
     transition: all 0.4s;
 }
+
 .topnav div {
     display: inline-block;
 }
+
 .topnav-left {
-    /* align on the left */
     float: left;
     padding-left: 30px;
-    /* in the middle */
     line-height: 45px;
-    /*display: inline-block;*/
 }
+
 .topnav-right {
-    /* align on the right */
     float: right;
     padding-right: 30px;
     line-height: 45px;
     display: inline-block;
 }
+
 .topnav-left button {
     width: 30px;
     height: 30px;
     line-height: 30px;
 }
+
 .topnav-right button {
     width: 30px;
     height: 30px;
     line-height: 30px;
 }
+
 .topnav button {
     border-radius: 20%;
     background-color: var(--color-primary);
     border: none;
-    /* margin-top: 7.5px; */
     position: relative;
     top: 7.5px;
-    transition:  all .4s;
+    transition: all .4s;
 }
+
 .topnav button:hover {
-    /* background-color: #B3D4E0; */
     background-color: rgba(255, 255, 255, 0.5);
 }
+
 .topnav-left .icon {
-    /* vertical-align: middle; */
     margin-left: -4px;
 }
-.topnav-left>div>input {
+
+.topnav-left > div > input {
     height: 25px;
 }
+
 .topnav-right .icon {
-    /* vertical-align: middle; */
     margin-left: -4px;
 }
-.topnav-right>svg {
+
+.topnav-right > svg {
     margin-right: 5px;
 }
+
 #saying {
-    width: 200px; 
+    width: 200px;
     line-height: 30px;
-    /* color: rgb(110, 131, 150);  */
     color: var(--color-nav-sayings-font);
-    background-color: rgba(255, 255, 255, 0.5); 
-    /*vertical-align: middle; */
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     text-align: center;
     transition: all 0.4s;
 }
+
 #numOfCompleted {
     color: var(--color-nav-font);
 }
+
 #numOfCompleted-icon {
     position: relative;
     top: 7.5px;
@@ -111,13 +115,13 @@
     padding-bottom: 0;
     flex-direction: row;
 }
+
 #sidebar {
     width: 250px;
     height: calc(100vh - 45px);
     background-color: var(--color-secondary);
     transition: all 0.5s;
     padding-top: 20px;
-    /* go to left */
     position: fixed;
     left: 0px;
     z-index: 1;
@@ -125,23 +129,23 @@
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
-    /* padding-left: 55px; */
 }
-/* .table {
-    width: 150px;
-} */
+
 #sidebar-top-table {
     position: relative;
     left: 40px;
 }
-#sidebar-top-table tr td{
+
+#sidebar-top-table tr td {
     border: 0px;
     font-size: 18px;
     vertical-align: middle;
 }
-#sidebar-top-table tr td:first-child{
+
+#sidebar-top-table tr td:first-child {
     width: 30px;
 }
+
 #sidebar-text {
     font-size: 16px;
     color: var(--color-main-font);
@@ -150,52 +154,59 @@
     left: 52.4px;
     display: flex;
 }
+
 #line {
     width: 100%;
     height: 1px;
     background-color: var(--color-sidebar-line);
     margin-bottom: 10px;
 }
+
 #sidebar-bottom-table {
     margin-top: 10px;
 }
+
 #sidebar-bottom-table tr {
     height: 35px;
 }
+
 #sidebar-bottom-table tr th {
     font-size: 16px;
     font-weight: 400;
     border: none;
-    /* margin-right: 10px; */
 }
+
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
     background-color: #EDEDED;
     cursor: pointer;
     transition: all 0.5s;
 }
-#sidebar-bottom-table tr th button{
-    width: 20px; 
+
+#sidebar-bottom-table tr th button {
+    width: 20px;
     height: 20px;
     border: none;
     background-color: #EDEDED;
     padding: 0;
     visibility: hidden;
 }
-#sidebar-bottom-table tr:hover th button{
-    visibility: visible;
-    transition:  all .5s;
-}
-.little-button:hover {
-    background-color: #EDEDED!important;
-    transition:  all .5s;
-    /*  larger  */
 
+#sidebar-bottom-table tr:hover th button {
+    visibility: visible;
+    transition: all .5s;
 }
+
+.little-button:hover {
+    background-color: #EDEDED !important;
+    transition: all .5s;
+}
+
 tr.on td {
     background-color: var(--color-sidebar-clicked);
     transition: all 0.5s;
 }
+
 tr.on th {
     background-color: var(--color-sidebar-clicked);
     transition: all 0.5s;
@@ -208,13 +219,11 @@ tr.on th {
 /* ---------------------------------------------------------------- */
 
 #mainContent {
-    /* width: 100%; */
     margin-left: 250px;
     width: calc(100% - 250px);
     height: calc(100vh - 45px);
     transition: all 0.5s;
     overflow-y: scroll;
-    /* overflow-x: hidden; */
 }
 
 /* ---------------------------------------------------------------- */
@@ -225,25 +234,31 @@ tr.on th {
 .modal-content {
     background-color: var(--color-modal-content);
 }
+
 input {
     border: 1px solid #c3c3c3;
     border-radius: 3px;
     line-height: 25px;
     padding-left: 5px;
 }
+
 .color_dropdown_select__color {
     display: inline-block;
     width: 12px;
     height: 12px;
     border-radius: 6px;
 }
+
 .color_dropdown_select__name {
     margin: 0 6px;
 }
-.dropdown-menu>li:hover {
+
+.dropdown-menu > li:hover {
     cursor: pointer;
 }
+
 button.btn.btn-default.dropdown-toggle {
     height: 34px;
 }
+
 /* ---------------------------------------------------------------- */

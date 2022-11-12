@@ -14,16 +14,21 @@
 </head>
 <body>
 <div id="bigBlock" class="row">
+    <!-- the login form -->
     <form>
+        <!-- the email input -->
         <div class="form-group">
             <label for="email" style="margin-bottom: 10px;">Email</label>
             <input type="text" class="form-control" id="email" placeholder="Please input your email.">
         </div>
+        <!-- the password input -->
         <div class="form-group" style="margin-top: 0px;">
             <label for="password" style="margin-bottom: 10px;">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Please input your password.">
         </div>
+        <!-- the submit button -->
         <button type="button" id="login-submit" class="btn btn-primary" style="width: 100%">Submit</button>
+        <!-- the register link -->
         <a href = {{ url_for('user.signup') }}>Does not have an account? Sign up. -></a>
     </form>
 </div>

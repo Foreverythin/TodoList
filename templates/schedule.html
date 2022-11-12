@@ -5,8 +5,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {#        <div id='calendar'></div>#}
+    <!-- the main content of the subpage -->
     <div class="container" id="schedule-mainContent">
+        <!-- the status dock -->
         <div id="status-dock">
             <table>
                 <tr>
@@ -33,6 +34,7 @@
             </table>
         </div>
 
+        <!-- the schedule table, whose content is rendered from schedule.js -->
         <div id="calendar"></div>
     </div>
 {% endblock %}

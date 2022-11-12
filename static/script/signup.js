@@ -1,22 +1,20 @@
-$(document).ready(function () {
-
-});
-
+// the function to validate the email address
 function validateEmail(email) {
     var re = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     return re.test(email);
 }
 
+// the function to get the captcha
 function getCaptcha() {
-    var usermail = $("input[name='usermail']").val();
-    if (!usermail) {
+    var usermail = $("input[name='usermail']").val();  // get the email address
+    if (!usermail) {  // if the email address is empty, show the tip information
         Toastify({
             text: "Please input your email address first!",
             duration: 1200
         }).showToast();
         return;
-    } else {
-        if (!validateEmail(usermail)) {
+    } else {  // if the email address is not empty, send the request to the server
+        if (!validateEmail(usermail)) {  // if the email address is invalid, show the tip information
             Toastify({
                 text: "Please input a valid email address!",
                 duration: 1200
@@ -31,10 +29,12 @@ function getCaptcha() {
                 },
                 success: function (res) {
                     if (res['status'] === 200) {
+                        // show the tip information
                         Toastify({
                             text: res['msg'],
                             duration: 1200
                         }).showToast();
+                        // resend the captcha after 60 seconds
                         var count = 60;
                         var timer = setInterval(function () {
                             if (count > 0) {
@@ -46,6 +46,7 @@ function getCaptcha() {
                             }
                         }, 1000);
                     } else {
+                        // show the tip information
                         Toastify({
                             text: res['msg'],
                             duration: 1200
@@ -57,20 +58,30 @@ function getCaptcha() {
     }
 }
 
+// the function which makes users sign up
 function signup() {
-    var usermail = $("input[name='usermail']").val();
-    var password = $("input[name='password']").val();
-    var confirm = $("input[name='confirm']").val();
-    var captcha = $("input[name='captcha']").val();
-    if (!usermail || !password || !captcha || !confirm) {
-        alert("Please fill in all the blanks!");
+    var usermail = $("input[name='usermail']").val();  // get the email address
+    var password = $("input[name='password']").val(); // get the password
+    var confirm = $("input[name='confirm']").val();  // get the confirmed password
+    var captcha = $("input[name='captcha']").val();  // get the captcha
+    if (!usermail || !password || !captcha || !confirm) {  // if the email address, password, captcha or confirmed password is empty, show the tip information
+        Toastify({
+            text: "Please fill in all the blanks!",
+            duration: 1200
+        }).showToast();
         return;
     } else {
-        if (!validateEmail(usermail)) {
-            alert("Please input a valid email address!");
+        if (!validateEmail(usermail)) {  // if the email address is invalid, show the tip information
+            Toastify({
+                text: "Please input a valid email address!",
+                duration: 1200
+            }).showToast();
             return;
-        } else if (password !== confirm) {
-            alert("The passwords you input are not the same!");
+        } else if (password !== confirm) {  // if the password and confirmed password are not the same, show the tip information
+            Toastify({
+                text: "The passwords you input are not the same!",
+                duration: 1200
+            }).showToast();
             return;
         } else {
             $.ajax({
@@ -85,12 +96,18 @@ function signup() {
                 success: function (res) {
                     if (res['status'] === 200) {
                         // wait for 1 second and then redirect to the login page
-                        alert(res['msg']);
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
                         setTimeout(function () {
                             window.location.href = '/user/login';
-                        }, 1000);
+                        }, 1200);
                     } else {
-                        alert(res['msg']);
+                        Toastify({
+                            text: res['msg'],
+                            duration: 1200
+                        }).showToast();
                     }
                 }
             })

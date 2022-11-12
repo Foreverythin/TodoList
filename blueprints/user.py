@@ -71,14 +71,16 @@ def signup():
 def get_captcha():
     usermail = request.form.get('usermail')  # Get the email from the form.
     usermail_exist = User.query.filter(User.usermail == usermail).first()  # Check if the email already exists.
+    # If the email already exists, return an error message.
     if usermail_exist:
         return jsonify({'code': 400, 'msg': 'Email already exists.'})
 
-    letters = string.ascii_letters + string.digits
-    captcha = "".join(random.sample(letters, 4))
+    letters = string.ascii_letters + string.digits  # Get all the letters and numbers.
+    captcha = "".join(random.sample(letters, 4))  # Generate a random captcha.
     message = Message('Captcha', recipients=[usermail], body="The captcha is: " + captcha + ", just valid for 5 "
                                                                                             "minutes.")
-    captcha_model = Captcha.query.filter(Captcha.usermail == usermail).first()
+    captcha_model = Captcha.query.filter(Captcha.usermail == usermail).first()  # Get the captcha from the database.
+    # If the captcha already exists, update the captcha.
     if captcha_model:
         captcha_model.captcha = captcha
         captcha_model.create_time = datetime.now()
@@ -87,6 +89,7 @@ def get_captcha():
         except Exception as e:
             db.session.rollback()
             return jsonify({'code': 400, 'msg': 'Get captcha failed.' + str(e)})
+    # If the captcha does not exist, create a new captcha.
     else:
         captcha_model = Captcha(usermail=usermail, captcha=captcha, create_time=datetime.now())
         db.session.add(captcha_model)
@@ -95,13 +98,14 @@ def get_captcha():
         except Exception as e:
             db.session.rollback()
             return jsonify({'code': 400, 'msg': 'Get captcha failed.' + str(e)})
-    mail.send(message)
+    mail.send(message)  # Send the captcha to the user's email.
 
     return jsonify({'status': 200, 'msg': 'Captcha has been sent to your email address!'})
 
 
+# This function is called when the user wants to log out.
 @bp.route('/logout', methods=['POST'])
 def logout():
-    if session.get('uid'):
+    if session.get('uid'):  # If the user is logged in, delete the session.
         session.pop('uid')
     return jsonify({'status': 200, 'msg': 'Logout successfully!'})

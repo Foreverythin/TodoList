@@ -7,11 +7,11 @@ db = SQLAlchemy()
 mail = Mail()
 aps = APScheduler()
 
-
+# a decorator to check if the user is logged in
 def login_identify(func):
     def wrapper(*args, **kwargs):
         if hasattr(session, 'uid'):
             return func()
         else:
-            return redirect('/user/login')
+            return redirect('/user/login')  # redirect to the login page if the user is not logged in
     return wrapper
