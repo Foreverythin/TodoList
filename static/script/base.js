@@ -3,30 +3,30 @@ $(document).ready(function () {
     adaptive();
     var moduleID_need_to_be_changed;  // moduleID need to be changed
 
-    var dayMode = localStorage.getItem('dayMode');  // get dayMode from localStorage
-
-    // whether the dayMode is null
-    if (dayMode == null) {
-        localStorage.setItem('dayMode', 'light');  // set dayMode to light
-    }
+    // var dayMode = localStorage.getItem('dayMode');  // get dayMode from localStorage
+    //
+    // // whether the dayMode is null
+    // if (dayMode == null) {
+    //     localStorage.setItem('dayMode', 'light');  // set dayMode to light
+    // }
 
     // toggle dayMode
-    var root = $(':root');
-    if (dayMode === 'light') {
-        root.css('--color-primary', '#D1E7EA');
-        root.css('--color-nav-sayings-font', 'rgb(110, 131, 150)');
-        root.css('--color-secondary', '#F7F7F7');
-        root.css('--color-sidebar-line', '#E6E4E4');
-        root.css('--color-modal-content', '#ffffff');
-        $('#flatpickrDark')[0].href = '';
-    } else {
-        root.css('--color-primary', '#000000');
-        root.css('--color-nav-sayings-font', '#000000');
-        root.css('--color-secondary', '#839AA8');
-        root.css('--color-sidebar-line', '#839AA8');
-        root.css('--color-modal-content', '#839AA8');
-        $('#flatpickrDark')[0].setAttribute('href', '../static/flatpickr/flatpickr-dark.css');
-    }
+    // var root = $(':root');
+    // if (dayMode === 'light') {
+    //     root.css('--color-primary', '#D1E7EA');
+    //     root.css('--color-nav-sayings-font', 'rgb(110, 131, 150)');
+    //     root.css('--color-secondary', '#F7F7F7');
+    //     root.css('--color-sidebar-line', '#E6E4E4');
+    //     root.css('--color-modal-content', '#ffffff');
+    //     $('#flatpickrDark')[0].href = '';
+    // } else {
+    //     root.css('--color-primary', '#000000');
+    //     root.css('--color-nav-sayings-font', '#000000');
+    //     root.css('--color-secondary', '#839AA8');
+    //     root.css('--color-sidebar-line', '#839AA8');
+    //     root.css('--color-modal-content', '#839AA8');
+    //     $('#flatpickrDark')[0].setAttribute('href', '../static/flatpickr/flatpickr-dark.css');
+    // }
     $(".flatpickr.selector").flatpickr({
         time: (new Date()).getTime()  // set the default time to now
     });

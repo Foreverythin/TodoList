@@ -31,7 +31,8 @@ class remindConfig(object):
             'func': 'app:taskReminder',
             'args': None,
             'trigger': 'interval',
-            'seconds': 2
+            'seconds': 2,
+            'replace_existing': True
         }
     ]
 
